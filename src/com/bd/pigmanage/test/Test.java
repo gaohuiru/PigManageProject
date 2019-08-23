@@ -12,6 +12,6 @@ public class Test {
         String[] split = uri.split("/");
         System.out.println(split[1]);
         System.out.println("/"+split[2]+"/"+split[3]);
-        System.out.println("Test");
+        System.out.println("Testyc");
     }
 }

@@ -17,7 +17,7 @@
 <body data-type="generalComponents">
 index.jsp<br><br>
 
-<a href="addIllnessSet.jsp">添加猪只疾病参数设定</a>
+<a href="addIllnessSet.jsp">添加猪只疾病参数设定yc</a>
 <a href="/addIllnessSet/PigService/insertIllnessSet.do">哈哈</a>
 <h2>haha</h2>
 </body>
