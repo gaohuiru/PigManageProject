@@ -52,6 +52,6 @@ public class DispatcherServlet extends HttpServlet {
         List<Object> result = reqMap.get("result");
         System.out.println(result.get(0));
 
-        resp.sendRedirect("/"+address+".jsp");
+        req.getRequestDispatcher("/"+address+".jsp").forward(req,resp);
     }
 }
