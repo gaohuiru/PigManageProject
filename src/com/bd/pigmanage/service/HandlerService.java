@@ -4,8 +4,8 @@ import java.lang.reflect.Constructor;
 import java.util.List;
 import java.util.Map;
 
-public class BaseService {
-    public BaseService(String uri, Map<String, List<Object>> reqMap) {
+public class HandlerService {
+    public HandlerService(String uri, Map<String, List<Object>> reqMap) {
         //解析URi
         String[] split = uri.split("/");
         String className = split[1];
