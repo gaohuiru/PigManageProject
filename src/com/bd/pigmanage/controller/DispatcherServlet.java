@@ -1,6 +1,6 @@
 package com.bd.pigmanage.controller;
 
-import com.bd.pigmanage.service.BaseService;
+import com.bd.pigmanage.service.HandlerService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -47,7 +47,7 @@ public class DispatcherServlet extends HttpServlet {
             System.out.println(mapKey+":"+mapValue[0]);
         }
         //传递给BaseService
-        new BaseService(uri,reqMap);
+        new HandlerService(uri,reqMap);
 
         List<Object> result = reqMap.get("result");
         System.out.println(result.get(0));
