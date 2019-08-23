@@ -22,19 +22,16 @@ public class DispatcherServlet extends HttpServlet {
         resp.setContentType("text/html;charset=utf-8");
         //获取URI
         String requestURI = req.getRequestURI();
+        System.out.println("获取到的URI"+requestURI);
         String[] split = requestURI.split("/");
         //获取返回值地址
         String address = split[1];
         //截取出参数地址
-        String uri = "/" + split[2] + "/" + split[3];
-        String substring = requestURI.substring(requestURI.indexOf("/"));
-        System.out.println(substring);
+        String uri = "/" + split[2] + "/" + split[3]+"/"+split[4];
 
         //获取请求参数
         Map<String, String[]> parameterMap = req.getParameterMap();
-
         Map<String,List<Object>> reqMap = new HashMap<>();
-
         for (Map.Entry<String,String[]> entry:parameterMap.entrySet()) {
             List<Object> paramList = new ArrayList<>();
 
@@ -46,12 +43,15 @@ public class DispatcherServlet extends HttpServlet {
 
             System.out.println(mapKey+":"+mapValue[0]);
         }
-        //传递给BaseService
+
+        //传递给HandlerService进行解析调用具体Service执行操作
         new HandlerService(uri,reqMap);
 
+        //获取操作完成后的结果
         List<Object> result = reqMap.get("result");
         System.out.println(result.get(0));
 
+        //请求转发至显示界面
         req.getRequestDispatcher("/"+address+".jsp").forward(req,resp);
     }
 }
