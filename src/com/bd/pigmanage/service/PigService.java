@@ -44,6 +44,12 @@ public class PigService {
 
     private void insert(String object, Map<String, List<Object>> reqMap) {
         System.out.println("service:");
+
+        //sql
+        //dao
+        //返回map数据
+
+
         for (Map.Entry<String, List<Object>> entry : reqMap.entrySet()) {
             String mapKey = entry.getKey();
             List<Object> value = entry.getValue();
