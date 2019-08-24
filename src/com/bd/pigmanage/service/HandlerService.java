@@ -11,7 +11,7 @@ public class HandlerService {
         String className = split[1];
         String methodName = split[2];
         String viewTable=split[3].substring(0,split[3].indexOf("."));
-        System.out.println("类名："+className+" 方法名："+methodName+" 视图表名："+viewTable);
+        System.out.println("类名："+className+" 方法名："+methodName+" 视图表名/View对象名："+viewTable);
 
         try {
             Class<?> c = Class.forName("com.bd.pigmanage.service."+className);

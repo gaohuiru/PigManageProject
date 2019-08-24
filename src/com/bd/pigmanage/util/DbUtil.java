@@ -11,7 +11,11 @@ public class DbUtil {
         private static final String USERNAME="root";
         private static final String PASSWORD="123456";
 
-        public static Connection getConnection() {
+    /**
+     * 连接数据库
+     * @return connnection 对象
+     */
+    public static Connection getConnection() {
             Connection conn=null;
             PreparedStatement ps=null;
             ResultSet rs=null;
@@ -25,6 +29,13 @@ public class DbUtil {
 
             return conn;
         }
+
+    /**
+     * 关闭数据库
+     * @param conn
+     * @param ps
+     * @param rs
+     */
         public static void closeAll(Connection conn,PreparedStatement ps,ResultSet rs) {
             try {
                 if(rs!=null) {
@@ -37,6 +48,7 @@ public class DbUtil {
                     conn.close();
                 }
             } catch (Exception e) {
+                e.printStackTrace();
                 // TODO: handle exception
             }
 
