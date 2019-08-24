@@ -1,6 +1,6 @@
 package com.bd.pigmanage.Dao;
 
-import com.mysql.cj.protocol.Resultset;
+
 
 import java.sql.*;
 import java.util.List;
@@ -46,7 +46,7 @@ public class PigDao {
         }
     }
 
-    public void insert(String sql, Map<String, List<Object>[]> map){
+    public void insert(String sql, Map<String, List<Object>> map){
         try {
             String ColumnName=null;
             List<Object> DataList=null;
@@ -58,7 +58,7 @@ public class PigDao {
                 map.put("result",DataList);
             }else{
                 DataList.add("0");
-                map.put("result",);
+                map.put("result",DataList);
             }
         } catch (SQLException e) {
             e.printStackTrace();
