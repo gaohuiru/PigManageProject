@@ -2,6 +2,7 @@ package com.bd.pigmanage.Dao;
 
 
 
+import javax.xml.crypto.dsig.keyinfo.PGPData;
 import java.sql.*;
 import java.util.List;
 import java.util.Map;
@@ -16,8 +17,8 @@ public class PigDao {
 
     PigDao(){
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            conn= DriverManager.getConnection("jdbc:mysql://localhost:3306/store","root","19990821");
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn= DriverManager.getConnection("jdbc:mysql://localhost:3306/pig_manager?useSSL=false&serverTimezone=UTC&characterEncording=utf-8","root","jx@07965568+");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -105,5 +106,8 @@ public class PigDao {
         }
     }
 
+    public static void main(String[] args) {
+        PigDao pg=new PigDao();
+    }
 
 }
