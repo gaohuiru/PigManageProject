@@ -18,7 +18,7 @@ public class PigDao {
     PigDao(){
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conn= DriverManager.getConnection("jdbc:mysql://localhost:3306/pig_manager?useSSL=false&serverTimezone=UTC&characterEncording=utf-8","root","jx@07965568+");
+            conn= DriverManager.getConnection("jdbc:mysql://localhost:3306/pig_manager?useSSL=false&serverTimezone=UTC&characterEncording=utf-8","root","123456");
         } catch (Exception e) {
             e.printStackTrace();
         }
