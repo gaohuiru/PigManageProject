@@ -53,8 +53,8 @@ public class PigService {
         String[] sqls=null;
             //获取sql语句的List集合(一般只有一条sql语句)
         List<String> sqlList=SqlUtil.insertSQL(beans, reqMap);
-        System.out.println(sqlList.size());
-        System.out.println("pigservice生成SQL语句的条数："+sqlList.get(0));
+        System.out.println("pigservice生成SQL语句的条数："+sqlList.size());
+        System.out.println("pigservice生成的SQL语句"+sqlList.get(0));
         //遍历List生成sql语句并调用dao层处理数据
         BaseDao bd=null;
         for(int i=0;i<sqlList.size();i++){
