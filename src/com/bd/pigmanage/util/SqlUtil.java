@@ -9,7 +9,7 @@ import java.util.Map;
 
 /**
  * 将传入对象生成sql语句
- * @author xcj xxbb
+ * @author xcj
  */
 public class SqlUtil {
     //用bean对象拼成sql语句 insert 插入语句

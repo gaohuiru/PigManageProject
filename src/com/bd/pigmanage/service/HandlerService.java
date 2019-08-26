@@ -4,6 +4,9 @@ import java.lang.reflect.Constructor;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author chb
+ */
 public class HandlerService {
     public HandlerService(String uri, Map<String, List<Object>> reqMap) {
         //解析URi

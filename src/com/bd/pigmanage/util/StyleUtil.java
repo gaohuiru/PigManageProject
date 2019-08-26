@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 /**
  * 变量名的驼峰和下划线相互转换(下划线转驼峰还有首字母问题待处理)‘
- * @author xxbb
+ * @author AlwaysXu
  */
 public class StyleUtil {
     private static Pattern linePattern = Pattern.compile("_(\\w)");

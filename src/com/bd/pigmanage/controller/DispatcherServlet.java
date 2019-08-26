@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+/**
+ * @author chb
+ */
 @WebServlet("*.do")
 public class DispatcherServlet extends HttpServlet {
     @Override
@@ -48,8 +52,8 @@ public class DispatcherServlet extends HttpServlet {
         new HandlerService(uri,reqMap);
 
         //获取操作完成后的结果
-        List<Object> result = reqMap.get("result");
-        System.out.println(result.get(0));
+
+        System.out.println("Servlet层的反馈结果： "+reqMap.get("result").get(0));
 
         //请求转发至显示界面
         req.getRequestDispatcher("/"+address+".jsp").forward(req,resp);

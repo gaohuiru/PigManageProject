@@ -3,6 +3,9 @@ package com.bd.pigmanage.Po;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author AlwaysXu
+ */
 public class DiseaseJudgeSet {
     //主键1，猪只的品种编号
     private int pigVarietyId;

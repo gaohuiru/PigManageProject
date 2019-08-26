@@ -7,6 +7,9 @@ import java.sql.*;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author yc
+ */
 public class PigDao {
     private Connection conn=null;
     private PreparedStatement ps=null;

@@ -5,6 +5,7 @@ import java.util.Properties;
 
 /**
  * 读取配置文件的工具类
+ * @author AlwaysXu
  */
 public class PropertiesUtil {
     public PropertiesUtil() {
