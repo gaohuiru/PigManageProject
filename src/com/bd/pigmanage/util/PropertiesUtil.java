@@ -16,12 +16,15 @@ public class PropertiesUtil {
         //加载properties的文件内容
         Properties pro = new Properties();
         // 使用InPutStream流读取properties文件
-        BufferedReader bufferedReader = new BufferedReader(
-                new FileReader(path)
-        );
+        InputStream is = ClassLoader.getSystemResourceAsStream(path);
+        System.out.println(is);
+
+
+//        BufferedReader bufferedReader = new BufferedReader(
+//                new FileReader(path)
         //加载配置文件
         try {
-            pro.load(bufferedReader);
+            pro.load(is);
         } catch (IOException e) {
             e.printStackTrace();
         }
