@@ -1,19 +1,19 @@
-package com.bd.pigmanage.Dao;
+package com.bd.pigmanage.util;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class InsertBean
-{
-//    @org.junit.Test
-    //用bean对象拼成sql语句
-    private static List<String> returnSQL(String[] beans, Map<String, Object> map) throws IllegalAccessException, ClassNotFoundException, NoSuchMethodException, InstantiationException, InvocationTargetException
-    {
+/**
+ * 将传入对象生成sql语句
+ * @author xcj xxbb
+ */
+public class SqlUtil {
+    //用bean对象拼成sql语句 insert 插入语句
+    public static List<String> insertSQL(String[] beans, Map<String, List<Object>> map) throws Exception {
 
         List<String> sqls = new ArrayList<>();
         List<Object> objects = mapToBean(beans, map);
@@ -38,10 +38,10 @@ public class InsertBean
             }
 
             StringBuffer insertSQL = new StringBuffer();
-            insertSQL.append("insert into " + (clazz).getSimpleName() + " (");
+            insertSQL.append("insert into " + StyleUtil.humpToLine((clazz).getSimpleName()) + " (");
             for (int i = 0, len = fieldsList.size(); i < len; i++)
             {
-                insertSQL.append(fieldsList.get(i));
+                insertSQL.append(StyleUtil.humpToLine(fieldsList.get(i)));
                 if (i < (len - 1))
                     insertSQL.append(",");
             }
@@ -62,23 +62,17 @@ public class InsertBean
 //    @org.junit.Test
 
     /**
-     *
+     * 创建bean对象将map中的数据传入
      * @param beans 对象的名字
      * @param map 对象的数据
      * @return 转化成bean对象
-     * @throws ClassNotFoundException
-     * @throws IllegalAccessException
-     * @throws InstantiationException
-     * @throws NoSuchMethodException
-     * @throws InvocationTargetException
+     * @throws Exception
      */
-    private static List<Object> mapToBean(String[] beans, Map<String, Object> map) throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException,
-            InvocationTargetException
-    {
+    private static List<Object> mapToBean(String[] beans, Map<String, List<Object>> map) throws Exception {
         List<Object> list = new ArrayList<>();
         for (String bean : beans)
         {
-            Class clazz = Class.forName("com.bd.pigmanage.Vo." + bean);
+            Class clazz = Class.forName("com.bd.pigmanage.Po." + bean);
 
             Constructor constructor = clazz.getConstructor(Map.class);
             Object object = constructor.newInstance(map);
@@ -88,23 +82,15 @@ public class InsertBean
 
     }
 
-    public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException
-    {
-        //参数  前端传递得操作对象
-        String[] beans = {"User", "Student"};
-        //参数  前端传递得数据
-        Map<String, Object> map = new HashMap<>();
-        map.put("id", 1);
-        map.put("name", "miku");
-        map.put("sex", "man");
-        map.put("age", 18);
+    public static void main(String[] args) throws Exception {
+        String[] beans={"DiseaseJudgeSet"};
+        Map<String, List<Object>> map=new HashMap<>();
+        List<Object> li=new ArrayList<>();
+        li.add(123);
+        map.put("pigVarietyId",li);
+        List<String> sqlList=insertSQL(beans,map);
+        System.out.println(sqlList.get(0));
 
-        //返回得sql语句
-        List<String> sqls = returnSQL(beans, map);
-
-
-        for (String sql : sqls)
-            System.out.println("sql:" + sql);
     }
 
 

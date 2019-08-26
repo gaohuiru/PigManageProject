@@ -56,21 +56,25 @@
 
 
                     <div class="am-u-sm-12 am-u-md-9">
-                        <form class="am-form am-form-horizontal" action="/addIllnessSet/PigService/insert/illPig.do" method="post">
+                        <form class="am-form am-form-horizontal" action="/addIllnessSet/PigService/insert/illSet.do" method="post">
                             <div class="am-form-group">
-                                <label for="user-name" class="am-u-sm-3 am-form-label">品种</label>
+                                <label  class="am-u-sm-3 am-form-label">品种</label>
                                 <div class="am-u-sm-9">
-                                    <input type="text" id="user-name" name="pigType" placeholder="输入品种">
+                                    <select name="pigVarietyId">
+                                    <option name="1" value="1">白猪</option>
+                                    <option name="2" value="2">黑猪</option>
+                                    <option name="3" value="3">花猪</option>
+                                </select>
                                 </div>
                             </div>
 
                             <div class="am-form-group">
-                                <label for="user-email" class="am-u-sm-3 am-form-label">生长阶段</label>
+                                <label class="am-u-sm-3 am-form-label">生长阶段</label>
                                 <div class="am-u-sm-9">
-                                    <select id="sex">
-                                        <option>哺乳阶段</option>
-                                        <option>保育阶段</option>
-                                        <option>生长育肥阶段</option>
+                                    <select name="growthStage">
+                                        <option name="1" value="1">哺乳阶段</option>
+                                        <option name="2" value="2">保育阶段</option>
+                                        <option name="3" value="3">生长育肥阶段</option>
                                     </select>
                                 </div>
                             </div>
@@ -78,7 +82,7 @@
                             <div class="am-form-group">
                                 <label for="user-phone" class="am-u-sm-3 am-form-label">猪只体温</label>
                                 <div class="am-u-sm-9">
-                                    <input type="tel" id="user-phone" name="Temperature" placeholder="输入猪只最低和最高体温，例36，40 ">
+                                    <input type="tel" id="user-phone" name="temperature" placeholder="输入猪只最低和最高体温，例36，40 ">
                                 </div>
                             </div>
 

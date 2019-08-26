@@ -6,7 +6,7 @@ package com.bd.pigmanage.util;
 public class TableUtil {
     //获取物理表需访问的配置文件路径
     private final static String PATH=
-            "D:\\javahome\\PigManageProject\\src\\com\\bd\\pigmanage\\table.properties";
+            "D:\\javahome\\PigManageProject\\src\\com\\bd\\pigmanage\\DataTable.properties";
 
     public TableUtil(){
 

@@ -10,13 +10,15 @@ public class User
     private int id;
     private String name;
     private int age;
+    private int maxAge;
 
     public User(){}
-    public User(int id, int age, String name)
+    public User(int id, String name,int age, int maxAge )
     {
         this.id = id;
         this.age = age;
         this.name = name;
+        this.maxAge=maxAge;
     }
 
     public User(Map<String,Object> map)
@@ -27,6 +29,8 @@ public class User
             id= (int) map.get("id");
         if(map.containsKey("age"))
             age= (int) map.get("age");
+        if(map.containsKey("age"))
+            maxAge= (int) map.get("maxAge");
 
     }
     Example Example;

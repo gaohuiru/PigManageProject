@@ -22,6 +22,7 @@ public class DbUtil {
             try {
                 Class.forName(DRIVER);
                 conn= DriverManager.getConnection(URL,USERNAME,PASSWORD);
+                System.out.println("数据库连接成功");
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -53,4 +54,9 @@ public class DbUtil {
             }
 
         }
+
+    public static void main(String[] args) {
+        Connection connection = getConnection();
+
+    }
 }
