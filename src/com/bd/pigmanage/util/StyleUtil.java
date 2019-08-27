@@ -12,13 +12,16 @@ public class StyleUtil {
     private static Pattern humpPattern = Pattern.compile("[A-Z]");
 
     /**
-     * 下划线转驼峰
+     * 下划线转驼峰 将下划线改成类的命名形式如 ass_ass转为AssAss
      * @param str
      * @return
      */
     public static String lineToHump(String str) {
+        //
         str = str.toLowerCase();
-        Matcher matcher = linePattern.matcher(str);
+        //将首字母先进行大写转换
+        String newStr=str.substring(0,1).toUpperCase()+str.substring(1);
+        Matcher matcher = linePattern.matcher(newStr);
         StringBuffer sb = new StringBuffer();
         while (matcher.find()) {
             matcher.appendReplacement(sb, matcher.group(1).toUpperCase());
@@ -47,8 +50,8 @@ public class StyleUtil {
     }
 
     public static void main(String[] args) {
-        String str="AssAss";
-        System.out.println(humpToLine(str));
+        String str="_ass_ass";
+        System.out.println(lineToHump(str));
     }
 }
 
