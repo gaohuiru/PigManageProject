@@ -38,9 +38,10 @@ public class PigService {
             Class c = Class.forName("com.bd.pigmanage.service.PigService");
             Object instance = c.newInstance();
 
-            //通过反射调用对应方法
+            //通过反射找到对应方法
             Method declaredMethod = c.getDeclaredMethod(method, String.class, Map.class);
             declaredMethod.setAccessible(true);
+            //调用方法
             declaredMethod.invoke(instance,viewObjectName, reqMap);
         } catch (Exception e) {
             e.printStackTrace();

@@ -80,16 +80,16 @@
                             </div>
 
                             <div class="am-form-group">
-                                <label for="user-phone" class="am-u-sm-3 am-form-label">猪只体温</label>
+                                <label for="pig-temperature" class="am-u-sm-3 am-form-label">猪只体温</label>
                                 <div class="am-u-sm-9">
-                                    <input type="tel" id="user-phone" name="temperature" placeholder="输入猪只最低和最高体温，例36，40 ">
+                                    <input type="tel" id="pig-temperature" name="temperature" placeholder="输入猪只最低和最高体温，例36，40 ">
                                 </div>
                             </div>
 
                             <div class="am-form-group">
-                                <label for="user-phone" class="am-u-sm-3 am-form-label">猪只进食量</label>
+                                <label for="pig-foodIntake" class="am-u-sm-3 am-form-label">猪只进食量</label>
                                 <div class="am-u-sm-9">
-                                    <input type="tel" id="user-phone" name="foodIntake" placeholder="输入猪只最低进食量 ">
+                                    <input type="tel" id="pig-foodIntake" name="foodIntake" placeholder="输入猪只最低进食量 ">
                                 </div>
                             </div>
                             <div class="am-form-group">

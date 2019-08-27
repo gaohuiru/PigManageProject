@@ -35,14 +35,17 @@ public class DispatcherServlet extends HttpServlet {
 
         //获取请求参数
         Map<String, String[]> parameterMap = req.getParameterMap();
+
+        //遍历出请求参数并把它存入List,再把key和参数传入reqMap
         Map<String,List<Object>> reqMap = new HashMap<>();
         for (Map.Entry<String,String[]> entry:parameterMap.entrySet()) {
             List<Object> paramList = new ArrayList<>();
 
             String mapKey = entry.getKey();
             String[] mapValue = entry.getValue();
-
-            paramList.add(mapValue[0]);
+            for (int i = 0; i < mapValue.length; i++) {
+                paramList.add(mapValue[i]);
+            }
             reqMap.put(mapKey,paramList);
 
             System.out.println(mapKey+":"+mapValue[0]);
