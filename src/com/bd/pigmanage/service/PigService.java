@@ -48,14 +48,18 @@ public class PigService {
         }
     }
 
+    /**
+     * 增加数据
+     * @param viewObjectName 对应视图表
+     * @param reqMap          前台传来的数据
+     * @throws Exception
+     */
     private void insert(String viewObjectName, Map<String, List<Object>> reqMap) throws Exception {
         System.out.println("正在使用插入方法");
         //将前台传入的视图表对象名转换成对应的一个或多个物理表名
         String[] beans=TableUtil.getTables(viewObjectName);
         //生成SQL语句
-            //创建接收Sql语句的字符串数组
-        String[] sqls=null;
-            //获取sql语句的List集合(一般只有一条sql语句)
+        //获取sql语句的List集合(一般只有一条sql语句)
         List<String> sqlList=SqlUtil.insertSQL(beans, reqMap);
         System.out.println("pigservice生成SQL语句的条数： "+sqlList.size());
         System.out.println("pigservice生成的SQL语句: "+sqlList.get(0));
@@ -90,5 +94,44 @@ public class PigService {
             }
 
         }
+    }
+
+    /**
+     * 删除数据
+     * @param viewObjectName 对应视图表
+     * @param reqMap          前台传来的数据
+     */
+    private void delete(String viewObjectName, Map<String, List<Object>> reqMap){
+
+    }
+
+    /**
+     * 修改数据
+     * @param viewObjectName 对应视图表
+     * @param reqMap          前台传来的数据
+     */
+    private void update(String viewObjectName, Map<String, List<Object>> reqMap){
+
+    }
+
+    /**
+     * 查询数据
+     * @param viewObjectName 对应视图表
+     * @param reqMap          前台传来的数据
+     */
+    private void select(String viewObjectName, Map<String, List<Object>> reqMap) throws Exception {
+        System.out.println("正在使用查询方法");
+        //将前台传入的视图表对象名转换成对应的一个或多个物理表名
+        String[] beans=TableUtil.getTables(viewObjectName);
+        //生成SQL语句
+        //获取sql语句的List集合(一般只有一条sql语句)
+        List<String> sqlList=SqlUtil.selectSQL(beans, reqMap);
+        System.out.println("pigservice生成SQL语句的条数： "+sqlList.size());
+        System.out.println("pigservice生成的SQL语句: "+sqlList.get(0));
+        reqMap.clear();
+        List<Object> list = new ArrayList<>();
+        list.add("成功");
+        reqMap.put("result", list);
+        System.out.println("pigService的查询反馈结果: "+reqMap.get("result").get(0));
     }
 }

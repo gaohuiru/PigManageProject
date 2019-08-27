@@ -8,19 +8,19 @@ import java.util.Map;
  */
 public class DiseaseJudgeSet {
     //主键1，猪只的品种编号
-    private int pigVarietyId;
+    private Integer pigVarietyId;
 
     //主键2，1表示哺乳阶段、2表示保育阶段，3表示生长育肥阶段
-    private int growthStage;
+    private Integer growthStage;
 
     //温度传感器反馈的猪只体温，单位是：摄氏度
-    private double temperature;
+    private Double temperature;
 
     //单位：kg（精确到0.01）
-    private double foodIntake;
+    private Double foodIntake;
 
     //预留字段，单位：步
-    private int pigStep;
+    private Integer pigStep;
 
     public DiseaseJudgeSet() {
     }
@@ -33,15 +33,15 @@ public class DiseaseJudgeSet {
     }
     public DiseaseJudgeSet(Map<String, List<Object>> map) {
         if(map.containsKey("pigVarietyId"))
-            pigVarietyId= Integer.parseInt((String) map.get("pigVarietyId").get(0)) ;
+            pigVarietyId= Integer.parseInt(map.get("pigVarietyId").get(0).toString()) ;
         if(map.containsKey("growthStage"))
-            growthStage= Integer.parseInt((String) map.get("growthStage").get(0)) ;
+            growthStage= Integer.parseInt(map.get("growthStage").get(0).toString()) ;
         if(map.containsKey("temperature"))
-            temperature= Double.parseDouble((String) map.get("temperature").get(0)) ;
+            temperature= Double.parseDouble(map.get("temperature").get(0).toString()) ;
         if(map.containsKey("foodIntake"))
-            foodIntake= Double.parseDouble((String) map.get("foodIntake").get(0));
+            foodIntake= Double.parseDouble(map.get("foodIntake").get(0).toString());
         if(map.containsKey("pigStep"))
-            pigStep= Integer.parseInt((String) map.get("pigStep").get(0)) ;
+            pigStep= Integer.parseInt(map.get("pigStep").get(0).toString()) ;
 
     }
 

@@ -151,10 +151,10 @@
                                 </a>
                                 <ul class="tpl-left-nav-sub-menu1" style="display: block;">
                                     <li>
-                                        <a href="SuspectIllnessList.html" class="" style="padding-left: 80px;">
+                                        <a href="" class="" style="padding-left: 80px;">
                                             <span>疑似生病猪只表</span>
                                         </a>
-                                        <a href="IllnessSetList.html" class=" active" style="padding-left: 80px;">
+                                        <a href="/IllnessSetList/PigService/select/illSet.do" class=" active" style="padding-left: 80px;">
                                             <span>疾病判断参数设定表</span>
                                         </a>
                                         <a href="IllnessList.html" class="" style="padding-left: 80px;">
