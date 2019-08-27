@@ -16,16 +16,19 @@ public class SqlUtil {
     public static List<String> insertSQL(String[] beans, Map<String, List<Object>> map) throws Exception {
 
         List<String> sqls = new ArrayList<>();
+        //返回实例化对象
         List<Object> objects = mapToBean(beans, map);
         for (Object object : objects)
         {
+            //遍历每一个objects，每次遍历名为object
             Class clazz = object.getClass();
-
+            //获取全部字段，形成fields[]
             Field[] fields = clazz.getDeclaredFields();
             List<String> fieldsList = new ArrayList<>();
             List<Object> valueList = new ArrayList<>();
             for (Field field : fields)
             {
+                //遍历全部字段数组，每个字段名字为field
                 field.setAccessible(true);
                 if (field.get(object) != null)
                 {
