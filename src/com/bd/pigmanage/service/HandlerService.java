@@ -18,7 +18,9 @@ public class HandlerService {
 
         try {
             Class<?> c = Class.forName("com.bd.pigmanage.service."+className);
+            //获取类中的特定的构造方法
             Constructor constructor = c.getConstructor(String.class,String.class,Map.class);
+            //调用了有参构造方法
             constructor.newInstance(methodName,viewTable,reqMap);
 
         } catch (Exception e) {
