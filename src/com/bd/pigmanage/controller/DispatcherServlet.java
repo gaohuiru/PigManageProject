@@ -43,12 +43,10 @@ public class DispatcherServlet extends HttpServlet {
 
             String mapKey = entry.getKey();
             String[] mapValue = entry.getValue();
+            //先加入到List中，然后加入到reqMap中
             for (int i = 0; i < mapValue.length; i++) {
                 paramList.add(mapValue[i]);
             }
-
-            //先加入到List中，然后加入到reqMap中
-            paramList.add(mapValue[0]);
             reqMap.put(mapKey,paramList);
 
             System.out.println(mapKey+":"+mapValue[0]);
