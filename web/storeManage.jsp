@@ -55,7 +55,7 @@
                     <div class="am-u-sm-12 am-u-md-6" style="width:30%">
                         <div class="am-btn-toolbar">
                             <div class="am-btn-group am-btn-group-xs">
-                                <button type="button" class="am-btn am-btn-default am-btn-success" onclick="window.location.href='storeinsert.html'"><span class="am-icon-plus"></span> 商品入库</button>
+                                <button type="button" class="am-btn am-btn-default am-btn-success" onclick="window.location.href='addStoreGoods.jsp'"><span class="am-icon-plus"></span> 商品入库</button>
                                 <button type="button" class="am-btn am-btn-default am-btn-danger"><span class="am-icon-trash-o"></span> 商品出库</button>
                             </div>
                         </div>
