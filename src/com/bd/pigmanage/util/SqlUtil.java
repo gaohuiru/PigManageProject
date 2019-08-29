@@ -62,6 +62,21 @@ public class SqlUtil {
         return sqls;
     }
 
+    public static List<String> updateSQL(String[] beans, Map<String, List<Object>> map) throws Exception{
+
+
+
+
+        return null;
+    }
+    public static List<String> deleteSQL(String[] beans, Map<String, List<Object>> map) throws Exception{
+
+
+
+
+        return null;
+    }
+
     public static List<String> selectSQL(String[] beans, Map<String, List<Object>> map) throws Exception {
         List<String> sqls = new ArrayList<>();
         //返回实例化对象
@@ -137,7 +152,7 @@ public class SqlUtil {
         li2.add(100);
         map.put("pigVarietyId",li1);
         map.put("pigStep",li2);
-        List<String> sqlList=selectSQL(beans,map);
+        List<String> sqlList=insertSQL(beans,map);
         System.out.println(sqlList.get(0));
 
     }

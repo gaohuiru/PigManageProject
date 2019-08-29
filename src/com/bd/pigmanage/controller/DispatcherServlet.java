@@ -49,6 +49,7 @@ public class DispatcherServlet extends HttpServlet {
 
             //先加入到List中，然后加入到reqMap中
             paramList.add(mapValue[0]);
+            reqMap.put(mapKey,paramList);
 
             System.out.println(mapKey+":"+mapValue[0]);
         }
