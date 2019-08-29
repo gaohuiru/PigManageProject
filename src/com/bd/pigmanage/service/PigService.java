@@ -126,12 +126,28 @@ public class PigService {
         //生成SQL语句
         //获取sql语句的List集合(一般只有一条sql语句)
         List<String> sqlList=SqlUtil.selectSQL(beans, reqMap);
+        //
+        BaseDao bd=null;
         System.out.println("pigservice生成SQL语句的条数： "+sqlList.size());
-        System.out.println("pigservice生成的SQL语句: "+sqlList.get(0));
-        reqMap.clear();
-        List<Object> list = new ArrayList<>();
-        list.add("成功");
-        reqMap.put("result", list);
-        System.out.println("pigService的查询反馈结果: "+reqMap.get("result").get(0));
+        for(int i=0;i<sqlList.size();i++){
+            System.out.println("pigservice生成的SQL语句: "+sqlList.get(i));
+            bd=new BaseDao(sqlList.get(i),reqMap);
+        }
+        if("查询成功".equals(reqMap.get("result").get(0))) {
+            System.out.println("pigService的查询反馈结果: "+reqMap.get("result").get(0));
+            System.out.println("illnessSetList的结果：");
+            List<Object> lists=reqMap.get("DiseaseJudgeSet");
+            for(Object obj:lists){
+                System.out.println(obj.toString());
+            }
+
+
+        }else{
+            //查询失败
+            System.out.println("pigService的查询反馈结果: "+reqMap.get("result").get(0));
+
+        }
+
+
     }
 }

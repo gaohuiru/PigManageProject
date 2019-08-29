@@ -45,4 +45,14 @@ public class DiseaseJudgeSet {
 
     }
 
+    @Override
+    public String toString() {
+        return "DiseaseJudgeSet{" +
+                "pigVarietyId=" + pigVarietyId +
+                ", growthStage=" + growthStage +
+                ", temperature=" + temperature +
+                ", foodIntake=" + foodIntake +
+                ", pigStep=" + pigStep +
+                '}';
+    }
 }

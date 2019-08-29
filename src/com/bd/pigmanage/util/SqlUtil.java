@@ -9,7 +9,7 @@ import java.util.Map;
 
 /**
  * 将传入对象生成sql语句
- * @author xcj
+ * @author xcj AlwaysXu binbinbin666
  */
 public class SqlUtil {
     //用bean对象拼成sql语句 insert 插入语句
@@ -78,6 +78,7 @@ public class SqlUtil {
             {
                 //遍历全部字段数组，每个字段名字为field
                 field.setAccessible(true);
+                //bean对象内属性的值如果为空则不会添加到list里
                 if (field.get(object) != null)
                 {
                     fieldsList.add(field.getName());
@@ -87,17 +88,23 @@ public class SqlUtil {
                 }
 
             }
-
-            StringBuffer insertSQL = new StringBuffer();
-            insertSQL.append("select * from " + StyleUtil.humpToLine((clazz).getSimpleName()));
+            StringBuffer selectSQL = new StringBuffer();
+            selectSQL.append("select * from " + StyleUtil.humpToLine((clazz).getSimpleName()));
             if (fieldsList.size() != 0){
-                insertSQL.append(" where ");
-                insertSQL.append(StyleUtil.humpToLine(fieldsList.get(0)));
-                insertSQL.append(" = ");
-                insertSQL.append(valueList.get(0));
+                selectSQL.append(" where ");
+                for(int i=0;i<fieldsList.size();i++){
+                    if(i!=0){
+                        selectSQL.append(" and ");
+                    }
+                    selectSQL.append(StyleUtil.humpToLine(fieldsList.get(i)));
+                    selectSQL.append(" = ");
+                    selectSQL.append(valueList.get(i));
+
+                }
+
             }
             //            System.out.println(insertSQL.toString());
-            sqls.add(insertSQL.toString());
+            sqls.add(selectSQL.toString());
         }
         return sqls;
     }
@@ -113,7 +120,6 @@ public class SqlUtil {
         for (String bean : beans)
         {
             Class clazz = Class.forName("com.bd.pigmanage.Po." + bean);
-
             Constructor constructor = clazz.getConstructor(Map.class);
             Object object = constructor.newInstance(map);
             list.add(object);
@@ -125,9 +131,12 @@ public class SqlUtil {
     public static void main(String[] args) throws Exception {
         String[] beans={"DiseaseJudgeSet"};
         Map<String, List<Object>> map=new HashMap<>();
-        List<Object> li=new ArrayList<>();
-        li.add(123);
-        map.put("pigVarietyId",li);
+        List<Object> li1=new ArrayList<>();
+        li1.add(123);
+        List<Object> li2=new ArrayList<>();
+        li2.add(100);
+        map.put("pigVarietyId",li1);
+        map.put("pigStep",li2);
         List<String> sqlList=selectSQL(beans,map);
         System.out.println(sqlList.get(0));
 
