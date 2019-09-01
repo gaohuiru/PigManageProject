@@ -50,16 +50,11 @@ public class StoreService {
         //创建接收Sql语句的字符串数组
         String[] sqls=null;
         //获取sql语句的List集合(一般只有一条sql语句)
-        List<String> sqlList= SqlUtil.insertSQL(beans, reqMap);
-        System.out.println("pigservice生成SQL语句的条数： "+sqlList.size());
-        System.out.println("pigservice生成的SQL语句: "+sqlList.get(0));
+        String sql= SqlUtil.insertSQL(beans, reqMap);
+        System.out.println("pigservice生成的SQL语句: "+sql);
         //遍历List生成sql语句并调用dao层处理数据
-        BaseDao bd=null;
-        for(int i=0;i<sqlList.size();i++){
-            //接收SQL语句=sqlList.get(i);
-            //调用DAO层处理命令
-            bd=new BaseDao(sqlList.get(i),reqMap);
-        }
+        BaseDao bd=new BaseDao(sql,reqMap);
+
         if(reqMap.isEmpty()){
             List<Object> list = new ArrayList<>();
             list.add("成功");

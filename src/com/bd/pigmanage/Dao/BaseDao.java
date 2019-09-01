@@ -60,7 +60,11 @@ public class BaseDao {
 
     }
 
-    //单个插入
+    /**
+     * 插入功能
+     * @param sql 传入的sql语句
+     * @param reqMap 主要用于存放执行结果(插入成功/插入失败)
+     */
     private void insert(String sql, Map<String, List<Object>> reqMap) {
         System.out.println("Dao层插入语句的SQL： " + sql);
         //执行sql语句
@@ -74,8 +78,14 @@ public class BaseDao {
             if (num != 0) {
                 //清空map
                 reqMap.clear();
+                List<Object> temp=new ArrayList<>();
+                temp.add("插入成功");
+                reqMap.put("result",temp);
             } else {
                 System.out.println("数据插入失败");
+                List<Object> temp=new ArrayList<>();
+                temp.add("插入失败");
+                reqMap.put("result",temp);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -86,7 +96,11 @@ public class BaseDao {
 
     }
 
-    //单个删除
+    /**
+     * 删除功能
+     * @param sql 传入的sql语句
+     * @param reqMap 主要用于存放执行结果(删除成功/删除失败)
+     */
     private void delete(String sql, Map<String, List<Object>> reqMap) {
         System.out.println("Dao层删除的SQL： " + sql);
         //执行sql语句
@@ -100,8 +114,14 @@ public class BaseDao {
             if (i!=0) {
                 //清空map
                 reqMap.clear();
+                List<Object> temp=new ArrayList<>();
+                temp.add("删除成功");
+                reqMap.put("result",temp);
             } else {
                 System.out.println("数据删除失败");
+                List<Object> temp=new ArrayList<>();
+                temp.add("删除失败");
+                reqMap.put("result",temp);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -113,7 +133,11 @@ public class BaseDao {
 
     }
 
-    //单个修改
+    /**
+     * 修改功能
+     * @param sql 传入的sql语句
+     * @param reqMap 主要用于存放执行结果（修改成功/修改失败）
+     */
     private void update(String sql, Map<String, List<Object>> reqMap) {
         System.out.println("Dao层修改的SQL： " + sql);
         //执行sql语句
@@ -127,8 +151,14 @@ public class BaseDao {
             if (i!=0) {
                 //清空map
                 reqMap.clear();
+                List<Object> temp=new ArrayList<>();
+                temp.add("修改成功");
+                reqMap.put("result",temp);
             } else {
-                System.out.println("数据删除失败");
+                System.out.println("数据修改失败");
+                List<Object> temp=new ArrayList<>();
+                temp.add("修改失败");
+                reqMap.put("result",temp);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -140,7 +170,11 @@ public class BaseDao {
 
     }
 
-    //查询
+    /**
+     * 查询功能，目前只支持查询记录的所有属性，即(select *)
+     * @param sql 传入的sql语句
+     * @param reqMap 主要用于存放执行的结果（Po类对象和查询成功/查询失败）
+     */
     private void select(String sql, Map<String, List<Object>> reqMap) {
         System.out.println("Dao层查询语句的SQL： " + sql);
 
@@ -205,14 +239,16 @@ public class BaseDao {
 
         String dsql="delete from disease_judge_set where pig_Variety_id=1";
         BaseDao baseDao2=new BaseDao(dsql,reqMap);
-        String usql="update disease_judge_set set pig_step=100 where pig_Variety_id=2 ";
+        String usql="update disease_judge_set set pig_step=111 where pig_Variety_id=6 ";
         BaseDao baseDao3=new BaseDao(usql,reqMap);
+        String isql="insert into disease_judge_set (pig_variety_id,growth_stage,temperature,food_intake,pig_step) values('9','123','100','37.6','12')";
+        BaseDao ibd=new BaseDao(isql,reqMap);
         String sql="select * from disease_judge_set";
         BaseDao bd=new BaseDao(sql,reqMap);
         if(reqMap.containsKey("DiseaseJudgeSet")) {
             System.out.println("成功咧！！！");
             List<Object> lists = reqMap.get("DiseaseJudgeSet");
-            System.out.println(lists.size());
+            System.out.println("查询到的数据的条数： "+lists.size());
             for(Object ob:lists){
                 System.out.println(ob.toString());
             }

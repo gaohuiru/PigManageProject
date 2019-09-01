@@ -60,40 +60,36 @@ public class PigService {
         String[] beans=TableUtil.getTables(viewObjectName);
         //生成SQL语句
         //获取sql语句的List集合(一般只有一条sql语句)
-        List<String> sqlList=SqlUtil.insertSQL(beans, reqMap);
-        System.out.println("pigservice生成SQL语句的条数： "+sqlList.size());
-        System.out.println("pigservice生成的SQL语句: "+sqlList.get(0));
+        String sql=SqlUtil.insertSQL(beans, reqMap);
+        System.out.println("pigservice生成的SQL语句: "+sql);
         //遍历List生成sql语句并调用dao层处理数据
-        BaseDao bd=null;
-        for(int i=0;i<sqlList.size();i++){
-            //接收SQL语句=sqlList.get(i);
-            //调用DAO层处理命令
-            bd=new BaseDao(sqlList.get(i),reqMap);
-        }
-        if(reqMap.isEmpty()){
-            List<Object> list = new ArrayList<>();
-            list.add("成功");
-            reqMap.put("result", list);
-            System.out.println("pigService的插入反馈结果: "+reqMap.get("result").get(0));
+        BaseDao bd=new BaseDao(sql,reqMap);
 
-        }else{
-            List<Object> list = new ArrayList<>();
-            list.add("失败");
-            reqMap.put("result", list);
-            for (Map.Entry<String, List<Object>> entry : reqMap.entrySet()) {
-                String mapKey = entry.getKey();
-                List<Object> value = entry.getValue();
-                for (Object v : value) {
-                    if("result".equals(mapKey)){
-                        System.out.println("PigService插入反馈结果： "+v);
-                        System.out.println("--------------------------");
-                    }
-                    System.out.println(mapKey + ":" + v.toString());
-
-                }
-            }
-
-        }
+//        if(reqMap.isEmpty()){
+//            List<Object> list = new ArrayList<>();
+//            list.add("成功");
+//            reqMap.put("result", list);
+//            System.out.println("pigService的插入反馈结果: "+reqMap.get("result").get(0));
+//
+//        }else{
+//            List<Object> list = new ArrayList<>();
+//            list.add("失败");
+//            reqMap.put("result", list);
+//            for (Map.Entry<String, List<Object>> entry : reqMap.entrySet()) {
+//                String mapKey = entry.getKey();
+//                List<Object> value = entry.getValue();
+//                for (Object v : value) {
+//                    if("result".equals(mapKey)){
+//                        System.out.println("PigService插入反馈结果： "+v);
+//                        System.out.println("--------------------------");
+//                    }
+//                    System.out.println(mapKey + ":" + v.toString());
+//
+//                }
+//            }
+//
+//        }
+        System.out.println("pigService的插入反馈结果: "+reqMap.get("result").get(0));
     }
 
     /**
@@ -127,12 +123,14 @@ public class PigService {
         //获取sql语句的List集合(一般只有一条sql语句)
         List<String> sqlList=SqlUtil.selectSQL(beans, reqMap);
         //
+        System.out.println("pigservice生成的SQL语句条数: "+sqlList.size());
         BaseDao bd=null;
-        System.out.println("pigservice生成SQL语句的条数： "+sqlList.size());
         for(int i=0;i<sqlList.size();i++){
-            System.out.println("pigservice生成的SQL语句: "+sqlList.get(i));
             bd=new BaseDao(sqlList.get(i),reqMap);
+            System.out.println("pigservice生成的SQL语句: "+ sqlList.get(i));
         }
+
+
         if("查询成功".equals(reqMap.get("result").get(0))) {
             System.out.println("pigService的查询反馈结果: "+reqMap.get("result").get(0));
             System.out.println("illnessSetList的结果：");
