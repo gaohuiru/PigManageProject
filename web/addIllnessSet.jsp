@@ -105,10 +105,6 @@
         </div>
     </div>
 </div>
-
-<script src="<%=basePath%>/assets/js/jquery.min.js"></script>
-<script src="<%=basePath%>/assets/js/amazeui.min.js"></script>
-<script src="<%=basePath%>/assets/js/app.js"></script>
 </body>
 
 </html>

@@ -58,7 +58,9 @@ public class DispatcherServlet extends HttpServlet {
         //获取操作完成后的结果
 
         System.out.println("Servlet层的反馈结果： "+reqMap.get("result").get(0));
+        List<Object> lists=reqMap.get("DiseaseJudgeSet");
 
+        req.setAttribute("data",reqMap);
         //请求转发至显示界面
         req.getRequestDispatcher("/"+address+".jsp").forward(req,resp);
     }

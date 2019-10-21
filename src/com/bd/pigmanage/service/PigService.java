@@ -134,7 +134,7 @@ public class PigService {
         if("查询成功".equals(reqMap.get("result").get(0))) {
             System.out.println("pigService的查询反馈结果: "+reqMap.get("result").get(0));
             System.out.println("illnessSetList的结果：");
-            List<Object> lists=reqMap.get("DiseaseJudgeSet");
+            List<Object> lists=reqMap.get(beans[0]);
             for(Object obj:lists){
                 System.out.println(obj.toString());
             }
