@@ -138,7 +138,7 @@
                                         <a href="VaccinateSetList.html" class="" style="padding-left: 80px;">
                                             <span>疫苗接种设定表</span>
                                         </a>
-                                        <a href="VaccinateList.html" class="" style="padding-left: 80px;">
+                                        <a href="/VaccinateList/PigService/select/vaccinateList.do" class="" style="padding-left: 80px;">
                                             <span>疫苗接种记录表</span>
                                         </a>
                                     </li>

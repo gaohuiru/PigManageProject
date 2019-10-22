@@ -1,16 +1,15 @@
-<%--
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Map" %><%--
   Created by IntelliJ IDEA.
   User: chen
-  Date: 2019/10/21
-  Time: 10:54
+  Date: 2019/10/22
+  Time: 19:34
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<!doctype html>
 <html>
-
 <head>
     <%
         String path = request.getContextPath();
@@ -31,7 +30,6 @@
     <link rel="stylesheet" href="<%=basePath%>/assets/css/admin.css">
     <link rel="stylesheet" href="<%=basePath%>/assets/css/app.css">
 </head>
-
 <body data-type="generalComponents">
 <%@ include file="head.jsp" %>
 
@@ -72,10 +70,7 @@
                         </li>
                     </ul>
 
-
                 </li>
-
-
 
                 <li class="tpl-left-nav-item">
                     <!-- 打开状态 a 标签添加 active 即可   -->
@@ -93,8 +88,6 @@
                                 <span>猪只信息管理</span>
                                 <i class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>
                             </a>
-
-
 
                             <ul class="tpl-left-nav-sub-menu4" style="">
                                 <li>
@@ -123,8 +116,6 @@
                                         <span>饲喂设定</span>
                                     </a>
 
-
-
                                     <a href="zhuzhi-table-feedAnalysis.html" class="tpl-left-nav-link-list1" style="padding-left: 55px;">
                                         <span>猪只饲喂生长统计</span>
                                     </a>
@@ -137,15 +128,15 @@
                             <a href="javascript:;" class="tpl-left-nav-link-list6 active">
                                 <i class="am-icon-angle-right tpl-left-nav-more-ico6 tpl-left-nav-more-ico-rotate6"></i>
                                 <span>猪只安全管理</span>
-                                <i class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>
+                                <i class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right "></i>
                             </a>
                             <ul class="tpl-left-nav-sub-menu6" style="display: block;">
                                 <li>
-                                    <a href="javascript:;" class="tpl-left-nav-link-list" style="padding-left: 55px;">
-                                        <i class="am-icon-angle-right tpl-left-nav-more-ico"></i>
+                                    <a href="javascript:;" class="tpl-left-nav-link-list active" style="padding-left: 55px;">
+                                        <i class="am-icon-angle-right tpl-left-nav-more-ico tpl-left-nav-more-ico-rotate"></i>
                                         <span>疫苗接种管理</span>
                                     </a>
-                                    <ul class="tpl-left-nav-sub-menu" style="">
+                                    <ul class="tpl-left-nav-sub-menu" style="display: block;">
                                         <li>
                                             <a href="CanVaccinateList.html" class="" style="padding-left: 80px;">
                                                 <span>需接种猪只信息表</span>
@@ -153,26 +144,25 @@
                                             <a href="/VaccinateSetList/PigService/select/vaccinateSet.do" class="" style="padding-left: 80px;">
                                                 <span>疫苗接种设定表</span>
                                             </a>
-                                            <a href="/VaccinateList/PigService/select/vaccinateList.do" class="" style="padding-left: 80px;">
+                                            <a href="/VaccinateList/PigService/select/vaccinateList.do" class=" active" style="padding-left: 80px;">
                                                 <span>疫苗接种记录表</span>
                                             </a>
                                         </li>
                                     </ul>
 
-
-                                    <a href="javascript:;" class="tpl-left-nav-link-list1 active" style="padding-left: 55px;">
-                                        <i class="am-icon-angle-right tpl-left-nav-more-ico1 tpl-left-nav-more-ico-rotate1"></i>
+                                    <a href="javascript:;" class="tpl-left-nav-link-list1" style="padding-left: 55px;">
+                                        <i class="am-icon-angle-right tpl-left-nav-more-ico1"></i>
                                         <span>疾病管理</span>
                                     </a>
-                                    <ul class="tpl-left-nav-sub-menu1" style="display: block;">
+                                    <ul class="tpl-left-nav-sub-menu1" style="">
                                         <li>
-                                            <a href="SuspectIllnessList.html" class=" active" style="padding-left: 80px;">
+                                            <a href="SuspectIllnessList.html" class="" style="padding-left: 80px;">
                                                 <span>疑似生病猪只表</span>
                                             </a>
                                             <a href="/IllnessSetList/PigService/select/illSetList.do" class="" style="padding-left: 80px;">
                                                 <span>疾病判断参数设定表</span>
                                             </a>
-                                            <a href="/IllnessList/PigService/select/illnessList.do" class="active" style="padding-left: 80px;">
+                                            <a href="/IllnessList/PigService/select/illnessList.do" class="" style="padding-left: 80px;">
                                                 <span>病情记录表</span>
                                             </a>
                                         </li>
@@ -186,9 +176,9 @@
                             </ul>
 
                             <!--<a href="javascript:;" class="tpl-left-nav-link-list7">
-                                <i class="am-icon-angle-right tpl-left-nav-more-ico7"></i>
-                                <span>移栏管理</span>
-                            </a>-->
+                            <i class="am-icon-angle-right tpl-left-nav-more-ico7"></i>
+                            <span>移栏管理</span>
+                        </a>-->
                             <!--<ul class="tpl-left-nav-sub-menu7" style="">-->
 
                             <!--</ul>-->
@@ -202,7 +192,6 @@
                                     <a href="zhushe-chart.html" class="tpl-left-nav-link-list" style="padding-left: 55px;">
                                         <span>猪舍环境信息</span>
                                     </a>
-
 
                                     <a href="zhushe-house-info.html" class="tpl-left-nav-link-list" style="padding-left: 55px;">
                                         <span>猪舍基本信息</span>
@@ -229,7 +218,6 @@
                                             </a>
                                         </li>
                                     </ul>
-
 
                                     <a href="javascript:;" class="tpl-left-nav-link-list1" style="padding-left: 55px;">
                                         <i class="am-icon-angle-right tpl-left-nav-more-ico1 "></i>
@@ -273,11 +261,9 @@
                                 <span>出入库记录</span>
                             </a>
 
-
                         </li>
                     </ul>
                 </li>
-
 
                 <li class="tpl-left-nav-item">
                     <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
@@ -304,7 +290,6 @@
                     </ul>
                 </li>
 
-
                 <li class="tpl-left-nav-item">
                     <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
                         <i class="am-icon-file-o"></i>
@@ -327,27 +312,34 @@
                     </ul>
                 </li>
 
-
             </ul>
         </div>
     </div>
+
     <div class="tpl-content-wrapper">
         <div class="tpl-content-page-title">
             猪只安全管理
         </div>
         <ol class="am-breadcrumb">
-            <li><a href="#" class="am-icon-home">首页</a></li>
-            <li><a href="#">猪只管理</a></li>
-            <li><a href="#">猪只安全管理</a></li>
-            <li><a href="#">疾病管理</a></li>
-            <li class="am-active">疑似生病猪只表</li>
+            <li>
+                <a href="#" class="am-icon-home">首页</a>
+            </li>
+            <li>
+                <a href="#">猪只管理</a>
+            </li>
+            <li>
+                <a href="#">猪只安全管理</a>
+            </li>
+            <li>
+                <a href="#">疫苗接种管理</a>
+            </li>
+            <li class="am-active">疫苗接种记录表</li>
         </ol>
         <div class="tpl-portlet-components">
             <div class="portlet-title">
                 <div class="caption font-green bold">
-                    <span class="am-icon-code"></span>疑似生病猪只表
+                    <span class="am-icon-code"></span>疫苗接种记录表
                 </div>
-
 
             </div>
             <div class="tpl-block">
@@ -357,7 +349,7 @@
                             <div class="am-btn-group am-btn-group-xs">
                                 <button type="button" class="am-btn am-btn-default am-btn-success"><span class="am-icon-plus"></span> 新增</button>
                                 <button type="button" class="am-btn am-btn-default am-btn-secondary"><span class="am-icon-save"></span> 保存</button>
-                                <button type="button" class="am-btn am-btn-default am-btn-warning"><span class="am-icon-archive"></span> 审核</button>
+                                <!--<button type="button" class="am-btn am-btn-default am-btn-warning"><span class="am-icon-archive"></span> 审核</button>-->
                                 <button type="button" class="am-btn am-btn-default am-btn-danger"><span class="am-icon-trash-o"></span> 删除</button>
                             </div>
                         </div>
@@ -392,92 +384,68 @@
                                 <tr>
                                     <th class="table-check"><input type="checkbox" class="tpl-table-fz-check"></th>
                                     <th class="table-id">猪耳号</th>
-                                    <th class="table-title">生病日期</th>
-                                    <th class="table-type">所在猪舍</th>
-                                    <th class="table-author am-hide-sm-only">所在猪栏</th>
+                                    <th class="table-title">猪舍号</th>
+                                    <th class="table-type">猪栏号</th>
+                                    <th class="table-author am-hide-sm-only">接种时间</th>
+                                    <th class="table-set">疫苗种类</th>
+                                    <th class="table-set">原因</th>
                                     <th class="table-set">操作</th>
                                 </tr>
                                 </thead>
+                                <%
+                                    List<Object> VaccinationRecord = (List<Object>) ((Map)request.getAttribute("data")).get("VaccinationRecord");
+                                    request.setAttribute("VaccinationRecord",VaccinationRecord);
+                                %>
+                                <c:forEach items="${VaccinationRecord}" var="record">
                                 <tbody>
                                 <tr>
                                     <td><input type="checkbox"></td>
-                                    <td class="am-hide-sm-only">1000010</td>
-                                    <td class="am-hide-sm-only">2019.07.22</td>
-                                    <td class="am-hide-sm-only">06</td>
-                                    <td class="am-hide-sm-only">15</td>
+                                    <td>${record.pigNo}</td>
+                                    <td>05</td>
+                                    <td class="am-hide-sm-only">24</td>
+                                    <td class="am-hide-sm-only">${record.inoculationTime}</td>
+                                    <td class="am-hide-sm-only">${record.vaccineSpecies}</td>
+                                    <td class="am-hide-sm-only">${record.inoculationReason}</td>
                                     <td>
                                         <div class="am-btn-toolbar">
                                             <div class="am-btn-group am-btn-group-xs">
-                                                <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 审核</button>
+                                                <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
                                                 <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
                                 </tbody>
-                                <tbody>
-                                <tr>
-                                    <td><input type="checkbox"></td>
-                                    <td class="am-hide-sm-only">10040010</td>
-                                    <td class="am-hide-sm-only">2019.07.22</td>
-                                    <td class="am-hide-sm-only">06</td>
-                                    <td class="am-hide-sm-only">15</td>
-                                    <td>
-                                        <div class="am-btn-toolbar">
-                                            <div class="am-btn-group am-btn-group-xs">
-                                                <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 审核</button>
-                                                <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                </tbody>
-                                <tbody>
-                                <tr>
-                                    <td><input type="checkbox"></td>
-                                    <td class="am-hide-sm-only">10100010</td>
-                                    <td class="am-hide-sm-only">2019.07.22</td>
-                                    <td class="am-hide-sm-only">06</td>
-                                    <td class="am-hide-sm-only">15</td>
-                                    <td>
-                                        <div class="am-btn-toolbar">
-                                            <div class="am-btn-group am-btn-group-xs">
-                                                <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 审核</button>
-                                                <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                </tbody>
-                                <tbody>
-                                <tr>
-                                    <td><input type="checkbox"></td>
-                                    <td class="am-hide-sm-only">10010010</td>
-                                    <td class="am-hide-sm-only">2019.07.22</td>
-                                    <td class="am-hide-sm-only">06</td>
-                                    <td class="am-hide-sm-only">15</td>
-                                    <td>
-                                        <div class="am-btn-toolbar">
-                                            <div class="am-btn-group am-btn-group-xs">
-                                                <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 审核</button>
-                                                <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                </tbody>
+                                </c:forEach >
                             </table>
                             <div class="am-cf">
-
+                                <div class="am-btn-group am-btn-group-xs">
+                                    <button type="button" class="am-btn am-btn-default am-btn-success">导入数据</button>
+                                    <button type="button" class="am-btn am-btn-default am-btn-secondary">导出数据</button>
+                                </div>
                                 <div class="am-fr">
                                     <ul class="am-pagination tpl-pagination">
-                                        <li class="am-disabled"><a href="#">«</a></li>
-                                        <li class="am-active"><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">5</a></li>
-                                        <li><a href="#">»</a></li>
+                                        <li class="am-disabled">
+                                            <a href="#">«</a>
+                                        </li>
+                                        <li class="am-active">
+                                            <a href="#">1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">2</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">3</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">4</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">5</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">»</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -496,5 +464,4 @@
 <script src="<%=basePath%>/assets/js/amazeui.min.js"></script>
 <script src="<%=basePath%>/assets/js/app.js"></script>
 </body>
-
 </html>
