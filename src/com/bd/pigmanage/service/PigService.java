@@ -97,8 +97,17 @@ public class PigService {
      * @param viewObjectName 对应视图表
      * @param reqMap          前台传来的数据
      */
-    private void delete(String viewObjectName, Map<String, List<Object>> reqMap){
-
+    private void delete(String viewObjectName, Map<String, List<Object>> reqMap) throws Exception {
+        System.out.println("正在使用删除方法");
+        //将前台传入的视图表对象名转换成对应的一个或多个物理表名
+        String[] beans=TableUtil.getTables(viewObjectName);
+        //生成SQL语句
+        //获取sql语句的List集合(一般只有一条sql语句)
+        String sql=SqlUtil.deleteSQL(beans, reqMap);
+        System.out.println("pigservice生成的SQL语句: "+sql);
+        //遍历List生成sql语句并调用dao层处理数据
+        BaseDao bd=new BaseDao(sql,reqMap);
+        System.out.println("pigService的插入反馈结果: "+reqMap.get("result").get(0));
     }
 
     /**
