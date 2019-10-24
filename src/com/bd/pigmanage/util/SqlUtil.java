@@ -309,7 +309,6 @@ public class SqlUtil {
                 }
 
             }
-            //            System.out.println(insertSQL.toString());
             sqls.add(selectSQL.toString());
 
         }
