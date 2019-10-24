@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * 变量名的驼峰和下划线相互转换(下划线转驼峰还有首字母问题待处理)‘
+ * 变量名的驼峰和下划线相互转换(下划线转驼峰还有首字母问题待处理) 如将_ass_ass转化为assAss还不能实现，目前对这种形式的转换也没有需求
  * @author AlwaysXu
  */
 public class StyleUtil {
