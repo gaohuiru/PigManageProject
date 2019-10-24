@@ -64,6 +64,7 @@ public class SqlUtil {
             insertSQL.append(")");
             //            System.out.println(insertSQL.toString());
             sqls.add(insertSQL.toString());
+
         }
         //return sqls;
         //将生成的多条语句（一般只有一条）合并成一句sql语句
@@ -74,6 +75,7 @@ public class SqlUtil {
                 sql.append(";");
             }
         }
+        System.out.println("SqlUtil生成的语句："+sql);
         return sql.toString();
     }
     /**
@@ -120,18 +122,51 @@ public class SqlUtil {
                 if (i < (len - 1))
                     updateSQL.append(",");
             }
+            /**
+             * 要生成where后面的字段逻辑比较复杂自己去悟，
+             */
+            //1.判断map里是否有where
             if(map.containsKey("where")){
-                updateSQL.append(" where ");
-                for (int i = 0, len = map.get("where").size(); i < len; i++)
-                {
-                    updateSQL.append(StyleUtil.humpToLine((String) map.get("where").get(i)));
-                    if (i < len - 1)
-                        updateSQL.append(" and ");
-                }
+                //2.1设置一个用来只生成一个where的标记
+                boolean flag=true;
+                //2.2一个计算作为删除条件个数的Count
+                int count=0;
+                //2.3一个计算作为语句中and个数的andCount
+                int andCount=0;
+                //3.计算条件个数
+                for(int i=0,len1=map.get("where").size();i<len1;i++){
+                    for(int j=0,len2=fieldsList.size();j<len2;j++){
+                        //4.当存在对应值时则开始生成where后面的条件
+                        if(map.get("where").get(i).equals(fieldsList.get(j))){
+                            count++;
+                        }
+                        }
+                    }
+                //4.比较map中where的值（即做where条件的属性名）是否存在于filedsList中
+                for(int i=0,len1=map.get("where").size();i<len1;i++){
+                    for(int j=0,len2=fieldsList.size();j<len2;j++){
+                        //5.当存在对应值时则开始生成where后面的条件
+                        if(map.get("where").get(i).equals(fieldsList.get(j))){
+                            if(flag){
+                                updateSQL.append(" where ");
+                                flag=false;
+                            }
+                            andCount++;
+                            updateSQL.append(StyleUtil.humpToLine(fieldsList.get(j)));
+                            updateSQL.append("=");
+                            updateSQL.append("'"+valueList.get(j)+"'");
+                            //and个数需要比条件个数少一个
+                            if(andCount < count){
+                                updateSQL.append(" and ");
+                            }
 
+                        }
+                    }
+                }
             }
-            //            System.out.println(insertSQL.toString());
+
             sqls.add(updateSQL.toString());
+
         }
 
         //将生成的多条语句（一般只有一条）合并成一句sql语句
@@ -142,6 +177,7 @@ public class SqlUtil {
                 sql.append(";");
             }
         }
+        System.out.println("SqlUtil生成的语句："+sql);
         return sql.toString();
 
         // return sqls;
@@ -156,6 +192,17 @@ public class SqlUtil {
      * @param map 从前台获取一直传下来的数据
      * @return sql 由一条或多条sql语句组合成的sql语句
      * @throws Exception
+     */
+    /**
+     *假设前端发送一次请求中包含两个对象，例如PigInfo 和 PigVariety,，传递到map中的kv对是{pigNo，1001}，{pigVarietyid，1}
+     * 我本想pigNo作为PigInfo生成语句的删除条件，pigvarietyid作为PigVariety的删除条件
+     * 期望生成 delete from pig_info where pig_no=1001;
+     *          delete from pig_variety where pig_variety_id=1
+     * 但是这两类中都有pigvarietyid这个属性
+     * 那么他们两个在实例化时都会从map中拿取pigVariety属性的值，用于生成删除语句
+     * 实际上删除语句会是：delete from pig_info where pig_no=1001 and pigVarietyId=1;
+     *                     delete from pig_variety where pig_variety_id=1;
+     * 虽然这种情况一般不会出现，但需要大家注意
      */
     public static String deleteSQL(String[] beans, Map<String, List<Object>> map) throws Exception{
         //使用list存储SQL语句和对应的实例化Po对象(一般只有一条sql语句和一个Po对象)
@@ -188,7 +235,7 @@ public class SqlUtil {
             deleteSQL.append("delete from " + StyleUtil.humpToLine((clazz).getSimpleName()));
             for (int i = 0, len = fieldsList.size(); i < len; i++)
             {
-                if(i==1){
+                if(i==0){
                     deleteSQL.append(" where ");
                 }
                 deleteSQL.append(StyleUtil.humpToLine(fieldsList.get(i)));
@@ -198,6 +245,7 @@ public class SqlUtil {
                     deleteSQL.append(" and ");
             }
             sqls.add(deleteSQL.toString());
+
         }
         //return sqls;
         //将生成的多条语句（一般只有一条）合并成一句sql语句
@@ -208,6 +256,7 @@ public class SqlUtil {
                 sql.append(";");
             }
         }
+        System.out.println("SqlUtil生成的语句："+sql);
         return sql.toString();
 
     }
@@ -262,6 +311,11 @@ public class SqlUtil {
             }
             //            System.out.println(insertSQL.toString());
             sqls.add(selectSQL.toString());
+
+        }
+        System.out.println("SqlUtil生成的语句数："+sqls.size());
+        for(String str:sqls){
+            System.out.println(str);
         }
         return sqls;
 //        //将生成的多条语句（一般只有一条）合并成一句sql语句
