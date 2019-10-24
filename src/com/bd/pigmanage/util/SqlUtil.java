@@ -179,12 +179,6 @@ public class SqlUtil {
         }
         System.out.println("SqlUtil生成的语句："+sql);
         return sql.toString();
-
-        // return sqls;
-
-
-
-
     }
     /**
      *  生成删除的sql语句
