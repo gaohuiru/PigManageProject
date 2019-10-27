@@ -116,7 +116,7 @@ public class PigService {
      * @param reqMap          前台传来的数据
      */
     private void update(String viewObjectName, Map<String, List<Object>> reqMap) throws Exception{
-        System.out.println("正在使用删除方法");
+        System.out.println("正在使用更新方法");
         //将前台传入的视图表对象名转换成对应的一个或多个物理表名
         String[] beans=TableUtil.getTables(viewObjectName);
         //生成SQL语句
