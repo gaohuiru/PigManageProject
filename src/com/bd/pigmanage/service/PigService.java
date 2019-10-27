@@ -115,8 +115,17 @@ public class PigService {
      * @param viewObjectName 对应视图表
      * @param reqMap          前台传来的数据
      */
-    private void update(String viewObjectName, Map<String, List<Object>> reqMap){
-
+    private void update(String viewObjectName, Map<String, List<Object>> reqMap) throws Exception{
+        System.out.println("正在使用删除方法");
+        //将前台传入的视图表对象名转换成对应的一个或多个物理表名
+        String[] beans=TableUtil.getTables(viewObjectName);
+        //生成SQL语句
+        //获取sql语句的List集合(一般只有一条sql语句)
+        String sql=SqlUtil.updateSQL(beans, reqMap);
+        System.out.println("pigservice生成的SQL语句: "+sql);
+        //遍历List生成sql语句并调用dao层处理数据
+        BaseDao bd=new BaseDao(sql,reqMap);
+        System.out.println("pigService的更新反馈结果: "+reqMap.get("result").get(0));
     }
 
     /**
@@ -125,8 +134,8 @@ public class PigService {
      * @param reqMap          前台传来的数据
      */
     private void select(String viewObjectName, Map<String, List<Object>> reqMap) throws Exception {
-        System.out.println("正在使用查询方法");
-        //将前台传入的视图表对象名转换成对应的一个或多个物理表名
+        System.out.println("正在使用查询方法,查询对象："+viewObjectName);
+        //将前台传入的视图表对象名转换成对应的一个或多个物理表名(即对应的Po类的类名)
         String[] beans=TableUtil.getTables(viewObjectName);
         //生成SQL语句
         //获取sql语句的List集合(一般只有一条sql语句)
@@ -142,8 +151,14 @@ public class PigService {
 
         if("查询成功".equals(reqMap.get("result").get(0))) {
             System.out.println("pigService的查询反馈结果: "+reqMap.get("result").get(0));
-            System.out.println("illnessSetList的结果：");
-            List<Object> lists=reqMap.get(beans[0]);
+            List<Object> lists=new ArrayList<Object>();
+            //获取map中可能存在的对象名，一般是单表查询map中只存放一个对象的数据
+            System.out.println("Map中存在的对象有：");
+            for(String str:beans){
+                lists.add(reqMap.get(str));
+                System.out.println(str);
+            }
+            System.out.println("PigService层获取的结果：");
             for(Object obj:lists){
                 System.out.println(obj.toString());
             }
