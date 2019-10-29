@@ -410,8 +410,9 @@
                                        <td>
                                            <div class="am-btn-toolbar">
                                                <div class="am-btn-group am-btn-group-xs">
-                                                   <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
-                                                   <a class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="window.location.href = '/IllnessSetList/PigService/delete/illnessList.do?PigVarietyId='+${pig.pigVarietyId}"><span class="am-icon-trash-o"></span> 删除</a>
+                                                   <button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
+                                                   <input type="hidden" id="delete_pigVarietyId">
+                                                   <button type="button" value="${pig.pigVarietyId}" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="deleteIllnessSetList(this)"><span class="am-icon-trash-o"></span> 删除</button>
                                                </div>
                                            </div>
                                        </td>
@@ -448,6 +449,7 @@
 <script src="<%=basePath%>/assets/js/jquery.min.js"></script>
 <script src="<%=basePath%>/assets/js/amazeui.min.js"></script>
 <script src="<%=basePath%>/assets/js/app.js"></script>
+<script src="<%=basePath%>/assets/js/common.js"></script>
 </body>
 
 </html>
