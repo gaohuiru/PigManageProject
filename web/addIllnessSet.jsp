@@ -350,7 +350,7 @@
 
 
                     <div class="am-u-sm-12 am-u-md-9">
-                        <form class="am-form am-form-horizontal" action="/addIllnessSet/PigService/insert/illSetList.do" method="post">
+                        <form class="am-form am-form-horizontal" action="/addIllnessSet/PigService/insert/illSetList.do" method="post" onsubmit="IllnessSetList()" >
                             <div class="am-form-group">
                                 <label  class="am-u-sm-3 am-form-label">品种</label>
                                 <div class="am-u-sm-9">
@@ -402,5 +402,7 @@
 <script src="<%=basePath%>/assets/js/jquery.min.js"></script>
 <script src="<%=basePath%>/assets/js/amazeui.min.js"></script>
 <script src="<%=basePath%>/assets/js/app.js"></script>
+<script src="<%=basePath%>/assets/js/common.js"></script>
+
 </body>
 </html>

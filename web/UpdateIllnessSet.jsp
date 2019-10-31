@@ -150,7 +150,7 @@
                                             <a href="/VaccinateSetList/PigService/select/vaccinateSet.do" class="" style="padding-left: 80px;">
                                                 <span>疫苗接种设定表</span>
                                             </a>
-                                            <a href="/VaccinateList/PigService/select/vaccinateList.do" class="" style="padding-left: 80px;">
+                                            <a href="/VaccinateList/PigService/select/vaccinateList.do" class=" " style="padding-left: 80px;">
                                                 <span>疫苗接种记录表</span>
                                             </a>
                                         </li>
@@ -166,7 +166,7 @@
                                             <a href="SuspectIllnessList.html" class="" style="padding-left: 80px;">
                                                 <span>疑似生病猪只表</span>
                                             </a>
-                                            <a href="/IllnessSetList/PigService/select/illSetList.do" class=" active" style="padding-left: 80px;">
+                                            <a href="/IllnessSetList/PigService/select/illSetList.do" class="active" style="padding-left: 80px;">
                                                 <span>疾病判断参数设定表</span>
                                             </a>
                                             <a href="/IllnessList/PigService/select/illnessList.do" class="" style="padding-left: 80px;">
@@ -183,9 +183,9 @@
                             </ul>
 
                             <!--<a href="javascript:;" class="tpl-left-nav-link-list7">
-                                 <i class="am-icon-angle-right tpl-left-nav-more-ico7"></i>
-                                 <span>移栏管理</span>
-                             </a>-->
+                                <i class="am-icon-angle-right tpl-left-nav-more-ico7"></i>
+                                <span>移栏管理</span>
+                            </a>-->
                             <!--<ul class="tpl-left-nav-sub-menu7" style="">-->
 
                             <!--</ul>-->
@@ -348,112 +348,82 @@
 
 
             </div>
-            <div class="tpl-block">
-                <div class="am-g">
-                    <div class="am-u-sm-12 am-u-md-6">
-                        <div class="am-btn-toolbar">
-                            <div class="am-btn-group am-btn-group-xs">
-                                <button type="button" class="am-btn am-btn-default am-btn-success" onclick="window.location.href = '/addIllnessSet.jsp'"><span class="am-icon-plus"></span> 新增</button>
-                                <button type="button" class="am-btn am-btn-default am-btn-secondary"><span class="am-icon-save"></span> 保存</button>
-                                <button type="button" class="am-btn am-btn-default am-btn-danger"><span class="am-icon-trash-o"></span> 删除</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="am-u-sm-12 am-u-md-3">
-                        <div class="am-form-group">
-                            <select id="search-criteria">
-                                <option value="pigVarietyId" name="pigVarietyId">品种</option>
-                                <option value="growthStage" name="growthStage">生长阶段</option>
-                                <option value="temperature" name="temperature">猪只体温</option>
-                                <option value="foodIntake" name="foodIntake">猪只进食量</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="am-u-sm-12 am-u-md-3">
-                        <div class="am-input-group am-input-group-sm">
-                            <input type="text" id="search-content" class="am-form-field">
-                            <span class="am-input-group-btn">
-                                <button type="button" class="am-btn  am-btn-default am-btn-success tpl-am-btn-success am-icon-search" onclick="searchIllnessSet()"></button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="am-g">
-                    <div class="am-u-sm-12">
-                        <form class="am-form">
-                            <table class="am-table am-table-striped am-table-hover table-main">
-                                <thead>
-                                <tr>
-                                    <th class="table-check"><input type="checkbox" class="tpl-table-fz-check"></th>
-                                    <th class="table-title">品种</th>
-                                    <th class="table-type">生长阶段</th>
-                                    <th class="table-author am-hide-sm-only">猪只体温</th>
-                                    <th class="table-set">猪只进食量</th>
-                                    <th class="table-set">操作</th>
-                                </tr>
-                                </thead>
-                                <%
-                                    List<Object> DiseaseJudgeSetList = (List<Object>) ((Map)request.getAttribute("data")).get("DiseaseJudgeSet");
-                                    request.setAttribute("DiseaseJudgeSetList",DiseaseJudgeSetList);
-                                %>
-                                <c:forEach items="${DiseaseJudgeSetList}" var="pig">
-                                <tbody>
-                                   <tr>
-                                       <td><input type="checkbox"></td>
-                                       <c:if test="${pig.pigVarietyId == 1}">
-                                           <td>白猪</td>
-                                       </c:if>
-                                       <c:if test="${pig.pigVarietyId == 2}">
-                                           <td>黑猪</td>
-                                       </c:if>
-                                       <c:if test="${pig.pigVarietyId == 3}">
-                                           <td>花猪</td>
-                                       </c:if>
+            <div class="tpl-block ">
 
-                                       <c:if test="${pig.growthStage == 1}">
-                                           <td class="am-hide-sm-only">哺乳阶段</td>
-                                       </c:if>
-                                       <c:if test="${pig.growthStage == 2}">
-                                           <td class="am-hide-sm-only">保育阶段</td>
-                                       </c:if>
-                                       <c:if test="${pig.growthStage == 3}">
-                                           <td class="am-hide-sm-only">生长育肥阶段</td>
-                                       </c:if>
-                                       <td class="am-hide-sm-only">${pig.temperature}</td>
-                                       <td class="am-hide-sm-only">${pig.foodIntake}</td>
-                                       <td>
-                                           <div class="am-btn-toolbar">
-                                               <div class="am-btn-group am-btn-group-xs">
-                                                   <button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary" value="${pig.pigVarietyId}" onclick="updateIllnessSetList(this)"><span class="am-icon-pencil-square-o"></span>编辑</button>
-                                                   <input type="hidden" id="delete_pigVarietyId">
-                                                   <button type="button" value="${pig.pigVarietyId}" name="${pig.growthStage}" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="deleteIllnessSetList(this)"><span class="am-icon-trash-o"></span> 删除</button>
-                                               </div>
-                                           </div>
-                                       </td>
-                                   </tr>
-                                </tbody>
-                                </c:forEach >
+                <div class="am-g tpl-amazeui-form">
 
-                            </table>
-                            <div class="am-cf">
-
-                                <div class="am-fr">
-                                    <ul class="am-pagination tpl-pagination">
-                                        <li class="am-disabled"><a href="#">«</a></li>
-                                        <li class="am-active"><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">5</a></li>
-                                        <li><a href="#">»</a></li>
-                                    </ul>
+                    <%
+                        List<Object> DiseaseJudgeSetList = (List<Object>) ((Map)request.getAttribute("data")).get("DiseaseJudgeSet");
+                        request.setAttribute("DiseaseJudgeSetList",DiseaseJudgeSetList);
+                    %>
+                    <div class="am-u-sm-12 am-u-md-9">
+                        <form class="am-form am-form-horizontal" action="/IllnessSetList/PigService/update/illSetList.do" method="post" onsubmit="IllnessSetList()">
+                            <div class="am-form-group">
+                                <label  class="am-u-sm-3 am-form-label">品种</label>
+                                <div class="am-u-sm-9">
+                                    <select name="pigVarietyId">
+                                        <c:if test="${DiseaseJudgeSetList.get(0).pigVarietyId == 1}">
+                                            <option name="1" value="1" selected>白猪</option>
+                                            <option name="2" value="2">黑猪</option>
+                                            <option name="3" value="3">花猪</option>
+                                        </c:if>
+                                        <c:if test="${DiseaseJudgeSetList.get(0).pigVarietyId == 2}">
+                                            <option name="1" value="1">白猪</option>
+                                            <option name="2" value="2" selected>黑猪</option>
+                                            <option name="3" value="3">花猪</option>
+                                        </c:if>
+                                        <c:if test="${DiseaseJudgeSetList.get(0).pigVarietyId == 3}">
+                                            <option name="1" value="1">白猪</option>
+                                            <option name="2" value="2">黑猪</option>
+                                            <option name="3" value="3" selected>花猪</option>
+                                        </c:if>
+                                    </select>
                                 </div>
                             </div>
-                            <hr>
 
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-form-label">生长阶段</label>
+                                <div class="am-u-sm-9">
+                                    <select name="growthStage">
+                                        <c:if test="${DiseaseJudgeSetList.get(0).growthStage == 1}">
+                                            <option name="1" value="1" selected>哺乳阶段</option>
+                                            <option name="2" value="2">保育阶段</option>
+                                            <option name="3" value="3">生长育肥阶段</option>
+                                        </c:if>
+                                        <c:if test="${DiseaseJudgeSetList.get(0).growthStage == 2}">
+                                            <option name="1" value="1">哺乳阶段</option>
+                                            <option name="2" value="2" selected>保育阶段</option>
+                                            <option name="3" value="3">生长育肥阶段</option>
+                                        </c:if>
+                                        <c:if test="${DiseaseJudgeSetList.get(0).growthStage == 3}">
+                                            <option name="1" value="1">哺乳阶段</option>
+                                            <option name="2" value="2">保育阶段</option>
+                                            <option name="3" value="3" selected>生长育肥阶段</option>
+                                        </c:if>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <label for="pig-temperature" class="am-u-sm-3 am-form-label">猪只体温</label>
+                                <div class="am-u-sm-9">
+                                    <input type="tel" id="pig-temperature" name="temperature" placeholder="输入猪只最低和最高体温，例36，40 "  value="${DiseaseJudgeSetList.get(0).temperature}">
+                                </div>
+                            </div>
+                            <input hidden="hidden" name="where" value="pigVarietyId">
+                            <div class="am-form-group">
+                                <label for="pig-foodIntake" class="am-u-sm-3 am-form-label">猪只进食量</label>
+                                <div class="am-u-sm-9">
+                                    <input type="tel" id="pig-foodIntake" name="foodIntake" placeholder="输入猪只最低进食量" value="${DiseaseJudgeSetList.get(0).foodIntake}">
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <div class="am-u-sm-9 am-u-sm-push-3">
+                                    <button type="submit" class="am-btn am-btn-primary">确定修改</button>
+                                </div>
+                            </div>
                         </form>
                     </div>
-
                 </div>
             </div>
             <div class="tpl-alert"></div>
@@ -465,5 +435,4 @@
 <script src="<%=basePath%>/assets/js/app.js"></script>
 <script src="<%=basePath%>/assets/js/common.js"></script>
 </body>
-
 </html>
