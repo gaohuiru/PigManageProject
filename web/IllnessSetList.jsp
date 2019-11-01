@@ -393,7 +393,7 @@
                                 </tr>
                                 </thead>
                                 <%
-                                    List<Object> DiseaseJudgeSetList = (List<Object>) ((Map)request.getAttribute("data")).get("DiseaseJudgeSet");
+                                    List<Object> DiseaseJudgeSetList = (List<Object>) ((Map)request.getAttribute("reqMap")).get("DiseaseJudgeSet");
                                     request.setAttribute("DiseaseJudgeSetList",DiseaseJudgeSetList);
                                 %>
                                 <c:forEach items="${DiseaseJudgeSetList}" var="pig">

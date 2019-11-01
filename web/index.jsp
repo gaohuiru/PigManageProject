@@ -171,7 +171,7 @@
                       <a href="SuspectIllnessList.html" class="" style="padding-left: 80px;">
                         <span>疑似生病猪只表</span>
                       </a>
-                      <a href="/IllnessSetList/PigService/select/illSetList.do" class="" style="padding-left: 80px;">
+                      <a href="${pageContext.request.contextPath}/IllnessSetList/PigService/select/illSetList.do" class="" style="padding-left: 80px;">
                         <span>疾病判断参数设定表</span>
                       </a>
                       <a href="/IllnessList/PigService/select/illnessList.do" class="" style="padding-left: 80px;">

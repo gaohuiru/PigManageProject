@@ -393,7 +393,7 @@
                                 </tr>
                                 </thead>
                                 <%
-                                    List<Object> VaccinationRecord = (List<Object>) ((Map)request.getAttribute("data")).get("VaccinationRecord");
+                                    List<Object> VaccinationRecord = (List<Object>) ((Map)request.getAttribute("reqMap")).get("VaccinationRecord");
                                     request.setAttribute("VaccinationRecord",VaccinationRecord);
                                 %>
                                 <c:forEach items="${VaccinationRecord}" var="record">

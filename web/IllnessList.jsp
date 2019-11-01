@@ -407,7 +407,7 @@
                                 </tr>
                                 </thead>
                                 <%
-                                    List<Object> IllnessRecord = (List<Object>) ((Map)request.getAttribute("data")).get("IllnessRecord");
+                                    List<Object> IllnessRecord = (List<Object>) ((Map)request.getAttribute("reqMap")).get("IllnessRecord");
                                     request.setAttribute("IllnessRecord",IllnessRecord);
                                 %>
                                 <c:forEach items="${IllnessRecord}" var="record">

@@ -353,7 +353,7 @@
                 <div class="am-g tpl-amazeui-form">
 
                     <%
-                        List<Object> DiseaseJudgeSetList = (List<Object>) ((Map)request.getAttribute("data")).get("DiseaseJudgeSet");
+                        List<Object> DiseaseJudgeSetList = (List<Object>) ((Map)request.getAttribute("reqMap")).get("DiseaseJudgeSet");
                         request.setAttribute("DiseaseJudgeSetList",DiseaseJudgeSetList);
                     %>
                     <div class="am-u-sm-12 am-u-md-9">
