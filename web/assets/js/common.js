@@ -18,11 +18,23 @@ function deleteIllnessSetList(a) {
  */
 function updateIllnessSetList(e) {
     var pigVarietyId = e.value;
-    window.location.href = "/UpdateIllnessSet/PigService/select/illSetList.do?pigVarietyId="+pigVarietyId;
+    var growthStage = e.name;
+    window.location.href = "/UpdateIllnessSet/PigService/select/illSetList.do?pigVarietyId="+pigVarietyId+"&growthStage="+growthStage;
 }
+
+/**
+ * 疫苗判断参数设定的条件查询
+ */
 function searchIllnessSet(){
     var criteria = document.getElementById("search-criteria").value;
     var content = document.getElementById("search-content").value;
+    if (content=="白猪"||content=="哺乳阶段"){
+        content=1;
+    }else if (content=="黑猪"||content=="保育阶段"){
+        content=2;
+    }else if (content=="花猪"||content=="生长育肥阶段"){
+        content=3;
+    }
     window.location.href = "/IllnessSetList/PigService/select/illSetList.do?"+criteria+"="+content;
 }
 
