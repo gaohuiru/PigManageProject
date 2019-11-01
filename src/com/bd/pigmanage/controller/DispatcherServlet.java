@@ -58,9 +58,18 @@ public class DispatcherServlet extends HttpServlet {
         //获取操作完成后的结果
 
         System.out.println("Servlet层的反馈结果： "+reqMap.get("result").get(0));
-        List<Object> lists=reqMap.get("DiseaseJudgeSet");
+        System.out.println("Servlet层的获取到的Key个数： "+reqMap.size());
+        if(reqMap.containsKey("DiseaseJudgeSet")) {
+            System.out.println("Servlet层的数据显示：" + reqMap.get("DiseaseJudgeSet").get(0));
+        }
+        if(reqMap.containsKey("PigInfo")) {
+            System.out.println("Servlet层的数据显示：" + reqMap.get("PigInfo"));
+        }
 
-        req.setAttribute("data",reqMap);
+        System.out.println("Servlet层的显示需要跳转到的页面："+address);
+        //
+
+        req.setAttribute("reqMap",reqMap);
         //请求转发至显示界面
         req.getRequestDispatcher("/"+address+".jsp").forward(req,resp);
     }

@@ -49,7 +49,7 @@ public class Test {
 
 
         try{
-            SqlUtil.deleteSQL(beans,map);
+            SqlUtil.updateSQL(beans,map);
         } catch (Exception e) {
             e.printStackTrace();
         }

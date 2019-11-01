@@ -35,3 +35,23 @@ function IllnessSetList() {
         window.location.href = "/IllnessSetList/PigService/select/illSetList.do";
     },20);
 }
+
+function  search() {
+    var criteria = document.getElementById("search-criteria").value;
+    var content = document.getElementById("search-content").value;
+    window.location.href = "/pigInfoList/PigService/select/pigInfo.do?"+criteria+"="+content;
+}
+function selectPigInfoList(){
+    window.setTimeout(function(){
+        window.location.href = "/pigInfoList/PigService/select/pigInfos.do?";
+    },20);
+}
+function insertPigInfoList() {
+    window.location.href = "/pigInfoInsert/PigService/select/pigInfo.do";
+}
+function deletePigInfoList(a){
+    var value = a.value;
+    window.location.href = "/pigInfoList/PigService/delete/pigInfo.do?pigNo="+value;
+    selectPigInfoList();
+}
+

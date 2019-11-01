@@ -1,15 +1,20 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: Administrator
+  Date: 2019/10/21
+  Time: 12:03
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.Map" %><%--
+<%@ page import="java.util.Map" %>
+<%@ page import="com.bd.pigmanage.Po.PigInfo" %><%--
   Created by IntelliJ IDEA.
   User: xxbb
-  Date: 2019/09/12
-  Time: 14:24
+  Date: 2019/10/20
+  Time: 14:39
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!--下面两句，就C的大小写不同，如果只有上面那句就显示不出页面，只有下面那句c if 表达式就会出错，加入头文件里了-->
-<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>--%>
 <!doctype html>
 <html>
 <head>
@@ -343,249 +348,168 @@
             </ul>
         </div>
     </div>
+
     <div class="tpl-content-wrapper">
         <div class="tpl-content-page-title">
-            猪只管理
+            智能养猪管理系统 文字列表
         </div>
         <ol class="am-breadcrumb">
             <li><a href="#" class="am-icon-home">首页</a></li>
-            <li><a href="#">猪只管理</a></li>
-            <li><a href="#">猪只管理信息</a></li>
-            <li class="am-active">猪只信息</li>
+            <li><a href="#">智能养猪管理系统</a></li>
+            <li class="am-active">文字列表</li>
         </ol>
-        <div class="tpl-portlet-components">
-            <div class="portlet-title">
-                <div class="caption font-green bold">
-                    <span class="am-icon-code"></span> 猪只基本信息
-                </div>
+    </div>
+    <div class="tpl-portlet-components">
+        <div class="portlet-title">
+            <div class="caption font-green bold"><span class="am-icon-code"></span> 猪只详细信息</div>
 
-
-            </div>
-            <div class="tpl-block">
-                <div class="am-g">
-                    <div class="am-u-sm-12 am-u-md-6">
-                        <div class="am-btn-toolbar">
-                            <div class="am-btn-group am-btn-group-xs">
-                                <button type="button" class="am-btn am-btn-default am-btn-success"
-                                        onclick="insertPigInfoList()"><span
-                                        class="am-icon-plus"></span> 添加
-                                </button>
-                                <button type="button" class="am-btn am-btn-default am-btn-secondary"><span
-                                        class="am-icon-save"></span> 保存
-                                </button>
-                                <!--<button type="button" class="am-btn am-btn-default am-btn-warning"><span class="am-icon-archive"></span> 特殊标记</button>-->
-                                <button type="button" class="am-btn am-btn-default am-btn-danger" float><span
-                                        class="am-icon-trash-o"></span> 删除
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="am-u-sm-12 am-u-md-3">
-                        <div class="am-form-group">
-                            <select id="search-criteria">
-                                <option value="pigNo">猪只编号</option>
-                                <option value="pigVarietyId">品种</option>
-                                <option value="sex">性别</option>
-                                <option value="age">日龄</option>
-                                <option value="growthStage">生长阶段</option>
-                                <option value="pigType">类型</option>
-                                <option value="pigState">状态</option>
-                                <option value="pigstyNo">所在猪舍</option>
-                                <option value="hogcoteNo">所在猪栏</option>
-
-                            </select>
-                        </div>
-                    </div>
-                    <div class="am-u-sm-12 am-u-md-3">
-                        <div class="am-input-group am-input-group-sm">
-                            <input type="text" class="am-form-field" id="search-content">
-                            <span class="am-input-group-btn">
-                                <button class="am-btn  am-btn-default am-btn-success tpl-am-btn-success am-icon-search"
-                                        type="button" onclick="search()"></button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="am-g">
-                    <div class="am-u-sm-12">
-                        <form class="am-form">
-                            <table class="am-table am-table-striped am-table-hover table-main">
-                                <thead>
-                                <tr>
-                                    <th class="table-check"><input type="checkbox" class="tpl-table-fz-check"></th>
-                                    <th class="table-id">猪只编号</th>
-                                    <th class="table-title">品种</th>
-                                    <th>性别</th>
-                                    <th class="table-type">猪舍号</th>
-                                    <th class="table-type">猪栏号</th>
-                                    <th class="table-author am-hide-sm-only">日龄</th>
-                                    <th class="table-set">当前体重</th>
-                                    <th class="table-date am-hide-sm-only">生长阶段</th>
-                                    <th>类型</th>
-                                    <th>状态</th>
-                                    <th>操作</th>
-
-
-                                </tr>
-                                </thead>
-                                <%
-                                    Map jspMap = (Map) request.getAttribute("reqMap");
-                                    List pigInfo = (List) jspMap.get("PigInfo");
-                                    request.setAttribute("pig", pigInfo);
-
-
-                                %>
-                                <tbody>
-
-                                <%--                                <tr>
-                                                                    <td><input type="checkbox"></td>
-                                                                    <td>1901100000</td>
-                                                                    <td><a href="#">白猪</a></td>
-                                                                    <td>雄性</td>
-                                                                    <td>01，01</td>
-                                                                    <td class="am-hide-sm-only">50</td>
-                                                                    <td>50kg</td>
-                                                                    <td class="am-hide-sm-only">生长育肥阶段</td>
-                                                                    <td>育肥猪</td>
-                                                                    <td>健康</td>
-                                                                    <td>
-                                                                        <div class="am-btn-toolbar">
-                                                                            <div class="am-btn-group am-btn-group-xs">
-                                                                                <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
-                                                                                        class="am-icon-pencil-square-o"></span> 修改
-                                                                                </button>
-                                                                                <button type="button"
-                                                                                        class="am-btn am-btn-default am-btn-xs am-hide-sm-only"
-                                                                                        onclick="window.location.href = 'zhuzhi-table-pigDetail.html'">
-                                                                                    <span class="am-icon-copy"></span>详情
-                                                                                </button>
-                                                                                <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
-                                                                                    <span class="am-icon-trash-o"></span> 删除
-                                                                                </button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>--%>
-                                <c:forEach items="${pig}" var="pig">
-
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>${pig.pigNo}</td>
-
-                                        <td>
-                                            <c:if test="${pig.pigVarietyId==0 }">虚空猪</c:if>
-                                            <c:if test="${pig.pigVarietyId==1 }">白猪</c:if>
-                                        </td>
-                                        <td>
-                                            <c:if test="${pig.sex==0}">公</c:if>
-                                            <c:if test="${pig.sex==1}">母</c:if>
-                                        </td>
-                                        <td>${pig.pigstyNo}</td>
-                                        <td>${pig.hogcoteNo}</td>
-                                        <td>${pig.age}天</td>
-                                        <td>${pig.pigRecentWeight} kg</td>
-                                        <td>
-                                            <c:if test="${pig.growthStage==1}">哺乳阶段</c:if>
-                                            <c:if test="${pig.growthStage==2}">保育阶段</c:if>
-                                            <c:if test="${pig.growthStage==3}">生长育肥阶段</c:if>
-                                        </td>
-                                        <td>
-                                            <c:if test="${pig.pigType==0}">育种猪</c:if>
-                                            <c:if test="${pig.pigType==1}">育肥猪</c:if>
-                                        </td>
-                                        <td>
-                                            <c:if test="${pig.pigState==1}">健康</c:if>
-                                            <c:if test="${pig.pigState==2}">生病</c:if>
-                                            <c:if test="${pig.pigState==-1}">淘汰</c:if>
-                                            <c:if test="${pig.pigState==0}">出栏</c:if>
-                                        </td>
-                                        <td>
-                                            <div class="am-btn-toolbar">
-                                                <div class="am-btn-group am-btn-group-xs">
-                                                    <form class=""
-                                                          action="/pigInfoUpdate/StoreService/select/pigInfo.do"
-                                                          method="post">
-                                                        <!-- 这个form不可删除，用来解决第一个form表达必跳转pigInfoList界面的玄学问题-->
-                                                    </form>
-                                                    <div style="float:left;">
-                                                        <form class=""
-                                                              action="/pigInfoUpdate/PigService/select/pigInfo.do"
-                                                              method="post">
-                                                            <input type="hidden" name="pigNo" value="${pig.pigNo}">
-                                                            <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
-                                                                    class="am-icon-pencil-square-o"></span>修改
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                    <div style="float:left;">
-                                                        <form class=""
-                                                              action="/pigInfoDetail/PigService/select/pigInfos.do"
-                                                              method="post">
-                                                            <input type="hidden" name="pigNo" value="${pig.pigNo}">
-                                                            <button class="am-btn am-btn-default am-btn-xs am-hide-sm-only">
-                                                                <span class="am-icon-copy"></span>详情
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                    <div style="float:left;">
-                                                            <%--<form class="" action="/pigInfoList/PigService/delete/pigInfo.do" method="post">
-                                                                <input type="hidden" name="pigNo" value="${pig.pigNo}" >
-                                                               <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only " onclick="deletePigInfoList()">
-                                                                    <span class="am-icon-trash-o"></span>删除
-                                                                </button>
-                                                            </form>--%>
-                                                        <button type="button" value="${pig.pigNo}"
-                                                                onclick="deletePigInfoList(this)"
-                                                                class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
-                                                            <span class="am-icon-trash-o"></span>删除
-                                                        </button>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-
-                                </tbody>
-                            </table>
-                            <div class="am-cf">
-                                <div class="am-btn-group am-btn-group-xs">
-                                    <button type="button" class="am-btn am-btn-default am-btn-success">导入数据</button>
-                                    <button type="button" class="am-btn am-btn-default am-btn-secondary">导出数据</button>
-                                </div>
-
-                                <div class="am-fr">
-
-                                    <ul class="am-pagination tpl-pagination">
-                                        <li class="am-disabled"><a href="#">«</a></li>
-                                        <li class="am-active"><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">5</a></li>
-                                        <li><a href="#">»</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <hr>
-                        </form>
-                    </div>
-
-                </div>
-            </div>
-            <div class="tpl-alert"></div>
         </div>
+        <%
+            Map jspMap = (Map) request.getAttribute("reqMap");
+            List pigInfo = (List) jspMap.get("PigInfo");
+            PigInfo pig = (PigInfo) pigInfo.get(pigInfo.size() - 1);
+            request.setAttribute("pig", pig);
+        %>
+        <div class="tpl-block ">
+            <div class="am-g tpl-amazeui-form">
+                <div class="am-u-sm-12 am-u-md-9">
+                    <form class="am-form am-form-horizontal" action="/pigInfoList/PigService/insert/pigInfo.do"
+                          id="pigInfoList" onsubmit="selectPigInfoList()"
+                          method="post">
+                        <div class="am-form-group" style="width: 50%;float: left">
+                            <label for="pigNo" class="am-u-sm-3 am-form-label">猪耳号</label>
+                            <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
+                                <input type="text" id="pigNo" placeholder="推荐编号：${pig.pigNo+1}" name="pigNo"
+                                >
+                            </div>
+                        </div>
+                        <div class="am-form-group" style="width: 50%;float: left">
+                            <label for="pigVarietyId" class="am-u-sm-3 am-form-label">品种</label>
+                            <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
+                                <input type="text" id="pigVarietyId" placeholder="请输入品种编号"
+                                       name="pigVarietyId">
+                            </div>
+                        </div>
+                        <div class="am-form-group" style="width: 50%;float: left">
+                            <label for="pigType" class="am-u-sm-3 am-form-label">类型</label>
+                            <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
+                                <input type="text" id="pigType" placeholder="请输入类型编号" name="pigType"
+                                >
+                            </div>
+                        </div>
+                        <div class="am-form-group" style="width: 50%;float: left">
+                            <label for="sex" class="am-u-sm-3 am-form-label">性别</label>
+                            <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
+                                <input type="text" id="sex" placeholder="请输入性别编号" name="sex"
+                                >
+                            </div>
+                        </div>
+                        <div class="am-form-group" style="width: 50%;float: left">
+                            <label for="age" class="am-u-sm-3 am-form-label">日龄</label>
+                            <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
+                                <input type="text" id="age" placeholder="请输入日龄" name="age"
+                                >
+                            </div>
+                        </div>
+                        <div class="am-form-group" style="width: 50%;float: left">
+                            <label for="growthStage" class="am-u-sm-3 am-form-label">生长阶段</label>
+                            <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
+                                <input type="text" id="growthStage" placeholder="请输入生长阶段编号"
+                                       name="growthStage">
+                            </div>
+                        </div>
+                        <div class="am-form-group" style="width: 50%;float: left">
+                            <label for="birthday" class="am-u-sm-3 am-form-label">出生日期</label>
+                            <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
+                                <input type="text" id="birthday" placeholder="日期格式：2010-9-21"
+                                       name="birthday">
+                            </div>
+                        </div>
+                        <div class="am-form-group" style="width: 50%;float: left">
+                            <label for="pigRecentWeight" class="am-u-sm-3 am-form-label">当前体重</label>
+                            <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
+                                <input type="text" id="pigRecentWeight" placeholder="请输入体重"
+                                       name="pigRecentWeight">
+                            </div>
+                        </div>
+                        <div class="am-form-group" style="width: 50%;float: left">
+                            <label for="vaccinumCount" class="am-u-sm-3 am-form-label">接种疫苗次数</label>
+                            <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
+                                <input type="text" id="vaccinumCount" placeholder="请输入疫苗次数"
+                                       name="vaccinumCount">
+                            </div>
+                        </div>
+                        <%--<div class="am-form-group" style="width: 50%;float: left">
+                            <label for="user-email" class="am-u-sm-3 am-form-label">具体接种疫苗</label>
+                            <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
+                                <input type="email" id="user-email" disabled="disabled" placeholder="猪瘟疫苗、冻干苗">
+                            </div>
+                        </div>--%>
+                        <div class="am-form-group" style="width: 50%;float: left">
+                            <label for="pigstyNo" class="am-u-sm-3 am-form-label">所在猪舍</label>
+                            <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
+                                <input type="text" id="pigstyNo" placeholder="请输入猪舍" name="pigstyNo"
+                                >
+                            </div>
+                        </div>
+                        <div class="am-form-group" style="width: 50%;float: left">
+                            <label for="hogcoteNo" class="am-u-sm-3 am-form-label">所在猪栏</label>
+                            <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
+                                <input type="text" id="hogcoteNo" placeholder="请输入猪栏" name="hogcoteNo"
+                                >
+                            </div>
+                        </div>
+                        <div class="am-form-group" style="width: 50%;float: left">
+                            <label for="pigBasicWeight" class="am-u-sm-3 am-form-label">入栏体重</label>
+                            <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
+                                <input type="text" id="pigBasicWeight" placeholder="请输入入栏体重"
+                                       name="pigBasicWeight">
+                            </div>
+                        </div>
+                        <div class="am-form-group" style="width: 50%;float: left">
+                            <label for="enterDate" class="am-u-sm-3 am-form-label">入栏日期</label>
+                            <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
+                                <input type="text" id="enterDate" placeholder="日期格式：2015-06-07"
+                                       name="enterDate">
+                            </div>
+                        </div>
+                        <div class="am-form-group" style="width: 50%;float: left">
+                            <label for="leaveDate" class="am-u-sm-3 am-form-label">出栏日期</label>
+                            <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
+                                <input type="text" id="leaveDate" placeholder="日期格式：2020-6-13"
+                                       name="leaveDate">
+                            </div>
+                        </div>
+                        <div class="am-form-group" style="width: 50%;float: left">
+                            <label for="pigState" class="am-u-sm-3 am-form-label">状态</label>
+                            <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
+                                <input type="text" id="pigState" placeholder="请输入状态编号" name="pigState"
+                                >
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <div class="am-u-sm-9 am-u-sm-push-3" style="float: left">
 
+                                <input type="hidden" name="where" value="pigNo"/>
+                                <button type="submit" class="am-btn am-btn-primary" style="margin-left:10%">保存
+                                </button>
 
+                                <button type="button" class="am-btn am-btn-primary" style="margin-left:10%" onclick="selectPigInfoList()">返回
+                                </button>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>
 
 
 <script src="<%=basePath%>/assets/js/jquery.min.js"></script>
+<script src="<%=basePath%>/assets/js/jquery-1.9.1.js"></script>
 <script src="<%=basePath%>/assets/js/amazeui.min.js"></script>
 <script src="<%=basePath%>/assets/js/app.js"></script>
 <script src="<%=basePath%>/assets/js/common.js"></script>

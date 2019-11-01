@@ -99,7 +99,7 @@
 
               <ul class="tpl-left-nav-sub-menu4">
                 <li>
-                  <a href="zhuzhi-table-font-list.html" class="tpl-left-nav-link-list" style="padding-left: 55px;">
+                  <a href="/pigInfoList/PigService/select/pigInfos.do" class="tpl-left-nav-link-list" style="padding-left: 55px;">
                     <span>猪只信息</span>
                   </a>
 
