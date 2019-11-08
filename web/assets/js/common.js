@@ -47,11 +47,15 @@ function IllnessSetList() {
         window.location.href = "/IllnessSetList/PigService/select/illSetList.do";
     },20);
 }
-
-function  search() {
+//if判断不太好
+function  search(a) {
     var criteria = document.getElementById("search-criteria").value;
     var content = document.getElementById("search-content").value;
-    window.location.href = "/pigInfoList/PigService/select/pigInfo.do?"+criteria+"="+content;
+    var viewTable=a.value();
+    if("pigInfos"==(viewTable)){
+        window.location.href = "/pigInfoList/PigService/select/"+viewTable+".do?"+criteria+"="+content;
+    }
+
 }
 function selectPigInfoList(){
     window.setTimeout(function(){

@@ -7,12 +7,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!--下面两句，就C的大小写不同，如果只有上面那句就显示不出页面，只有下面那句c if 表达式就会出错，加入头文件里了-->
-<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>--%>
 <!doctype html>
 <html>
 <head>
+
     <%
         String path = request.getContextPath();
         String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -403,7 +401,7 @@
                             <input type="text" class="am-form-field" id="search-content">
                             <span class="am-input-group-btn">
                                 <button class="am-btn  am-btn-default am-btn-success tpl-am-btn-success am-icon-search"
-                                        type="button" onclick="search()"></button>
+                                        type="button" value="pigInfos" onclick="search(this)"></button>
                             </span>
                         </div>
                     </div>
@@ -430,45 +428,45 @@
 
                                 </tr>
                                 </thead>
+                                <!--     读取数据          -->
                                 <%
-                                    Map jspMap = (Map) request.getAttribute("reqMap");
+                                    Map<String, List<Object>> jspMap = (Map) request.getAttribute("reqMap");
                                     List pigInfo = (List) jspMap.get("PigInfo");
                                     request.setAttribute("pig", pigInfo);
+                                %>
 
+                                <!--    分页        -->
+                                <%
 
+                                    int pageBegin = 0;//页面第一条数据的位置
+                                    int pageEnd = 0;//页面最后一条数据的位置
+                                    int pageTotal = 0;//总页数
+                                    int pageSize = 3;//一页所显示的数据数量
+
+                                    //第一次请求显示的数据从第一条开始显示
+                                    // 在需要查看第几页的时候会把需要查看的页数存储在map中的pageBegin
+                                    //根据pageBegin的值来确定需要读取数据的起始位置从而实现分页效果
+                                    if (jspMap.containsKey("pageBegin")) {
+                                        pageBegin = Integer.valueOf(jspMap.get("pageBegin").get(0).toString());
+                                        System.out.println("PageBegin: " + pageBegin);
+                                    }
+
+                                    pageEnd = pageBegin + pageSize;//一页中最后一条数据的下标
+                                    System.out.println("pageEnd: " + pageEnd);
+
+                                    request.setAttribute("pageBegin", pageBegin);
+                                    request.setAttribute("pageEnd", pageEnd);
+                                    //计算显示数据所需要的页数
+                                    if (pigInfo.size() % (pageSize + 1) == 0) {
+                                        pageTotal = pigInfo.size() / (pageSize + 1);
+                                    } else {
+                                        pageTotal = pigInfo.size() / (pageSize + 1) + 1;
+                                    }
+                                    System.out.println("pageTotal: " + pageTotal);
+                                    //接下来的代码段在末尾
                                 %>
                                 <tbody>
-
-                                <%--                                <tr>
-                                                                    <td><input type="checkbox"></td>
-                                                                    <td>1901100000</td>
-                                                                    <td><a href="#">白猪</a></td>
-                                                                    <td>雄性</td>
-                                                                    <td>01，01</td>
-                                                                    <td class="am-hide-sm-only">50</td>
-                                                                    <td>50kg</td>
-                                                                    <td class="am-hide-sm-only">生长育肥阶段</td>
-                                                                    <td>育肥猪</td>
-                                                                    <td>健康</td>
-                                                                    <td>
-                                                                        <div class="am-btn-toolbar">
-                                                                            <div class="am-btn-group am-btn-group-xs">
-                                                                                <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
-                                                                                        class="am-icon-pencil-square-o"></span> 修改
-                                                                                </button>
-                                                                                <button type="button"
-                                                                                        class="am-btn am-btn-default am-btn-xs am-hide-sm-only"
-                                                                                        onclick="window.location.href = 'zhuzhi-table-pigDetail.html'">
-                                                                                    <span class="am-icon-copy"></span>详情
-                                                                                </button>
-                                                                                <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
-                                                                                    <span class="am-icon-trash-o"></span> 删除
-                                                                                </button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>--%>
-                                <c:forEach items="${pig}" var="pig">
+                                <c:forEach items="${pig}" var="pig" begin="${pageBegin}" end="${pageEnd}">
 
                                     <tr>
                                         <td><input type="checkbox"></td>
@@ -560,13 +558,50 @@
                                 <div class="am-fr">
 
                                     <ul class="am-pagination tpl-pagination">
-                                        <li class="am-disabled"><a href="#">«</a></li>
+
+                                        <%
+
+                                            for (int i = 1; i <= pageTotal; i++) {
+                                        %>
+                                        <li class="am-active" style="float: left">
+                                            <form action="/pigInfoList/PigService/select/pigInfos.do" method="post">
+                                                <%
+                                                    pageBegin = (pageSize + 1) * (i - 1);
+                                                %>
+
+                                                <%
+                                                    if(i==1){
+
+                                                %>
+                                                <button type="submit" style="color:white;background-color:#0f9ae0;border-color: #0f9ae0"><<</button>
+                                                <%
+                                                    }
+                                                    if(i<6){
+                                                %>
+                                                <input type="hidden" value="<%= pageBegin %>" name="pageBegin">
+                                                <button type="submit" style="color:white;background-color:#0f9ae0;border-color: #0f9ae0"><%=i%></button>
+                                                <%
+                                                    }
+                                                    if(i==pageTotal){
+
+                                                %>
+                                                <button type="submit" style="color:white;background-color:#0f9ae0;border-color: #0f9ae0">>></button>
+                                                <%
+                                                    }
+                                                %>
+                                            </form>
+                                        </li>
+                                        <%
+                                            }
+                                        %>
+
+                                        <%--<li class="am-disabled"><a href="#">«</a></li>
                                         <li class="am-active"><a href="#">1</a></li>
                                         <li><a href="#">2</a></li>
                                         <li><a href="#">3</a></li>
                                         <li><a href="#">4</a></li>
                                         <li><a href="#">5</a></li>
-                                        <li><a href="#">»</a></li>
+                                        <li><a href="#">»</a></li>--%>
                                     </ul>
                                 </div>
                             </div>
