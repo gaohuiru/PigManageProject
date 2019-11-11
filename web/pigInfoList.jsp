@@ -101,14 +101,10 @@
                                         <span>猪只信息</span>
                                     </a>
 
-                                    <a href="zhuzhi-table-pigType.html" class="tpl-left-nav-link-list1"
+                                    <a href="/pigVarietyList/PigService/select/pigVariety.do"
+                                       class="tpl-left-nav-link-list1"
                                        style="padding-left: 55px;">
                                         <span>猪只品种</span>
-                                    </a>
-
-                                    <a href="zhuzhi-table-pigDefault.html" class="tpl-left-nav-link-list1"
-                                       style="padding-left: 55px;">
-                                        <span>猪只默认参数</span>
                                     </a>
 
                                 </li>
@@ -365,7 +361,7 @@
                         <div class="am-btn-toolbar">
                             <div class="am-btn-group am-btn-group-xs">
                                 <button type="button" class="am-btn am-btn-default am-btn-success"
-                                        onclick="insertPigInfoList()"><span
+                                        onclick="insertForPig(this)" value="pigInfo"><span
                                         class="am-icon-plus"></span> 添加
                                 </button>
                                 <button type="button" class="am-btn am-btn-default am-btn-secondary"><span
@@ -435,27 +431,39 @@
                                     request.setAttribute("pig", pigInfo);
                                 %>
 
-                                <!--    分页        -->
+                                <%--    分页        --%>
                                 <%
+                                    //只需要修改这两个参数
+                                    int pageButtonNum = 5;//显示页数下标按钮的个数
+                                    int pageSize = 2;//页面显示数据的条数，实际显示数量为pageSize+1，表示的应该是数据下标的位移量，由于下标是从0开始
+                                    //
 
-                                    int pageBegin = 0;//页面第一条数据的位置
-                                    int pageEnd = 0;//页面最后一条数据的位置
+                                    int dataBegin = 0;//页面第一条数据的位置
+                                    int dataEnd = 0;//页面最后一条数据的位置
                                     int pageTotal = 0;//总页数
-                                    int pageSize = 3;//一页所显示的数据数量
+                                    int pageButtonBegin=1;//显示页数按钮的第一个按钮的数字
+                                    int pageButtonAddNum = 0;//用于追加显示页面下标，每次点击按钮<<或>>都会使得相应的使页面按钮变化，如从6~10按<<变成1~5，按>>变成11~15
 
-                                    //第一次请求显示的数据从第一条开始显示
-                                    // 在需要查看第几页的时候会把需要查看的页数存储在map中的pageBegin
-                                    //根据pageBegin的值来确定需要读取数据的起始位置从而实现分页效果
-                                    if (jspMap.containsKey("pageBegin")) {
-                                        pageBegin = Integer.valueOf(jspMap.get("pageBegin").get(0).toString());
-                                        System.out.println("PageBegin: " + pageBegin);
+
+                                    //通过请求往map中传一下三个值以实现页面分页参数的更改
+                                    if (jspMap.containsKey("dataBegin")) {
+                                        dataBegin = Integer.valueOf(jspMap.get("dataBegin").get(0).toString());
+                                        System.out.println("dataBegin: " + dataBegin);
+                                    }
+                                    if (jspMap.containsKey("pageButtonAddNum")) {
+                                        pageButtonAddNum = Integer.valueOf(jspMap.get("pageButtonAddNum").get(0).toString());
+                                        System.out.println("pageButtonAddNum: " + pageButtonAddNum);
+                                    }
+                                    if (jspMap.containsKey("pageButtonBegin")) {
+                                        pageButtonBegin = Integer.valueOf(jspMap.get("pageButtonBegin").get(0).toString());
+                                        System.out.println("pageButtonBegin: " + pageButtonBegin);
                                     }
 
-                                    pageEnd = pageBegin + pageSize;//一页中最后一条数据的下标
-                                    System.out.println("pageEnd: " + pageEnd);
+                                    dataEnd = dataBegin + pageSize;//一页中最后一条数据的下标
+                                    System.out.println("dataEnd: " + dataEnd);
 
-                                    request.setAttribute("pageBegin", pageBegin);
-                                    request.setAttribute("pageEnd", pageEnd);
+                                    request.setAttribute("dataBegin", dataBegin);
+                                    request.setAttribute("dataEnd", dataEnd);
                                     //计算显示数据所需要的页数
                                     if (pigInfo.size() % (pageSize + 1) == 0) {
                                         pageTotal = pigInfo.size() / (pageSize + 1);
@@ -465,8 +473,9 @@
                                     System.out.println("pageTotal: " + pageTotal);
                                     //接下来的代码段在末尾
                                 %>
+                                <%--    分页        --%>
                                 <tbody>
-                                <c:forEach items="${pig}" var="pig" begin="${pageBegin}" end="${pageEnd}">
+                                <c:forEach items="${pig}" var="pig" begin="${dataBegin}" end="${dataEnd}">
 
                                     <tr>
                                         <td><input type="checkbox"></td>
@@ -505,7 +514,7 @@
                                                     <form class=""
                                                           action="/pigInfoUpdate/StoreService/select/pigInfo.do"
                                                           method="post">
-                                                        <!-- 这个form不可删除，用来解决第一个form表达必跳转pigInfoList界面的玄学问题-->
+                                                        <!-- 这个form不可删除，用来解决第一个form表达必跳转pigInfoList界面的玄学问题,可能是受最外面的一个form表单影响-->
                                                     </form>
                                                     <div style="float:left;">
                                                         <form class=""
@@ -528,12 +537,6 @@
                                                         </form>
                                                     </div>
                                                     <div style="float:left;">
-                                                            <%--<form class="" action="/pigInfoList/PigService/delete/pigInfo.do" method="post">
-                                                                <input type="hidden" name="pigNo" value="${pig.pigNo}" >
-                                                               <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only " onclick="deletePigInfoList()">
-                                                                    <span class="am-icon-trash-o"></span>删除
-                                                                </button>
-                                                            </form>--%>
                                                         <button type="button" value="${pig.pigNo}"
                                                                 onclick="deletePigInfoList(this)"
                                                                 class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
@@ -554,55 +557,90 @@
                                     <button type="button" class="am-btn am-btn-default am-btn-success">导入数据</button>
                                     <button type="button" class="am-btn am-btn-default am-btn-secondary">导出数据</button>
                                 </div>
-
+                                <%--        以下代码只需要修改form表单中的action值 三处                --%>
                                 <div class="am-fr">
 
-                                    <ul class="am-pagination tpl-pagination">
-
-                                        <%
-
+                                    <%
+                                        if (pageTotal < pageButtonNum) {
                                             for (int i = 1; i <= pageTotal; i++) {
-                                        %>
-                                        <li class="am-active" style="float: left">
-                                            <form action="/pigInfoList/PigService/select/pigInfos.do" method="post">
-                                                <%
-                                                    pageBegin = (pageSize + 1) * (i - 1);
-                                                %>
+                                    %>
+                                    <li class="am-active" style="float: left">
+                                        <form action="/pigInfoList/PigService/select/pigInfos.do" method="post">
+                                            <%
+                                                dataBegin = (pageSize + 1) * (i - 1);
+                                            %>
+                                            <input type="hidden" value="<%= dataBegin %>" name="dataBegin">
+                                            <button type="submit"
+                                                    style="color:white;background-color:#0f9ae0;border-color: #0f9ae0"><%=i%>
+                                            </button>
 
-                                                <%
-                                                    if(i==1){
+                                        </form>
+                                    </li>
+                                    <%
+                                        }
+                                    } else {
+                                            pageButtonBegin+=pageButtonAddNum;
+                                            System.out.println("else pageButtonBegin:"+pageButtonBegin);
+                                            System.out.println("else pageButtonAddNum:"+pageButtonAddNum);
+                                        if (!((pageButtonBegin) == 1)) {
+                                            dataBegin=(pageSize + 1) * (pageButtonBegin-2);
+                                            System.out.println("send before dataBegin:"+dataBegin);
+                                    %>
+                                    <li class="am-active" style="float: left">
+                                        <form>
+                                            <input type="hidden" value="<%= dataBegin %>" name="dataBegin">
+                                            <input type="hidden" name="pageButtonAddNum" value="<%=-(pageButtonNum)%>">
+                                            <input type="hidden" name="pageButtonBegin" value="<%=pageButtonBegin%>">
+                                            <button type="submit"
+                                                    style="color:white;background-color:#0f9ae0;border-color: #0f9ae0">
+                                                <<
+                                            </button>
+                                        </form>
+                                    </li>
+                                    <%
+                                        }
+                                        for (int i = pageButtonBegin;i <pageButtonBegin+pageButtonNum; i++) {
+                                    %>
+                                    <li class="am-active" style="float: left">
+                                        <form action="/pigInfoList/PigService/select/pigInfos.do" method="post">
+                                            <%
+                                                dataBegin = (pageSize + 1) * (i - 1);
+                                            %>
+                                            <input type="hidden" name="dataBegin" value="<%= dataBegin %>" >
+                                            <input type="hidden" name="pageButtonBegin" value="<%=pageButtonBegin%>">
+                                            <button type="submit"
+                                                    style="color:white;background-color:#0f9ae0;border-color: #0f9ae0"><%=i%>
+                                            </button>
 
-                                                %>
-                                                <button type="submit" style="color:white;background-color:#0f9ae0;border-color: #0f9ae0"><<</button>
-                                                <%
-                                                    }
-                                                    if(i<6){
-                                                %>
-                                                <input type="hidden" value="<%= pageBegin %>" name="pageBegin">
-                                                <button type="submit" style="color:white;background-color:#0f9ae0;border-color: #0f9ae0"><%=i%></button>
-                                                <%
-                                                    }
-                                                    if(i==pageTotal){
-
-                                                %>
-                                                <button type="submit" style="color:white;background-color:#0f9ae0;border-color: #0f9ae0">>></button>
-                                                <%
-                                                    }
-                                                %>
-                                            </form>
-                                        </li>
-                                        <%
+                                        </form>
+                                    </li>
+                                    <%
+                                        if(i==pageTotal){
+                                            break;
+                                        }
+                                        }
+                                        if ((pageButtonBegin + pageButtonNum) < pageTotal) {
+                                            dataBegin = (pageSize + 1) * (pageButtonBegin + pageButtonNum-1);
+                                            System.out.println("send next dataBegin:"+dataBegin);
+                                    %>
+                                    <li class="am-active" style="float: left">
+                                        <form action="/pigInfoList/PigService/select/pigInfos.do" method="post">
+                                            <input type="hidden" value="<%= dataBegin %>" name="dataBegin">
+                                            <input type="hidden" name="pageButtonAddNum" value="<%=pageButtonNum%>">
+                                            <input type="hidden" name="pageButtonBegin" value="<%=pageButtonBegin%>">
+                                            <button type="submit"
+                                                    style="color:white;background-color:#0f9ae0;border-color: #0f9ae0">
+                                                >>
+                                            </button>
+                                        </form>
+                                    </li>
+                                    <%
                                             }
-                                        %>
+                                        }
+                                    %>
+                                    <%--<li class="am-disabled"><a href="#">«</a></li>
+                                    <li class="am-active"><a href="#">1</a></li>--%>
 
-                                        <%--<li class="am-disabled"><a href="#">«</a></li>
-                                        <li class="am-active"><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">5</a></li>
-                                        <li><a href="#">»</a></li>--%>
-                                    </ul>
                                 </div>
                             </div>
                             <hr>

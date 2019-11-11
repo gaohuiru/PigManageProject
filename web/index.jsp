@@ -103,12 +103,8 @@
                     <span>猪只信息</span>
                   </a>
 
-                  <a href="zhuzhi-table-pigType.html" class="tpl-left-nav-link-list1" style="padding-left: 55px;">
+                  <a href="/pigVarietyList/PigService/select/pigVariety.do" class="tpl-left-nav-link-list1" style="padding-left: 55px;">
                     <span>猪只品种</span>
-                  </a>
-
-                  <a href="zhuzhi-table-pigDefault.html" class="tpl-left-nav-link-list1" style="padding-left: 55px;">
-                    <span>猪只默认参数</span>
                   </a>
 
                 </li>

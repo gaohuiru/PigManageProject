@@ -16,7 +16,7 @@ public class PigVariety {
     }
     public PigVariety(Map<String, List<Object>> map) {
         if (map.containsKey("pigVarietyId")) {
-            pigVarietyId = (Integer) map.get("pigVarietyId").get(0);
+            pigVarietyId = Integer.parseInt( map.get("pigVarietyId").get(0).toString());
         }
         if (map.containsKey("pigVariety")) {
             pigVariety = map.get("pigVariety").get(0).toString();

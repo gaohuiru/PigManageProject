@@ -51,9 +51,12 @@ function IllnessSetList() {
 function  search(a) {
     var criteria = document.getElementById("search-criteria").value;
     var content = document.getElementById("search-content").value;
-    var viewTable=a.value();
+    var viewTable=a.value;
     if("pigInfos"==(viewTable)){
         window.location.href = "/pigInfoList/PigService/select/"+viewTable+".do?"+criteria+"="+content;
+    }
+    if("pigVariety"==viewTable){
+        window.location.href = "/pigVarietyList/PigService/select/"+viewTable+".do?"+criteria+"="+content;
     }
 
 }
@@ -62,8 +65,15 @@ function selectPigInfoList(){
         window.location.href = "/pigInfoList/PigService/select/pigInfos.do?";
     },20);
 }
-function insertPigInfoList() {
-    window.location.href = "/pigInfoInsert/PigService/select/pigInfo.do";
+function insertForPig(a) {
+    var viewTable=a.value;
+    if("pigVariety"==viewTable){
+        window.location.href = "/pigVarietyInsert/PigService/select/pigVariety.do";
+    }
+    if("pigInfo"==viewTable){
+        window.location.href = "/pigInfoInsert/PigService/select/pigInfo.do";
+    }
+
 }
 function deletePigInfoList(a){
     var value = a.value;
@@ -71,3 +81,15 @@ function deletePigInfoList(a){
     selectPigInfoList();
 }
 
+
+
+function deletePigVarietyList(a){
+    var value = a.value;
+    window.location.href = "/pigVarietyList/PigService/delete/pigVariety.do?pigVarietyId="+value;
+    selectPigVarietyList();
+}
+function selectPigVarietyList () {
+    window.setTimeout(function(){
+        window.location.href = "/pigVarietyList/PigService/select/pigVariety.do";
+    },20);
+}
