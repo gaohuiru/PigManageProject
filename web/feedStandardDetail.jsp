@@ -1,6 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
-<%@ page import="com.bd.pigmanage.Po.PigInfo" %><%--
+<%@ page import="com.bd.pigmanage.Po.PigInfo" %>
+<%@ page import="com.bd.pigmanage.Po.FeedStandard" %><%--
   Created by IntelliJ IDEA.
   User: xxbb
   Date: 2019/10/20
@@ -87,46 +88,49 @@
                         <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
                     </a>
                     <!-- 打开状态 添加 display:block-->
-                    <ul class="tpl-left-nav-sub-menu display:block" style="display: block;">
+                    <ul class="tpl-left-nav-sub-menu "  style="display: block">
                         <li>
-                            <a href="javascript:;" class="tpl-left-nav-link-list4 active">
+                            <a href="javascript:" class="tpl-left-nav-link-list4 active">
                                 <i class="am-icon-angle-right tpl-left-nav-more-ico4"></i>
                                 <span>猪只信息管理</span>
                                 <i class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>
                             </a>
 
-                            <ul class="tpl-left-nav-sub-menu4" style="display:block">
+                            <ul class="tpl-left-nav-sub-menu4">
                                 <li>
-                                    <a href="/pigInfoList/PigService/select/pigInfo.do" class="tpl-left-nav-link-list" style="padding-left: 55px;">
+                                    <a href="/pigInfoList/PigService/select/pigInfo.do" class="tpl-left-nav-link-list"
+                                       style="padding-left: 55px;">
                                         <span>猪只信息</span>
                                     </a>
 
-                                    <a href="zhuzhi-table-pigType.html" class="tpl-left-nav-link-list1" style="padding-left: 55px;">
+                                    <a href="/pigVarietyList/PigService/select/pigVariety.do"
+                                       class="tpl-left-nav-link-list1"
+                                       style="padding-left: 55px;">
                                         <span>猪只品种</span>
                                     </a>
-
-
 
                                 </li>
                             </ul>
 
-                            <a href="javascript:;" class="tpl-left-nav-link-list5">
+                            <a href="javascript:" class="tpl-left-nav-link-list5" style="display: block;">
                                 <i class="am-icon-angle-right tpl-left-nav-more-ico5"></i>
                                 <span>饲喂生长管理</span>
                             </a>
-                            <ul class="tpl-left-nav-sub-menu5">
+                            <ul class="tpl-left-nav-sub-menu5" style="display: block;">
                                 <li>
-                                    <a href="/feedStandardList/PigService/select/feedStandard.do" class="tpl-left-nav-link-list" style="padding-left: 55px;">
+                                    <a href="/feedStandardList/PigService/select/feedStandard.do" class="tpl-left-nav-link-list"
+                                       style="padding-left: 55px;">
                                         <span>饲喂设定</span>
                                     </a>
 
 
-
-                                    <a href="/pigFeedList/PigService/select/pigFeed.do" class="tpl-left-nav-link-list1" style="padding-left: 55px;">
+                                    <a href="/pigFeedList/PigService/select/pigFeed.do" class="tpl-left-nav-link-list1"
+                                       style="padding-left: 55px;">
                                         <span>猪只饲喂生长统计</span>
                                     </a>
 
-                                    <a href="zhuzhi-table-badGrowth.html" class="tpl-left-nav-link-list1" style="padding-left: 55px;">
+                                    <a href="zhuzhi-table-badGrowth.html" class="tpl-left-nav-link-list1"
+                                       style="padding-left: 55px;">
                                         <span>生长状况不良猪只统计</span>
                                     </a>
                                 </li>
@@ -345,66 +349,73 @@
         </div>
         <%
             Map jspMap=(Map)request.getAttribute("reqMap");
-            List pigInfo=(List)jspMap.get("PigInfo");
-            PigInfo pig= (PigInfo) pigInfo.get(0);
-            request.setAttribute("pig",pig);
+            List feedStandard=(List)jspMap.get("FeedStandard");
+            FeedStandard feed= (FeedStandard) feedStandard.get(0);
+            request.setAttribute("feed",feed);
         %>
         <div class="tpl-block ">
             <div class="am-g tpl-amazeui-form">
                 <div class="am-u-sm-12 am-u-md-9">
                     <form class="am-form am-form-horizontal">
                         <div class="am-form-group" style="width: 50%;float: left">
-                            <label for="pigNo" class="am-u-sm-3 am-form-label">猪耳号</label>
+                            <label for="feedSettingNo" class="am-u-sm-3 am-form-label">饲喂编号</label>
                             <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
-                                <input type="text" id="pigNo"  disabled="disabled" placeholder="1901100000" name="pigNo" value="${pig.pigNo}">
+                                <input type="text" id="feedSettingNo"  disabled="disabled" placeholder="1" name="feedSettingNo" value="${feed.feedSettingNo}">
                             </div>
                         </div>
                         <div class="am-form-group" style="width: 50%;float: left">
                             <label for="pigVarietyId" class="am-u-sm-3 am-form-label">品种</label>
                             <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
-                                <input type="text" id="pigVarietyId" disabled="disabled" placeholder="浙江金华猪" name="pigVarietyId" value="${pig.pigVarietyId}">
-                            </div>
-                        </div>
-                        <div class="am-form-group" style="width: 50%;float: left">
-                            <label for="pigType" class="am-u-sm-3 am-form-label">类型</label>
-                            <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
-                                <input type="text" id="pigType" disabled="disabled" placeholder="育肥猪" name="pigType" value="${pig.pigType}">
+                                <input type="text" id="pigVarietyId" disabled="disabled" placeholder="浙江金华猪" name="pigVarietyId" value="${feed.pigVarietyId}">
                             </div>
                         </div>
                         <div class="am-form-group" style="width: 50%;float: left">
                             <label for="sex" class="am-u-sm-3 am-form-label">性别</label>
                             <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
-                                <input type="text" id="sex" disabled="disabled" placeholder="公" name="sex" value="${pig.sex}">
+                                <input type="text" id="sex" disabled="disabled" placeholder="公" name="sex" value="${feed.sex}">
                             </div>
                         </div>
                         <div class="am-form-group" style="width: 50%;float: left">
-                            <label for="age" class="am-u-sm-3 am-form-label">日龄</label>
+                            <label for="pigType" class="am-u-sm-3 am-form-label">类型</label>
                             <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
-                                <input type="text" id="age" disabled="disabled" placeholder="60" name="age" value="${pig.age}">
+                                <input type="text" id="pigType" disabled="disabled" placeholder="育肥猪" name="pigType" value="${feed.pigType}">
+                            </div>
+                        </div>
+                        <div class="am-form-group" style="width: 50%;float: left">
+                            <label for="pigState" class="am-u-sm-3 am-form-label">状态</label>
+                            <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
+                                <input type="text" id="pigState" disabled="disabled" placeholder="出栏" name="pigState" value="${feed.pigState}">
                             </div>
                         </div>
                         <div class="am-form-group" style="width: 50%;float: left">
                             <label for="growthStage" class="am-u-sm-3 am-form-label">生长阶段</label>
                             <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
-                                <input type="text" id="growthStage" disabled="disabled" placeholder="保育期" name="growthStage" value="${pig.growthStage}">
+                                <input type="text" id="growthStage" disabled="disabled" placeholder="保育期" name="growthStage" value="${feed.growthStage}">
                             </div>
                         </div>
                         <div class="am-form-group" style="width: 50%;float: left">
-                            <label for="birthday" class="am-u-sm-3 am-form-label">出生日期</label>
+                            <label for="foodRate" class="am-u-sm-3 am-form-label">饲料比例</label>
                             <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
-                                <input type="text" id="birthday" disabled="disabled" placeholder="2010-9-21" name="birthday" value="${pig.birthday}">
+                                <input type="text" id="foodRate" disabled="disabled" placeholder="0.4" name="foodRate" value="${feed.foodRate}">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group" style="width: 50%;float: left">
+                            <label for="waterRate" class="am-u-sm-3 am-form-label">水比例</label>
+                            <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
+                                <input type="text" id="waterRate" disabled="disabled" placeholder="0.3" name="waterRate" value="${feed.waterRate}">
                             </div>
                         </div>
                         <div class="am-form-group" style="width: 50%;float: left">
-                            <label for="pigRecentWeight" class="am-u-sm-3 am-form-label">当前体重</label>
+                            <label for="drugRate" class="am-u-sm-3 am-form-label">药品比例</label>
                             <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
-                                <input type="text" id="pigRecentWeight" disabled="disabled" placeholder="100" name="pigRecentWeight" value="${pig.pigRecentWeight}">
+                                <input type="text" id="drugRate" disabled="disabled" placeholder="0.3" name="drugRate" value="${feed.drugRate}">
                             </div>
                         </div>
                         <div class="am-form-group" style="width: 50%;float: left">
-                            <label for="vaccinumCount" class="am-u-sm-3 am-form-label">接种疫苗次数</label>
+                            <label for="totalWeight" class="am-u-sm-3 am-form-label">饲喂总量</label>
                             <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
-                                <input type="text" id="vaccinumCount" disabled="disabled" placeholder="1" name="vaccinumCount" value="${pig.vaccinumCount}">
+                                <input type="text" id="totalWeight" disabled="disabled" placeholder="5kg" name="totalWeight" value="${feed.totalWeight}kg">
                             </div>
                         </div>
                         <%--<div class="am-form-group" style="width: 50%;float: left">
@@ -414,57 +425,52 @@
                             </div>
                         </div>--%>
                         <div class="am-form-group" style="width: 50%;float: left">
-                            <label for="pigstyNo" class="am-u-sm-3 am-form-label">所在猪舍</label>
+                            <label for="feedCount" class="am-u-sm-3 am-form-label">饲喂次数</label>
                             <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
-                                <input type="text" id="pigstyNo" disabled="disabled" placeholder="10" name="pigstyNo" value="${pig.pigstyNo}">
+                                <input type="text" id="feedCount" disabled="disabled" placeholder="10" name="feedCount" value="${feed.feedCount}">
                             </div>
                         </div>
                         <div class="am-form-group" style="width: 50%;float: left">
-                            <label for="hogcoteNo" class="am-u-sm-3 am-form-label">所在猪栏</label>
+                            <label for="feedTime" class="am-u-sm-3 am-form-label">饲喂开始时间</label>
                             <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
-                                <input type="text" id="hogcoteNo" disabled="disabled" placeholder="2" name="hogcoteNo" value="${pig.hogcoteNo}">
+                                <input type="text" id="feedTime" disabled="disabled" placeholder="12:00" name="feedTime" value="${feed.feedTime}">
                             </div>
                         </div>
                         <div class="am-form-group" style="width: 50%;float: left">
-                            <label for="pigBasicWeight" class="am-u-sm-3 am-form-label">入栏体重</label>
+                            <label for="feedLastTime" class="am-u-sm-3 am-form-label">饲喂持续时间</label>
                             <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
-                                <input type="text" id="pigBasicWeight" disabled="disabled" placeholder="10" name="pigBasicWeight" value="${pig.pigBasicWeight}">
+                                <input type="text" id="feedLastTime" disabled="disabled" placeholder="30min" name="feedLastTime" value="${feed.feedLastTime}min">
                             </div>
                         </div>
                         <div class="am-form-group" style="width: 50%;float: left">
-                            <label for="enterDate" class="am-u-sm-3 am-form-label">入栏日期</label>
+                            <label for="feedIntervalTime" class="am-u-sm-3 am-form-label">饲喂间隔时间</label>
                             <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
-                                <input type="text" id="enterDate" disabled="disabled" placeholder="2015-06-07" name="enterDate" value="${pig.enterDate}">
+                                <input type="text" id="feedIntervalTime" disabled="disabled" placeholder="4小时" name="feedIntervalTime" value="${feed.feedIntervalTime}小时">
                             </div>
                         </div>
                         <div class="am-form-group" style="width: 50%;float: left">
-                            <label for="leaveDate" class="am-u-sm-3 am-form-label">出栏日期</label>
+                            <label for="upperWeight" class="am-u-sm-3 am-form-label">日增重上限</label>
                             <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
-                                <input type="text" id="leaveDate" disabled="disabled" placeholder="2020-6-13" name="leaveDate" value="${pig.leaveDate}">
+                                <input type="text" id="upperWeight" disabled="disabled" placeholder="10kg" name="upperWeight" value="${feed.upperWeight}">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group" style="width: 50%;float: left">
+                            <label for="lowerWeight" class="am-u-sm-3 am-form-label">日增重下限</label>
+                            <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
+                                <input type="text" id="lowerWeight" disabled="disabled" placeholder="2kg" name="lowerWeight" value="${feed.lowerWeight}">
                             </div>
                         </div>
                         <div class="am-form-group" style="width: 50%;float: left">
-                            <label for="pigState" class="am-u-sm-3 am-form-label">状态</label>
+                            <label for="realName" class="am-u-sm-3 am-form-label">设置人</label>
                             <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
-                                <input type="text" id="pigState" disabled="disabled" placeholder="出栏" name="pigState" value="${pig.pigState}">
-                            </div>
-                        </div>
-                        <div class="am-form-group" style="width: 50%;float: left">
-                            <label for="user-email" class="am-u-sm-3 am-form-label">转栏记录</label>
-                            <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
-                                <button type="button" class="am-btn am-btn-primary" style="margin-left:25%" onclick="window.location.href = 'TurnBarList.html'">点击查看</button>
-                            </div>
-                        </div>
-                        <div class="am-form-group" style="width: 50%;float: left">
-                            <label for="user-email" class="am-u-sm-3 am-form-label">接种记录</label>
-                            <div class="am-u-sm-9" style="width: 50%;margin-right:15%">
-                                <button type="button" class="am-btn am-btn-primary" style="margin-left:25%" onclick="window.location.href = 'TurnBarList.html'">点击查看</button>
+                                <input type="text" id="realName" disabled="disabled" placeholder="10kg" name="realName" value="${feed.realName}">
                             </div>
                         </div>
 
                         <div class="am-form-group">
                             <div class="am-u-sm-9 am-u-sm-push-3">
-                                <button type="button" class="am-btn am-btn-primary" style="margin-left:25%" onclick="selectPigInfoList()">返回</button>
+                                <button type="button" class="am-btn am-btn-primary" style="margin-left:25%;" onclick="selectFeedStandardList()" >返回</button>
                             </div>
                         </div>
                     </form>

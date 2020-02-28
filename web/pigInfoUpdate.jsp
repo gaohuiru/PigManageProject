@@ -101,12 +101,11 @@
                                         <span>猪只信息</span>
                                     </a>
 
-                                    <a href="zhuzhi-table-pigType.html" class="tpl-left-nav-link-list1"
+                                    <a href="/pigVarietyList/PigService/select/pigVariety.do"
+                                       class="tpl-left-nav-link-list1"
                                        style="padding-left: 55px;">
                                         <span>猪只品种</span>
                                     </a>
-
-
 
                                 </li>
                             </ul>
@@ -115,21 +114,19 @@
                                 <i class="am-icon-angle-right tpl-left-nav-more-ico5"></i>
                                 <span>饲喂生长管理</span>
                             </a>
-                            <ul class="tpl-left-nav-sub-menu5" style="">
+                            <ul class="tpl-left-nav-sub-menu5">
                                 <li>
-                                    <a href="zhuzhi-table-feed.html" class="tpl-left-nav-link-list"
-                                       style="padding-left: 55px;">
+                                    <a href="/feedStandardList/PigService/select/feedStandard.do" class="tpl-left-nav-link-list" style="padding-left: 55px;">
                                         <span>饲喂设定</span>
                                     </a>
 
 
-                                    <a href="zhuzhi-table-feedAnalysis.html" class="tpl-left-nav-link-list1"
-                                       style="padding-left: 55px;">
+
+                                    <a href="/pigFeedList/PigService/select/pigFeed.do" class="tpl-left-nav-link-list1" style="padding-left: 55px;">
                                         <span>猪只饲喂生长统计</span>
                                     </a>
 
-                                    <a href="zhuzhi-table-badGrowth.html" class="tpl-left-nav-link-list1"
-                                       style="padding-left: 55px;">
+                                    <a href="zhuzhi-table-badGrowth.html" class="tpl-left-nav-link-list1" style="padding-left: 55px;">
                                         <span>生长状况不良猪只统计</span>
                                     </a>
                                 </li>

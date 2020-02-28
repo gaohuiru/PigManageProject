@@ -44,7 +44,7 @@
     <div class="tpl-left-nav-list">
       <ul class="tpl-left-nav-menu">
         <li class="tpl-left-nav-item">
-          <a href="index.html" class="nav-link active">
+          <a href="index.jsp" class="nav-link active">
             <i class="am-icon-home"></i>
             <span>首页</span>
           </a>
@@ -116,13 +116,13 @@
               </a>
               <ul class="tpl-left-nav-sub-menu5">
                 <li>
-                  <a href="zhuzhi-table-feed.html" class="tpl-left-nav-link-list" style="padding-left: 55px;">
+                  <a href="/feedStandardList/PigService/select/feedStandard.do" class="tpl-left-nav-link-list" style="padding-left: 55px;">
                     <span>饲喂设定</span>
                   </a>
 
 
 
-                  <a href="zhuzhi-table-feedAnalysis.html" class="tpl-left-nav-link-list1" style="padding-left: 55px;">
+                  <a href="/pigFeedList/PigService/select/pigFeed.do" class="tpl-left-nav-link-list1" style="padding-left: 55px;">
                     <span>猪只饲喂生长统计</span>
                   </a>
 

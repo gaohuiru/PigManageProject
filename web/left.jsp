@@ -28,7 +28,7 @@
     <div class="tpl-left-nav-list">
         <ul class="tpl-left-nav-menu">
             <li class="tpl-left-nav-item">
-                <a href="index.html" class="nav-link active">
+                <a href="index.jsp" class="nav-link active">
                     <i class="am-icon-home"></i>
                     <span>首页</span>
                 </a>
@@ -87,7 +87,7 @@
                                     <span>猪只信息</span>
                                 </a>
 
-                                <a href="zhuzhi-table-pigType.html" class="tpl-left-nav-link-list1" style="padding-left: 55px;">
+                                <a href="/pigVarietyList/PigService/select/pigVariety.d" class="tpl-left-nav-link-list1" style="padding-left: 55px;">
                                     <span>猪只品种</span>
                                 </a>
 

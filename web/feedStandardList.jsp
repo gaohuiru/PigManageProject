@@ -7,6 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html>
 <head>
@@ -30,12 +31,7 @@
     <link rel="stylesheet" href="<%=basePath%>/assets/css/admin.css">
     <link rel="stylesheet" href="<%=basePath%>/assets/css/app.css">
 </head>
-<script language="JavaScript">
-    function bashInsert() {
-        window.open("http://localhost:8080/bash_demo.jsp","new Windows","height=100, width=400, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no");
-        alert("使用成功！！！");
-    }
-</script>
+
 <body data-type="generalComponents">
 
 <%@ include file="head.jsp" %>
@@ -91,15 +87,15 @@
                         <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
                     </a>
                     <!-- 打开状态 添加 display:block-->
-                    <ul class="tpl-left-nav-sub-menu" style="display: block">
+                    <ul class="tpl-left-nav-sub-menu "  style="display: block">
                         <li>
-                            <a href="javascript:;" class="tpl-left-nav-link-list4 active">
+                            <a href="javascript:" class="tpl-left-nav-link-list4 active">
                                 <i class="am-icon-angle-right tpl-left-nav-more-ico4"></i>
                                 <span>猪只信息管理</span>
                                 <i class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>
                             </a>
 
-                            <ul class="tpl-left-nav-sub-menu4" style="display:block">
+                            <ul class="tpl-left-nav-sub-menu4">
                                 <li>
                                     <a href="/pigInfoList/PigService/select/pigInfo.do" class="tpl-left-nav-link-list"
                                        style="padding-left: 55px;">
@@ -115,14 +111,14 @@
                                 </li>
                             </ul>
 
-                            <a href="javascript:;" class="tpl-left-nav-link-list5">
+                            <a href="javascript:" class="tpl-left-nav-link-list5" style="display: block;">
                                 <i class="am-icon-angle-right tpl-left-nav-more-ico5"></i>
                                 <span>饲喂生长管理</span>
                             </a>
-                            <ul class="tpl-left-nav-sub-menu5">
+                            <ul class="tpl-left-nav-sub-menu5" style="display: block;">
                                 <li>
-                                    <a href="/feedStandardList/PigService/select/feedStandard.do"
-                                       class="tpl-left-nav-link-list" style="padding-left: 55px;">
+                                    <a href="/feedStandardList/PigService/select/feedStandard.do" class="tpl-left-nav-link-list"
+                                       style="padding-left: 55px;">
                                         <span>饲喂设定</span>
                                     </a>
 
@@ -355,7 +351,7 @@
         <div class="tpl-portlet-components">
             <div class="portlet-title">
                 <div class="caption font-green bold">
-                    <span class="am-icon-code"></span> 猪只基本信息
+                    <span class="am-icon-code"></span> 饲喂设定
                 </div>
 
 
@@ -365,16 +361,16 @@
                     <div class="am-u-sm-12 am-u-md-6">
                         <div class="am-btn-toolbar">
                             <div class="am-btn-group am-btn-group-xs">
-                                <button type="button" class="am-btn am-btn-default am-btn-success"
-                                        onclick="insertForPig(this)" value="pigInfo"><span
-                                        class="am-icon-plus"></span> 添加
-                                </button>
+                                    <button type="button" class="am-btn am-btn-default am-btn-success"
+                                        onclick="insertForPig(this)" value="feedStandard">
+                                        <span class="am-icon-plus"></span> 添加
+                                    </button>
                                 <button type="button" class="am-btn am-btn-default am-btn-secondary"><span
                                         class="am-icon-save"></span> 保存
                                 </button>
                                 <!--<button type="button" class="am-btn am-btn-default am-btn-warning"><span class="am-icon-archive"></span> 特殊标记</button>-->
-                                <button type="button" class="am-btn am-btn-default am-btn-danger" onclick="bashInsert()"><span
-                                        class="am-icon-trash-o" ></span> 删除
+                                <button type="button" class="am-btn am-btn-default am-btn-danger" float><span
+                                        class="am-icon-trash-o"></span> 删除
                                 </button>
                             </div>
                         </div>
@@ -384,15 +380,13 @@
                     <div class="am-u-sm-12 am-u-md-3">
                         <div class="am-form-group">
                             <select id="search-criteria">
-                                <option value="pigNo">猪只编号</option>
-                                <option value="pigVarietyId">品种</option>
+                                <option value="pigNo">饲喂标准编号</option>
+                                <option value="pigVarietyId">猪只品种</option>
                                 <option value="sex">性别</option>
-                                <option value="age">日龄</option>
                                 <option value="growthStage">生长阶段</option>
                                 <option value="pigType">类型</option>
                                 <option value="pigState">状态</option>
-                                <option value="pigstyNo">所在猪舍</option>
-                                <option value="hogcoteNo">所在猪栏</option>
+                                <option value="realName">设置人</option>
 
                             </select>
                         </div>
@@ -414,16 +408,16 @@
                                 <thead>
                                 <tr>
                                     <th class="table-check"><input type="checkbox" class="tpl-table-fz-check"></th>
-                                    <th class="table-id">猪只编号</th>
-                                    <th class="table-title">品种</th>
-                                    <th>性别</th>
-                                    <th class="table-type">猪舍号</th>
-                                    <th class="table-type">猪栏号</th>
-                                    <th class="table-author am-hide-sm-only">日龄</th>
-                                    <th class="table-set">当前体重</th>
-                                    <th class="table-date am-hide-sm-only">生长阶段</th>
-                                    <th>类型</th>
-                                    <th>状态</th>
+                                    <th class="table-id">饲喂标准编号</th>
+                                    <th class="table-title">饲料比例</th>
+                                    <th>水比例</th>
+                                    <th class="table-type">药品比例</th>
+                                    <th class="table-type">饲喂总量</th>
+                                    <th class="table-author am-hide-sm-only">饲喂次数</th>
+                                    <th class="table-set">日增重上限</th>
+                                    <th class="table-date am-hide-sm-only">日增重下限</th>
+                                    <th>设置人</th>
+
                                     <th>操作</th>
 
 
@@ -432,21 +426,22 @@
                                 <!--     读取数据          -->
                                 <%
                                     Map<String, List<Object>> jspMap = (Map) request.getAttribute("reqMap");
-                                    List pigInfo = (List) jspMap.get("PigInfo");
-                                    request.setAttribute("pig", pigInfo);
+                                    List feedStandard = (List) jspMap.get("FeedStandard");
+                                    request.setAttribute("feeds", feedStandard);
+
                                 %>
 
                                 <%--    分页        --%>
                                 <%
                                     //只需要修改这两个参数
-                                    int pageButtonNum = 3;//显示页数下标按钮的个数
-                                    int pageSize = 1;//页面显示数据的条数，实际显示数量为pageSize+1，表示的应该是数据下标的位移量，由于下标是从0开始
+                                    int pageButtonNum = 5;//显示页数下标按钮的个数
+                                    int pageSize = 2;//页面显示数据的条数，实际显示数量为pageSize+1，表示的应该是数据下标的位移量，由于下标是从0开始
                                     //
 
                                     int dataBegin = 0;//页面第一条数据的位置
                                     int dataEnd = 0;//页面最后一条数据的位置
                                     int pageTotal = 0;//总页数
-                                    int pageButtonBegin = 1;//显示页数按钮的第一个按钮的数字
+                                    int pageButtonBegin=1;//显示页数按钮的第一个按钮的数字
                                     int pageButtonAddNum = 0;//用于追加显示页面下标，每次点击按钮<<或>>都会使得相应的使页面按钮变化，如从6~10按<<变成1~5，按>>变成11~15
 
 
@@ -470,49 +465,32 @@
                                     request.setAttribute("dataBegin", dataBegin);
                                     request.setAttribute("dataEnd", dataEnd);
                                     //计算显示数据所需要的页数
-                                    if (pigInfo.size() % (pageSize + 1) == 0) {
-                                        pageTotal = pigInfo.size() / (pageSize + 1);
+                                    if (feedStandard.size() % (pageSize + 1) == 0) {
+                                        pageTotal = feedStandard.size() / (pageSize + 1);
                                     } else {
-                                        pageTotal = pigInfo.size() / (pageSize + 1) + 1;
+                                        pageTotal = feedStandard.size() / (pageSize + 1) + 1;
                                     }
                                     System.out.println("pageTotal: " + pageTotal);
                                     //接下来的代码段在末尾
                                 %>
                                 <%--    分页        --%>
                                 <tbody>
-                                <c:forEach items="${pig}" var="pig" begin="${dataBegin}" end="${dataEnd}">
+                                <c:forEach items="${feeds}" var="feed" begin="${dataBegin}" end="${dataEnd}">
 
                                     <tr>
                                         <td><input type="checkbox"></td>
-                                        <td>${pig.pigNo}</td>
+                                        <td>${feed.feedSettingNo}</td>
+                                        <td>${feed.foodRate}</td>
+                                        <td>${feed.waterRate}</td>
+                                        <td>${feed.drugRate}</td>
+                                        <td>${feed.totalWeight}</td>
+                                        <td>${feed.feedCount}</td>
+                                        <td>${feed.upperWeight}</td>
+                                        <td>${feed.lowerWeight}</td>
+                                        <td>${feed.realName}</td>
 
-                                        <td>
-                                            <c:if test="${pig.pigVarietyId==0 }">虚空猪</c:if>
-                                            <c:if test="${pig.pigVarietyId==1 }">白猪</c:if>
-                                        </td>
-                                        <td>
-                                            <c:if test="${pig.sex==0}">公</c:if>
-                                            <c:if test="${pig.sex==1}">母</c:if>
-                                        </td>
-                                        <td>${pig.pigstyNo}</td>
-                                        <td>${pig.hogcoteNo}</td>
-                                        <td>${pig.age}天</td>
-                                        <td>${pig.pigRecentWeight} kg</td>
-                                        <td>
-                                            <c:if test="${pig.growthStage==1}">哺乳阶段</c:if>
-                                            <c:if test="${pig.growthStage==2}">保育阶段</c:if>
-                                            <c:if test="${pig.growthStage==3}">生长育肥阶段</c:if>
-                                        </td>
-                                        <td>
-                                            <c:if test="${pig.pigType==0}">育种猪</c:if>
-                                            <c:if test="${pig.pigType==1}">育肥猪</c:if>
-                                        </td>
-                                        <td>
-                                            <c:if test="${pig.pigState==1}">健康</c:if>
-                                            <c:if test="${pig.pigState==2}">生病</c:if>
-                                            <c:if test="${pig.pigState==-1}">淘汰</c:if>
-                                            <c:if test="${pig.pigState==0}">出栏</c:if>
-                                        </td>
+
+
                                         <td>
                                             <div class="am-btn-toolbar">
                                                 <div class="am-btn-group am-btn-group-xs">
@@ -523,9 +501,9 @@
                                                     </form>
                                                     <div style="float:left;">
                                                         <form class=""
-                                                              action="/pigInfoUpdate/PigService/select/pigInfo.do"
+                                                              action="/feedStandardUpdate/PigService/select/feedStandard.do"
                                                               method="post">
-                                                            <input type="hidden" name="pigNo" value="${pig.pigNo}">
+                                                            <input type="hidden" name="feedSettingNo" value="${feed.feedSettingNo}">
                                                             <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
                                                                     class="am-icon-pencil-square-o"></span>修改
                                                             </button>
@@ -533,9 +511,9 @@
                                                     </div>
                                                     <div style="float:left;">
                                                         <form class=""
-                                                              action="/pigInfoDetail/PigService/select/pigInfos.do"
+                                                              action="/feedStandardDetail/PigService/select/feedStandard.do"
                                                               method="post">
-                                                            <input type="hidden" name="pigNo" value="${pig.pigNo}">
+                                                            <input type="hidden" name="feedSettingNo" value="${feed.feedSettingNo}">
                                                             <button class="am-btn am-btn-default am-btn-xs am-hide-sm-only">
                                                                 <span class="am-icon-copy"></span>详情
                                                             </button>
@@ -584,12 +562,12 @@
                                     <%
                                         }
                                     } else {
-                                        pageButtonBegin += pageButtonAddNum;
-                                        System.out.println("else pageButtonBegin:" + pageButtonBegin);
-                                        System.out.println("else pageButtonAddNum:" + pageButtonAddNum);
+                                        pageButtonBegin+=pageButtonAddNum;
+                                        System.out.println("else pageButtonBegin:"+pageButtonBegin);
+                                        System.out.println("else pageButtonAddNum:"+pageButtonAddNum);
                                         if (!((pageButtonBegin) == 1)) {
-                                            dataBegin = (pageSize + 1) * (pageButtonBegin - 2);
-                                            System.out.println("send before dataBegin:" + dataBegin);
+                                            dataBegin=(pageSize + 1) * (pageButtonBegin-2);
+                                            System.out.println("send before dataBegin:"+dataBegin);
                                     %>
                                     <li class="am-active" style="float: left">
                                         <form>
@@ -604,14 +582,14 @@
                                     </li>
                                     <%
                                         }
-                                        for (int i = pageButtonBegin; i < pageButtonBegin + pageButtonNum; i++) {
+                                        for (int i = pageButtonBegin;i <pageButtonBegin+pageButtonNum; i++) {
                                     %>
                                     <li class="am-active" style="float: left">
                                         <form action="/pigInfoList/PigService/select/pigInfos.do" method="post">
                                             <%
                                                 dataBegin = (pageSize + 1) * (i - 1);
                                             %>
-                                            <input type="hidden" name="dataBegin" value="<%= dataBegin %>">
+                                            <input type="hidden" name="dataBegin" value="<%= dataBegin %>" >
                                             <input type="hidden" name="pageButtonBegin" value="<%=pageButtonBegin%>">
                                             <button type="submit"
                                                     style="color:white;background-color:#0f9ae0;border-color: #0f9ae0"><%=i%>
@@ -620,13 +598,13 @@
                                         </form>
                                     </li>
                                     <%
-                                            if (i == pageTotal) {
+                                            if(i==pageTotal){
                                                 break;
                                             }
                                         }
-                                        if ((pageButtonBegin + pageButtonNum) <= pageTotal) {
-                                            dataBegin = (pageSize + 1) * (pageButtonBegin + pageButtonNum - 1);
-                                            System.out.println("send next dataBegin:" + dataBegin);
+                                        if ((pageButtonBegin + pageButtonNum) < pageTotal) {
+                                            dataBegin = (pageSize + 1) * (pageButtonBegin + pageButtonNum-1);
+                                            System.out.println("send next dataBegin:"+dataBegin);
                                     %>
                                     <li class="am-active" style="float: left">
                                         <form action="/pigInfoList/PigService/select/pigInfos.do" method="post">
@@ -670,3 +648,4 @@
 </body>
 
 </html>
+

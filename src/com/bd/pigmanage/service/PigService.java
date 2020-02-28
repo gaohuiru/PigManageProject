@@ -42,7 +42,7 @@ public class PigService {
             Method declaredMethod = c.getDeclaredMethod(method, String.class, Map.class);
             declaredMethod.setAccessible(true);
             //调用方法
-            declaredMethod.invoke(instance,viewObjectName, reqMap);
+                                        declaredMethod.invoke(instance,viewObjectName, reqMap);
         } catch (Exception e) {
             e.printStackTrace();
         }

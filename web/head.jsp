@@ -134,7 +134,7 @@
 
             <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
                 <a class="am-dropdown-toggle tpl-header-list-link" href="javascript:;">
-                    <span class="tpl-header-list-user-nick">陈洪彬</span><span class="tpl-header-list-user-ico"> <img src="<%=basePath%>/assets/img/user01.png"></span>
+                    <span class="tpl-header-list-user-nick">徐斌</span><span class="tpl-header-list-user-ico"> <img src="<%=basePath%>/assets/img/user01.png"></span>
                 </a>
                 <ul class="am-dropdown-content">
                     <li><a href="PersonInfo.html"><span class="am-icon-bell-o"></span> 资料</a></li>

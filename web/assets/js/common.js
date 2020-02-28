@@ -73,6 +73,9 @@ function insertForPig(a) {
     if("pigInfo"==viewTable){
         window.location.href = "/pigInfoInsert/PigService/select/pigInfo.do";
     }
+    if("feedStandard"==viewTable){
+        window.location.href = "/feedStandardInsert/PigService/select/feedStandard.do";
+    }
 
 }
 function deletePigInfoList(a){
@@ -92,4 +95,25 @@ function selectPigVarietyList () {
     window.setTimeout(function(){
         window.location.href = "/pigVarietyList/PigService/select/pigVariety.do";
     },20);
+}
+function selectFeedStandardList () {
+    window.setTimeout(function(){
+        window.location.href = "/feedStandardList/PigService/select/feedStandard.do";
+    },20);
+}
+
+
+
+
+
+
+function selectPigFeedList () {
+    window.setTimeout(function(){
+        window.location.href = "/pigFeedList/PigService/select/pigFeed.do";
+    },20);
+}
+function deletePigFeedList(a){
+    var value = a.value;
+    window.location.href = "/pigFeedList/PigService/delete/pigFeed.do?id="+value;
+    selectPigFeedList();
 }
