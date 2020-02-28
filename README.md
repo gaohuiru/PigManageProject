@@ -1,8 +1,5 @@
-# PigManageProject
-This is a pig manage project developed by team
-which is not completed yet.
-menbers：xxbb, chb, xcj, ly, yc
+# 生猪养殖管理系统
+开发成员：徐斌、陈洪彬
 
-=======
 
 

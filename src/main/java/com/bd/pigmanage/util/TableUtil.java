@@ -6,7 +6,7 @@ package com.bd.pigmanage.util;
  */
 public class TableUtil {
     //properties配置文件在项目中的相对位置
-    private final static String RELATIVEPATH="resource/DataTable.properties";
+    private final static String RELATIVEPATH="DataTable.properties";
 
     public TableUtil(){
 
@@ -19,10 +19,8 @@ public class TableUtil {
        // path  以’/'开头时，则是从ClassPath根下获取；
         String absolutePath=TableUtil.class.getClassLoader().getResource("").getPath().substring(1);
         System.out.println("绝对路径"+absolutePath);
-        //通过sqlit截取出保存项目路径的字符串
-        String[] projectPaths=absolutePath.split("out/artifacts/PigManage_war_exploded/WEB-INF/classes/");
         //将项目路径和配置文件的相对路径组合
-        String path=projectPaths[0]+RELATIVEPATH;
+        String path=absolutePath+RELATIVEPATH;
         System.out.println("组合后的路径: "+path);
         //读取配置文件中值
         String value=PropertiesUtil.getValue(path,key);
