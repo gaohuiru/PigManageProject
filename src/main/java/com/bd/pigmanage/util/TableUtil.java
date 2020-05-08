@@ -12,7 +12,12 @@ public class TableUtil {
 
     }
 
-    //获取对应的物理表
+    /**
+     * 获取对应的物理表
+     * @param key
+     * @return
+     * @throws Exception
+     */
     public static String[] getTables(String key) throws Exception {
         //获取该类的路径，用于截取出项目路径以适配不同的电脑
         //path不以’/'开头时，默认是从此类所在的包下取资源；
@@ -22,9 +27,9 @@ public class TableUtil {
         //将项目路径和配置文件的相对路径组合
         String path=absolutePath+RELATIVEPATH;
         System.out.println("组合后的路径: "+path);
-        //读取配置文件中值
+//        读取配置文件中值
         String value=PropertiesUtil.getValue(path,key);
-        //返回存有物理表的字符串数数组
+//        返回存有物理表的字符串数数组
         return value.split("\\.");
     }
 }
