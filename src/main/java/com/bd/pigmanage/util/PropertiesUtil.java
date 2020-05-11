@@ -17,13 +17,12 @@ public class PropertiesUtil {
     }
 
     /**
-     * TODO 需要读取配置文件逻辑，不需要提前去找配置文件位置
      * 获取properties文件对应的值
      *
      * @param propertiesName 配置文件名称
-     * @param key
-     * @return
-     * @throws Exception
+     * @param key 键名
+     * @return 键值
+     * @throws Exception 异常
      */
     public static String getValue(String propertiesName, String key) throws Exception {
         // 之前一直使用：PropertiesUtil.class.getClassLoader().getSystemResourceAsStream(path)导致获取不到配置文件
