@@ -7,8 +7,8 @@
 --%>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
-<%@ page import="com.bd.pigmanage.Po.PigInfo" %>
-<%@ page import="com.bd.pigmanage.Po.PigVariety" %>
+<%@ page import="com.bluedot.pig.pojo.PigInfo" %>
+<%@ page import="com.bluedot.pig.pojo.PigVariety" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html>

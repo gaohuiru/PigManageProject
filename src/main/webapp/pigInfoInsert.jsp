@@ -7,7 +7,7 @@
 --%>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
-<%@ page import="com.bd.pigmanage.Po.PigInfo" %><%--
+<%@ page import="com.bluedot.pig.pojo.PigInfo" %><%--
   Created by IntelliJ IDEA.
   User: xxbb
   Date: 2019/10/20

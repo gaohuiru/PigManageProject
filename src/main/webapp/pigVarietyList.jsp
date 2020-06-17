@@ -1,6 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
-<%@ page import="com.bd.pigmanage.Po.PigVariety" %><%--
+<%@ page import="com.bluedot.pig.pojo.PigVariety" %><%--
   Created by IntelliJ IDEA.
   User: xxbb
   Date: 2019/09/12

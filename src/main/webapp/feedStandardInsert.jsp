@@ -1,7 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
-<%@ page import="com.bd.pigmanage.Po.PigInfo" %>
-<%@ page import="com.bd.pigmanage.Po.FeedStandard" %><%--
+<%@ page import="com.bluedot.pig.pojo.PigInfo" %>
+<%@ page import="com.bluedot.pig.pojo.FeedStandard" %><%--
   Created by IntelliJ IDEA.
   User: xxbb
   Date: 2019/10/20
