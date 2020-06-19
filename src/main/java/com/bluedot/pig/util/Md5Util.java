@@ -29,10 +29,11 @@ public class Md5Util {
 
         for (int i = 0; i < byteArray.length; i++) {
             //加盐gi
-            if (Integer.toHexString(0xFF & byteArray[i]).length() == 1)
+            if (Integer.toHexString(0xFF & byteArray[i]).length() == 1) {
                 md5StrBuff.append("0").append(Integer.toHexString(0xFF & byteArray[i]));
-            else
+            } else {
                 md5StrBuff.append(Integer.toHexString(0xFF & byteArray[i]));
+            }
         }
 
         return md5StrBuff.toString();

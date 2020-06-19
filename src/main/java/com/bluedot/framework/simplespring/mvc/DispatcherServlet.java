@@ -52,7 +52,6 @@ public class DispatcherServlet extends HttpServlet {
         //初始化容器
         BeanContainer beanContainer = BeanContainer.getInstance();
         beanContainer.loadBeans(contextCofig.getProperty("scanPackage"));
-        System.out.println();
         //AOP织入
         new AspectWeaver().doAspectOrientedProgramming();
         //初始化简易mybatis框架，往IoC容器中注入SqlSessionFactory对象

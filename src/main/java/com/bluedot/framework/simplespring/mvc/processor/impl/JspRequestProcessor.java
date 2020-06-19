@@ -39,7 +39,7 @@ public class JspRequestProcessor implements RequestProcessor {
     public boolean process(RequestProcessorChain requestProcessorChain) throws Exception {
         String requestPath=requestProcessorChain.getRequestPath();
         if(isJspResource(requestPath)){
-            LogUtil.getLogger().info("jsp request path: {}",requestPath);
+            LogUtil.getLogger().debug("jsp request path: {}",requestPath);
             jspServlet.forward(requestProcessorChain.getReq(),requestProcessorChain.getResp());
             return false;
         }

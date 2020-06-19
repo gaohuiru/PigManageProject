@@ -45,7 +45,7 @@ public class ResultCache<K, V> {
     /**
      * 线程池
      */
-    private ExecutorService pool = Executors.newFixedThreadPool(10);
+    private final ExecutorService pool = Executors.newFixedThreadPool(10);
     /**
      * 需要执行的任务
      */
@@ -153,22 +153,22 @@ public class ResultCache<K, V> {
      * @return value
      */
     public V get(K key) {
+        lock.lock();
         try {
-            lock.lock();
             while (true) {
                 Node<K, V> node = caches.get(key);
-                Future<V> future = null;
+
                 if (node == null) {
                     log.info("该请求的响应缓存不存在，调用线程执行任务");
                     try {
-                        future = pool.submit(task);
+                        Future<V> future = pool.submit(task);
                         node = new Node<>(key, future.get());
                         put(key, node);
                     } catch (ExecutionException | InterruptedException e) {
                         log.error(e.getMessage());
                     }
-                }else{
-                    log.info("该请求的响应缓存存在：{}",node.value);
+                } else {
+                    log.info("该请求的响应缓存存在：{}", node.value);
                 }
 
                 moveToHead(node);
@@ -191,10 +191,8 @@ public class ResultCache<K, V> {
      *
      * @param key   key
      * @param value value
-     * @throws ExecutionException   异常
-     * @throws InterruptedException 异常
      */
-    private void put(K key, Node<K, V> value) throws ExecutionException, InterruptedException {
+    private void put(K key, Node<K, V> value) {
         if (currentSize >= capacity) {
             //移除map中节点
             caches.remove(last.key);

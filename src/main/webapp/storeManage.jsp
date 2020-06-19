@@ -36,7 +36,7 @@
 
 <div class="tpl-page-container tpl-page-header-fixed">
 
-    <%@include file="left.jsp"%>
+    <%@include file="left-old.jsp"%>
 
     <div class="tpl-content-wrapper">
         <div class="tpl-content-page-title"> 仓库管理 </div>

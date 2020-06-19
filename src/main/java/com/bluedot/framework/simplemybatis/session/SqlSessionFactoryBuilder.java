@@ -26,6 +26,7 @@ public class SqlSessionFactoryBuilder {
      */
     public SqlSessionFactory build(String fileName) {
         InputStream is = SqlSessionFactoryBuilder.class.getClassLoader().getResourceAsStream(fileName);
+        LogUtil.getLogger().debug("load smybatis properties："+fileName);
         return build(is);
     }
 
@@ -33,11 +34,11 @@ public class SqlSessionFactoryBuilder {
         try {
             Configuration.pros.load(inputStream);
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtil.getLogger().error(e.getMessage());
         }
         SqlSessionFactory factory= DefaultSqlSessionFactory.getInstance(new Configuration());
         //将sqlFactory注入到IoC容器中
-        LogUtil.getLogger().debug("load bean: "+factory.getClass().getName());
+        LogUtil.getLogger().debug("load sqlSession Factory: "+factory.getClass().getName());
         BeanContainer.getInstance().addBean(factory.getClass(),factory);
         return factory;
     }

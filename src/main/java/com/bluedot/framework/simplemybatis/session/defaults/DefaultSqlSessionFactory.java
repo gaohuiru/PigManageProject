@@ -86,6 +86,7 @@ public class DefaultSqlSessionFactory implements SqlSessionFactory {
      * @param dirName mapper.xml所在的文件夹名
      */
     private void loadMappersInfo(String dirName) {
+        //要求目标文件夹下一定要有内容，不然会报错
         String resource = Objects.requireNonNull
                 (DefaultSqlSessionFactory.class.getClassLoader().getResource(dirName)).getPath();
         logger.debug("加载资源路径" + resource);

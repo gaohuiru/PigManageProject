@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  * @author chb
  */
-@WebServlet("*.do")
+
 public class DispatcherServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp)

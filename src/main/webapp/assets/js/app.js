@@ -96,32 +96,32 @@ var pageData = {
     'index': function indexData() {
 
 
-        var myScroll = new IScroll('#wrapper', {
-            scrollbars: true,
-            mouseWheel: true,
-            interactiveScrollbars: true,
-            shrinkScrollbars: 'scale',
-            preventDefault: false,
-            fadeScrollbars: true
-        });
-
-        var myScrollA = new IScroll('#wrapperA', {
-            scrollbars: true,
-            mouseWheel: true,
-            interactiveScrollbars: true,
-            shrinkScrollbars: 'scale',
-            preventDefault: false,
-            fadeScrollbars: true
-        });
-
-        var myScrollB = new IScroll('#wrapperB', {
-            scrollbars: true,
-            mouseWheel: true,
-            interactiveScrollbars: true,
-            shrinkScrollbars: 'scale',
-            preventDefault: false,
-            fadeScrollbars: true
-        });
+        // var myScroll = new IScroll('#wrapper', {
+        //     scrollbars: true,
+        //     mouseWheel: true,
+        //     interactiveScrollbars: true,
+        //     shrinkScrollbars: 'scale',
+        //     preventDefault: false,
+        //     fadeScrollbars: true
+        // });
+        //
+        // var myScrollA = new IScroll('#wrapperA', {
+        //     scrollbars: true,
+        //     mouseWheel: true,
+        //     interactiveScrollbars: true,
+        //     shrinkScrollbars: 'scale',
+        //     preventDefault: false,
+        //     fadeScrollbars: true
+        // });
+        //
+        // var myScrollB = new IScroll('#wrapperB', {
+        //     scrollbars: true,
+        //     mouseWheel: true,
+        //     interactiveScrollbars: true,
+        //     shrinkScrollbars: 'scale',
+        //     preventDefault: false,
+        //     fadeScrollbars: true
+        // });
 
 
 
@@ -216,6 +216,7 @@ var pageData = {
             toolbox: {
                 top: '0',
                 feature: {
+                    mark: true,
                     dataView: { show: true, readOnly: false },
                     magicType: { show: true, type: ['line', 'bar'] },
                     restore: { show: true },
@@ -230,7 +231,7 @@ var pageData = {
             },
             xAxis: [{
                 type: 'category',
-                data: ['7月10', '7月11', '7月12', '7月13', '7月14', '7月15', '7月16', '7月17', '7月18', '7月19', '7月20', '7月21']
+                data: ['7月21日', '7月22日', '7月23日', '7月24日', '7月25日', '7月26日', '7月27日', '7月28日', '7月29日', '7月30日', '7月31日', '8月1日']
             }],
             yAxis: [{
                     type: 'value',
@@ -271,100 +272,231 @@ var pageData = {
                 }
             ]
         };
-
         echartsC.setOption(optionC);
+
+
+
+
+
+
+
+
+        function randomData() {
+            now = new Date(+now + oneDay);
+            value = value + Math.random() * 21 - 10;
+            return {
+                name: now.toString(),
+                value: [
+                    [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
+                    Math.round(value)
+                ]
+            }
+        }
+
+        var data = [];
+        var now = +new Date(1997, 9, 3);
+        var oneDay = 24 * 3600 * 1000;
+        var value = (Math.random() * 15 + 15);
+        for (var i = 0; i < 1000; i++) {
+            data.push(randomData());
+        }
+
 
         var echartsB = echarts.init(document.getElementById('tpl-echarts-B'));
         optionB = {
+            title: {
+                text: 'xxx猪舍温度实时数据'
+            },
             tooltip: {
-                trigger: 'axis'
-            },
-            legend: {
-                x: 'center',
-                data: ['某软件', '某主食手机', '某水果手机', '降水量', '蒸发量']
-            },
-            radar: [{
-                    indicator: [
-                        { text: '品牌', max: 100 },
-                        { text: '内容', max: 100 },
-                        { text: '可用性', max: 100 },
-                        { text: '功能', max: 100 }
-                    ],
-                    center: ['25%', '40%'],
-                    radius: 80
+                trigger: 'axis',
+                formatter: function(params) {
+                    params = params[0];
+                    var date = new Date(params.name);
+                    return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' : ' + params.value[1] + "℃";
                 },
-                {
-                    indicator: [
-                        { text: '外观', max: 100 },
-                        { text: '拍照', max: 100 },
-                        { text: '系统', max: 100 },
-                        { text: '性能', max: 100 },
-                        { text: '屏幕', max: 100 }
-                    ],
-                    radius: 80,
-                    center: ['50%', '60%'],
-                },
-                {
-                    indicator: (function() {
-                        var res = [];
-                        for (var i = 1; i <= 12; i++) {
-                            res.push({ text: i + '月', max: 100 });
-                        }
-                        return res;
-                    })(),
-                    center: ['75%', '40%'],
-                    radius: 80
+                axisPointer: {
+                    animation: false
                 }
-            ],
+            },
+            xAxis: {
+                type: 'time',
+                splitLine: {
+                    show: false
+                }
+            },
+            yAxis: {
+                type: 'value',
+                boundaryGap: [0, '100%'],
+                splitLine: {
+                    show: false
+                }
+            },
             series: [{
-                    type: 'radar',
-                    tooltip: {
-                        trigger: 'item'
-                    },
-                    itemStyle: { normal: { areaStyle: { type: 'default' } } },
-                    data: [{
-                        value: [60, 73, 85, 40],
-                        name: '某软件'
-                    }]
-                },
-                {
-                    type: 'radar',
-                    radarIndex: 1,
-                    data: [{
-                            value: [85, 90, 90, 95, 95],
-                            name: '某主食手机'
-                        },
-                        {
-                            value: [95, 80, 95, 90, 93],
-                            name: '某水果手机'
-                        }
-                    ]
-                },
-                {
-                    type: 'radar',
-                    radarIndex: 2,
-                    itemStyle: { normal: { areaStyle: { type: 'default' } } },
-                    data: [{
-                            name: '降水量',
-                            value: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 75.6, 82.2, 48.7, 18.8, 6.0, 2.3],
-                        },
-                        {
-                            name: '蒸发量',
-                            value: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 35.6, 62.2, 32.6, 20.0, 6.4, 3.3]
-                        }
-                    ]
-                }
-            ]
+                name: '模拟数据',
+                type: 'line',
+                showSymbol: false,
+                hoverAnimation: false,
+                data: data
+            }]
         };
+
+        setInterval(function() {
+
+            for (var i = 0; i < 5; i++) {
+                data.shift();
+                data.push(randomData());
+            }
+
+            echartsB.setOption(optionB, {
+                series: [{
+                    data: data
+                }]
+            });
+        }, 1000);
+
+
         echartsB.setOption(optionB);
+
+
+
+
+
+
+
+
+
+
+
+        // var echartsB = echarts.init(document.getElementById('tpl-echarts-B'));
+        // optionB = {
+        //     tooltip: {
+        //         trigger: 'axis',
+
+        //     },
+        //     legend: {
+        //         x: 'center',
+        //         data: ['某软件', '某主食手机', '某水果手机', '降水量', '蒸发量']
+        //     },
+        //     radar: [{
+        //             indicator: [
+        //                 { text: '品牌', max: 100 },
+        //                 { text: '内容', max: 100 },
+        //                 { text: '可用性', max: 100 },
+        //                 { text: '功能', max: 100 }
+        //             ],
+        //             center: ['25%', '40%'],
+        //             radius: 80
+        //         },
+        //         {
+        //             indicator: [
+        //                 { text: '外观', max: 100 },
+        //                 { text: '拍照', max: 100 },
+        //                 { text: '系统', max: 100 },
+        //                 { text: '性能', max: 100 },
+        //                 { text: '屏幕', max: 100 }
+        //             ],
+        //             radius: 80,
+        //             center: ['50%', '60%'],
+        //         },
+        //         {
+        //             indicator: (function() {
+        //                 var res = [];
+        //                 for (var i = 1; i <= 12; i++) {
+        //                     res.push({ text: i + '月', max: 100 });
+        //                 }
+        //                 return res;
+        //             })(),
+        //             center: ['75%', '40%'],
+        //             radius: 80
+        //         }
+        //     ],
+        //     series: [{
+        //             type: 'radar',
+        //             tooltip: {
+        //                 trigger: 'item'
+        //             },
+        //             itemStyle: { normal: { areaStyle: { type: 'default' } } },
+        //             data: [{
+        //                 value: [60, 73, 85, 40],
+        //                 name: '某软件'
+        //             }]
+        //         },
+        //         {
+        //             type: 'radar',
+        //             radarIndex: 1,
+        //             data: [{
+        //                     value: [85, 90, 90, 95, 95],
+        //                     name: '某主食手机'
+        //                 },
+        //                 {
+        //                     value: [95, 80, 95, 90, 93],
+        //                     name: '某水果手机'
+        //                 }
+        //             ]
+        //         },
+        //         {
+        //             type: 'radar',
+        //             radarIndex: 2,
+        //             itemStyle: { normal: { areaStyle: { type: 'default' } } },
+        //             data: [{
+        //                     name: '降水量',
+        //                     value: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 75.6, 82.2, 48.7, 18.8, 6.0, 2.3],
+        //                 },
+        //                 {
+        //                     name: '蒸发量',
+        //                     value: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 35.6, 62.2, 32.6, 20.0, 6.4, 3.3]
+        //                 }
+        //             ]
+        //         }
+        //     ]
+        // };
+        // echartsB.setOption(optionB);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         var echartsA = echarts.init(document.getElementById('tpl-echarts-A'));
         option = {
             title: {
                 text: 'xxx猪舍环境信息',
-                subtext: '真的很开心'
+                subtext: '日期：2019-7-31'
             },
             tooltip: {
                 trigger: 'axis',
+                // formatter: function(params) {
+                //     params = params[0];
+                //     var date = new Date(params.name);
+                //     return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' : ' + params.value[1];
+                // },
+                axisPointer: {
+                    animation: false
+                },
+
+                formatter: '{b}<br/>{a0}:{c0}℃,<br/>{a1}:{c1}%RH,<br/>{a2}:{c2}Lux,<br/>{a3}:{c3}ppm,<br/>{a4}:{c4}ppm<br/>'
 
             },
             legend: {
@@ -390,7 +522,7 @@ var pageData = {
             xAxis: [{
                 type: 'category',
                 boundaryGap: true,
-                data: ['前90分钟', '前75分钟', '前60分钟', '前45分钟', '前30分钟', '前15分钟', '当前数据']
+                data: ['0:00', '2:00', '4:00', '6:00', '8:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00']
             }],
 
             yAxis: [{
@@ -416,7 +548,7 @@ var pageData = {
                     type: 'line',
                     //stack: '总量',
                     // areaStyle: { normal: {} },
-                    data: [{ value: 31.5, name: '非温度', unit: '℃' }, { value: 32, name: '非温度', unit: '℃' }, { value: 31, name: '非温度', unit: '℃' }, { value: 30, name: '非温度', unit: '℃' }, { value: 30.5, name: '非温度', unit: '℃' }, { value: 31, name: '非温度', unit: '℃' }, { value: 29.5, name: '非温度', unit: '℃' }],
+                    data: [{ value: 31.5, name: '非温度', unit: '℃' }, { value: 32, name: '非温度', unit: '℃' }, { value: 31, name: '非温度', unit: '℃' }, { value: 30, name: '非温度', unit: '℃' }, { value: 30.5, name: '非温度', unit: '℃' }, { value: 31, name: '非温度', unit: '℃' }, { value: 29.5, name: '非温度', unit: '℃' }, 31, 32, 33, 34, 29],
                     itemStyle: {
                         normal: {
                             color: '#19ae12'
@@ -433,7 +565,7 @@ var pageData = {
                     },
                     markLine: {
                         data: [
-                            { type: 'average', name: '平均值' }
+                            // { type: 'average', name: '平均值' }
                         ]
                     }
 
@@ -443,7 +575,7 @@ var pageData = {
                     type: 'line',
                     //stack: '总量',
                     // areaStyle: { normal: {} },
-                    data: [50, 55, 50, 45, 55, 50, 60],
+                    data: [50, 55, 50, 45, 55, 50, 60, 51, 54, 56, 58, 51],
                     itemStyle: {
                         normal: {
                             color: '#e7505a'
@@ -457,7 +589,7 @@ var pageData = {
                     },
                     markLine: {
                         data: [
-                            { type: 'average', name: '平均值' }
+                            // { type: 'average', name: '平均值' }
                         ]
                     }
                 },
@@ -467,7 +599,7 @@ var pageData = {
                     type: 'line',
                     //stack: '总量',
                     // areaStyle: { normal: {} },
-                    data: [40, 50, 45, 50, 45, 60, 40],
+                    data: [40, 50, 45, 50, 45, 60, 40, 41, 42, 43, 44, 45],
                     itemStyle: {
                         normal: {
                             color: '#10c5d2'
@@ -481,7 +613,7 @@ var pageData = {
                     },
                     markLine: {
                         data: [
-                            { type: 'average', name: '平均值' }
+                            // { type: 'average', name: '平均值' }
                         ]
                     }
                 },
@@ -490,7 +622,7 @@ var pageData = {
                     type: 'line',
                     //stack: '总量',
                     // areaStyle: { normal: {} },
-                    data: [23, 30, 20, 24, 25, 20, 15],
+                    data: [23, 30, 20, 24, 25, 20, 15, 21, 22, 23, 24, 25],
                     itemStyle: {
                         normal: {
                             color: '#3240d2'
@@ -504,7 +636,7 @@ var pageData = {
                     },
                     markLine: {
                         data: [
-                            { type: 'average', name: '平均值' }
+                            // { type: 'average', name: '平均值' }
                         ]
                     }
                 },
@@ -536,7 +668,7 @@ var pageData = {
                     type: 'line',
                     //stack: '总量',
                     // areaStyle: { normal: {} },
-                    data: [0.5, 1, 0.2, 0.1, 0.2, 0.1, 0.5],
+                    data: [0.5, 1, 0.2, 0.1, 0.2, 0.1, 0.5, 0.1, 0.2, 0.3, 0.4, 0.5],
                     itemStyle: {
                         normal: {
                             color: '#162542'
@@ -550,7 +682,7 @@ var pageData = {
                     },
                     markLine: {
                         data: [
-                            { type: 'average', name: '平均值' }
+                            // { type: 'average', name: '平均值' }
                         ]
                     }
                 }
@@ -559,3 +691,17 @@ var pageData = {
         echartsA.setOption(option);
     }
 }
+
+setInterval(function() {
+
+    for (var i = 0; i < 5; i++) {
+        data.shift();
+        data.push(randomData());
+    }
+
+    myChart.setOption({
+        series: [{
+            data: data
+        }]
+    });
+}, 1000);

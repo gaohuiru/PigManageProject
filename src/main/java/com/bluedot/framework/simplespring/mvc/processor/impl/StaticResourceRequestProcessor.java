@@ -14,6 +14,8 @@ import javax.servlet.ServletContext;
 public class StaticResourceRequestProcessor implements RequestProcessor {
     private static final String DEFAULT_TOMCAT_SERVLET="default";
     private static final String STATIC_RESOURCE_PREFIX="/static/";
+    private static final String ASSETS_RESOURCE_PREFIX="/assets/";
+    private static final String HTML_RESOURCE_SUFFIX=".html";
     /**
      * tomcat默认的请求派发器
      */
@@ -25,14 +27,14 @@ public class StaticResourceRequestProcessor implements RequestProcessor {
             LogUtil.getLogger().error("StaticResourceRequestProcessor constructor error");
             throw new RuntimeException("There is no default tomcat servlet");
         }
-        LogUtil.getLogger().info("The default servlet for static resource is {}", DEFAULT_TOMCAT_SERVLET);
+        LogUtil.getLogger().debug("The default servlet for static resource is {}", DEFAULT_TOMCAT_SERVLET);
     }
     @Override
     public boolean process(RequestProcessorChain requestProcessorChain) throws Exception {
         //通过请求路径判断是否为静态资源
         if(isStaticResource(requestProcessorChain.getRequestPath())){
             //如果是静态资源，则交给default servlet处理
-            LogUtil.getLogger().info("static requestPath: {}",requestProcessorChain.getRequestPath());
+            LogUtil.getLogger().debug("static requestPath: {}",requestProcessorChain.getRequestPath());
             defaultDispatcher.forward(requestProcessorChain.getReq(),requestProcessorChain.getResp());
             return false;
         }
@@ -47,6 +49,6 @@ public class StaticResourceRequestProcessor implements RequestProcessor {
      * @return 否为静态资源路径
      */
     private boolean isStaticResource(String requestPath) {
-        return requestPath.startsWith(STATIC_RESOURCE_PREFIX);
+        return requestPath.startsWith(STATIC_RESOURCE_PREFIX)||requestPath.startsWith(ASSETS_RESOURCE_PREFIX)||requestPath.endsWith(HTML_RESOURCE_SUFFIX);
     }
 }

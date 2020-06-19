@@ -1,6 +1,6 @@
 package com.bluedot.pig.service;
 
-import com.bluedot.pig.dao.BaseDao;
+import com.bluedot.pig.mapper.BaseDao;
 import com.bluedot.pig.util.SqlUtil;
 import com.bluedot.pig.util.TableUtil;
 

@@ -73,7 +73,7 @@ public class RequestProcessorChain {
         try {
             while(requestProcessorIterator.hasNext()){
                 RequestProcessor requestProcessor=requestProcessorIterator.next();
-                log.info("this requestProcessor is {}",requestProcessor);
+                log.debug("this requestProcessor is {}",requestProcessor);
                 //直到某个请求处理器执行后返回为false为止
                 if(!requestProcessor.process(this)){
                     break;
@@ -99,7 +99,7 @@ public class RequestProcessorChain {
         }
         try {
             //调用渲染器的render方法对结果进行渲染
-            log.info("using {} to render view",this.resultRender.getClass().getSimpleName());
+            log.debug("using {} to render view",this.resultRender.getClass().getSimpleName());
             this.resultRender.render(this);
         } catch (Exception e) {
             log.error("doRender error:",e);
