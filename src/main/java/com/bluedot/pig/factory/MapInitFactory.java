@@ -16,7 +16,7 @@ public class MapInitFactory {
      * @param pageSize 页面大小
      * @return map
      */
-    public Map<String,Object> createServiceMapForSimpleQueryList(Integer pageNo,Integer pageSize){
+    public static Map<String,Object> createServiceMapForSimpleQueryList(Integer pageNo,Integer pageSize){
         //当正确传入分页参数时
         if (pageNo == null || pageSize == null) {
             pageNo = 1;

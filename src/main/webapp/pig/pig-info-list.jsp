@@ -1,3 +1,4 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %><%--
   Created by IntelliJ IDEA.
@@ -125,7 +126,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${pig}" var="pig">
+                                <c:forEach items="${result['pageInfo'].list}" var="pig">
 
                                     <tr>
                                         <td><input type="checkbox"></td>
@@ -168,16 +169,6 @@
                                                     </form>
                                                     <div style="float:left;">
                                                         <form class=""
-                                                              action="/pigInfoUpdate/PigService/select/pigInfo.do"
-                                                              method="post">
-                                                            <input type="hidden" name="pigNo" value="${pig.pigNo}">
-                                                            <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
-                                                                    class="am-icon-pencil-square-o"></span>修改
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                    <div style="float:left;">
-                                                        <form class=""
                                                               action="/pigInfoDetail/PigService/select/pigInfos.do"
                                                               method="post">
                                                             <input type="hidden" name="pigNo" value="${pig.pigNo}">
@@ -187,11 +178,21 @@
                                                         </form>
                                                     </div>
                                                     <div style="float:left;">
-                                                        <button type="button" value="${pig.pigNo}"
-                                                                onclick="deletePigInfoList(this)"
-                                                                class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
-                                                            <span class="am-icon-trash-o"></span>删除
-                                                        </button>
+                                                        <form class=""
+                                                              action="/pigInfoUpdate/PigService/select/pigInfo.do"
+                                                              method="post">
+                                                            <input type="hidden" name="pigNo" value="${pig.pigNo}">
+                                                            <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
+                                                                    class="am-icon-pencil-square-o"></span>修改
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                    <div style="float:left;">
+                                                        <a href="${pageContext.request.contextPath}/removePig?pigNo=${pig.No}&pageNo=${result['pageNo']}&pageSize=${result['pageSize']}">
+                                                            <button type="button" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
+                                                                <span class="am-icon-trash-o"></span>删除
+                                                            </button>
+                                                        </a>
                                                     </div>
 
                                                 </div>
@@ -207,17 +208,54 @@
                                     <button type="button" class="am-btn am-btn-default am-btn-success">导入数据</button>
                                     <button type="button" class="am-btn am-btn-default am-btn-secondary">导出数据</button>
                                 </div>
-                                <%--        以下代码只需要修改form表单中的action值 三处                --%>
                                 <div class="am-cf">
                                     <div class="am-fr">
+                                        <%-- 页码的分页参数，用于将页码分成n个一组，如此处每次只显示5个页码--%>
+                                        <c:set var="pageNumberPagingFactor" value="5"/>
+                                        <%--使用${result['pageInfo'].pageNo}会报错？？？
+                                        直接从参数集中拿${result['pageNo']}不报错，
+                                        而且${result['pageInfo']}中其他参数都不报错？？？离谱--%>
+
+                                        <%--当前页面开始和结束的页码，如第一页开始页码为1，结束页码为5 --%>
+                                        <%--计算当前页面的第一个页码--%>
+                                        <%--除法计算得到的是浮点型数，需要取整，去除小数--%>
+                                        <fmt:parseNumber integerOnly="true" var="prePageNumberStart"
+                                                         value="${((result['pageNo']-1)/pageNumberPagingFactor)}"/>
+                                        <fmt:parseNumber integerOnly="true" var="pageNumberStart"
+                                                         value="${prePageNumberStart*pageNumberPagingFactor+1}"/>
+                                        <%--计算预期的最后一个页码--%>
+                                        <%--除法计算得到的是浮点型数，需要取整，去除小数--%>
+                                        <fmt:parseNumber integerOnly="true" var="tempPageNumberEnd"
+                                                         value="${((result['pageNo']-1)/pageNumberPagingFactor)}"/>
+                                        <%--处理计算结果的小数--%>
+                                        <fmt:parseNumber integerOnly="true" var="prePageNumberEnd"
+                                                         value="${tempPageNumberEnd*pageNumberPagingFactor+pageNumberPagingFactor}"/>
+                                        <%--最后一个页码和页面总数比较，避免越界--%>
+                                        <c:set var="pageNumberEnd"
+                                               value="${prePageNumberEnd>result['pageInfo'].totalPage?result['pageInfo'].totalPage:prePageNumberEnd}"/>
                                         <ul class="am-pagination tpl-pagination">
-                                            <li class="am-disabled"><a href="#">«</a></li>
-                                            <li class="am-active"><a href="#">1</a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">4</a></li>
-                                            <li><a href="#">5</a></li>
-                                            <li><a href="#">»</a></li>
+                                            <%--按此按钮回到上一组页码的最后一个--%>
+                                            <c:if test="${pageNumberStart!=1}">
+                                                <li>
+                                                    <a href="${pageContext.request.contextPath}/pig/queryPigs?pageNo=${pageNumberStart-1}&pageSize=10">«</a>
+                                                </li>
+                                            </c:if>
+
+                                            <c:forEach begin="${pageNumberStart}" end="${pageNumberEnd}"
+                                                       var="pageNo">
+                                                <%--当页码为当前页是页码按钮高亮--%>
+                                                <li
+                                                        <c:if test="${pageNo==result['pageNo']}">class="am-active"</c:if>>
+                                                    <a href="${pageContext.request.contextPath}/pig/queryPigs?pageNo=${pageNo}&pageSize=10">${pageNo}</a>
+                                                </li>
+                                            </c:forEach>
+                                            <%--按此按钮去往下一组页码的第一个--%>
+                                            <c:if test="${pageNumberEnd!=result['pageInfo'].totalPage}">
+                                                <li>
+                                                    <a href="${pageContext.request.contextPath}/pig/queryPigs?pageNo=${pageNumberEnd+1}&pageSize=10">»</a>
+                                                </li>
+                                            </c:if>
+
                                         </ul>
                                     </div>
                                 </div>

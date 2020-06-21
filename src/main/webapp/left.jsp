@@ -36,7 +36,7 @@
                             </a>
                         </c:if>
                         <c:if test="${purview.systemRights==1}">
-                        <a href="user/queryUsers?pageNo=1&pageSize=2">
+                        <a href="${pageContext.request.contextPath}/user/queryUsers?pageNo=1&pageSize=2">
                             <i class="am-icon-angle-right"></i>
                             <span>用户信息</span>
                             <i class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>
@@ -69,12 +69,12 @@
 
                         <ul class="tpl-left-nav-sub-menu4">
                             <li>
-                                <a href="" class="tpl-left-nav-link-list"
+                                <a href="${pageContext.request.contextPath}/pig/queryPigs?pageNo=1&pageSize=10" class="tpl-left-nav-link-list"
                                    style="padding-left: 55px;">
                                     <span>猪只信息</span>
                                 </a>
 
-                                <a href="/pigVarietyList/PigService/select/pigVariety.do"
+                                <a href="${pageContext.request.contextPath}/pig/queryPigVarieties"
                                    class="tpl-left-nav-link-list1" style="padding-left: 55px;">
                                     <span>猪只品种</span>
                                 </a>

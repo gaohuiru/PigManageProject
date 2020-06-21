@@ -42,7 +42,10 @@ public class BaseService {
         int pageSize = (int) map.get("pageSize");
         List<T> list =serviceCallback.doListExecutor(baseMapper, pageStart, pageSize);
         Long totalSize = serviceCallback.doCountExecutor(baseMapper);
-        PageInfo<T> pageInfo = new PageInfo<>(pageNo, pageSize, totalSize, list);
+        //页面数据、页码、数据总数、数据列表，注意顺序
+        PageInfo<T> pageInfo = new PageInfo<>(pageSize,pageNo,totalSize, list);
+        //单独计算总页数
+        pageInfo.setTotalPage(totalSize,pageSize);
         map.put("pageInfo", pageInfo);
     }
 
