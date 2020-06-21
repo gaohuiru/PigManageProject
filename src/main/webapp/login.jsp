@@ -43,7 +43,7 @@
                         <input type="password" class="" id="doc-ipt-pwd-1" placeholder="输入密码吧" name="password">
                     </div>
                     <p><button type="submit" class="am-btn am-btn-default">登录</button></p>
-                    <p><button type="button" class="am-btn am-btn-default" onclick="window.location.href = 'searchPassword.html'">找回密码</button></p>
+<%--                    <p><button type="button" class="am-btn am-btn-default" onclick="window.location.href = 'searchPassword.html'">找回密码</button></p>--%>
 
                 </fieldset>
             </form>

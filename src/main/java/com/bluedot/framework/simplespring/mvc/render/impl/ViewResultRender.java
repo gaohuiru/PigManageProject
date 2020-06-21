@@ -11,6 +11,7 @@ import com.bluedot.framework.simplespring.util.LogUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 /**
@@ -49,9 +50,17 @@ public class ViewResultRender implements ResultRender {
         HttpServletResponse response=requestProcessorChain.getResp();
         String path=modeAndView.getView();
         Map<String,Object> model=modeAndView.getModel();
+        HttpSession session=request.getSession();
         if(!model.isEmpty()){
             for(Map.Entry<String,Object> entry:model.entrySet()){
-                request.setAttribute(entry.getKey(),entry.getValue());
+                String key=entry.getKey();
+                //如果参数期望是session参数时
+                if(key.startsWith("session")){
+                    key=key.substring(8);
+                    session.setAttribute(key,entry.getValue());
+                }
+
+                request.setAttribute(key,entry.getValue());
             }
         }
         //跳转到jsp页面

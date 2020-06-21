@@ -1,6 +1,6 @@
 package com.bluedot.pig.pojo.domain;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * @author  xxbb
@@ -17,7 +17,7 @@ public class Employee  {
 	/**
  	* sex
  	*/
-	private String sex;
+	private Integer sex;
 	/**
  	* age
  	*/
@@ -81,11 +81,11 @@ public class Employee  {
   	}
 
 
-  	public String getSex() {
+  	public Integer getSex() {
     	return sex;
   	}
 
-  	public void setSex(String sex) {
+  	public void setSex(Integer sex) {
     	this.sex = sex;
   	}
 
@@ -188,5 +188,23 @@ public class Employee  {
     	this.password = password;
   	}
 
-
+	@Override
+	public String toString() {
+		return "Employee{" +
+				"employeeId=" + employeeId +
+				", realName='" + realName + '\'' +
+				", sex=" + sex +
+				", age=" + age +
+				", identityNumber='" + identityNumber + '\'' +
+				", telephone='" + telephone + '\'' +
+				", email='" + email + '\'' +
+				", image='" + image + '\'' +
+				", position=" + position +
+				", address='" + address + '\'' +
+				", entryTime=" + entryTime +
+				", workingYears=" + workingYears +
+				", status=" + status +
+				", password='" + password + '\'' +
+				'}';
+	}
 }

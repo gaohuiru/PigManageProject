@@ -41,7 +41,7 @@ public class XmlParseUtils {
 
             //判断根元素是否正确
             if (!Constant.XML_ROOT_LABEL.equals(rootElement.getName())) {
-                System.out.println("mapper.xml文件的元素错误");
+                LogUtils.getLogger().error("mapper.xml文件的元素错误");
                 return;
             }
             //获取标签内容

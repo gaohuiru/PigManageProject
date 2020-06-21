@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper namespace="com.bluedot.pig.mapper.BaseMapper">
+    <!--用户相关-->
+    <select id="getEmployeeByAccount" resultType="com.bluedot.pig.pojo.domain.Employee">
+        select real_name from t_employee where employee_id = #{employee_id} and password=#{password} and status=1
+    </select>
+    <select id="getPurviewById" resultType="com.bluedot.pig.pojo.domain.Purview">
+        select * from t_purview where employee_id=#{id}
+    </select>
+    <select id="getUsers" resultType="com.bluedot.pig.pojo.domain.Employee">
+        select * from t_employee limit #{pageStart},#{pageSize}
+    </select>
+    <select id="getUsersCount" resultType="java.lang.Long">
+        select count(*) from t_employee
+    </select>
+
+
+    <!--猪只相关-->
+    <select id="getPigs" resultType="com.bluedot.pig.pojo.domain.PigInfo">
+        select * from t_pig_info limit #{pageStart},#{pageSize}
+    </select>
+    <select id="getPigsCount" resultType="java.lang.Long">
+        select count(*) from t_pig_info
+    </select>
+
+
+</mapper>

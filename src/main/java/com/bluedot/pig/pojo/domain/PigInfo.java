@@ -1,6 +1,6 @@
 package com.bluedot.pig.pojo.domain;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * @author  xxbb
@@ -9,7 +9,7 @@ public class PigInfo  {
 	/**
  	* pigNo
  	*/
-	private Integer pigNo;
+	private String pigNo;
 	/**
  	* sex
  	*/
@@ -67,11 +67,11 @@ public class PigInfo  {
  	*/
 	private Date leaveDate;
 
-  	public Integer getPigNo() {
+  	public String getPigNo() {
     	return pigNo;
   	}
 
-  	public void setPigNo(Integer pigNo) {
+  	public void setPigNo(String pigNo) {
     	this.pigNo = pigNo;
   	}
 
@@ -204,7 +204,7 @@ public class PigInfo  {
 	@Override
 	public String toString() {
 		return "PigInfo{" +
-				"pigNo=" + pigNo +
+				"pigNo='" + pigNo + '\'' +
 				", sex=" + sex +
 				", age=" + age +
 				", pigVarietyId=" + pigVarietyId +

@@ -15,12 +15,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <link rel="icon" type="image/png" href="assets/i/favicon.png">
-    <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="${pageContext.request.contextPath}/assets/i/app-icon72x72@2x.png">
     <meta name="apple-mobile-web-app-title" content="智能养猪管理系统" />
-    <link rel="stylesheet" href="assets/css/amazeui.min.css" />
-    <link rel="stylesheet" href="assets/css/admin.css">
-    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/amazeui.min.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/app.css">
 </head>
 
 
@@ -28,7 +28,7 @@
 
     <div class="am-topbar-brand">
         <a href="javascript:;" class="tpl-logo">
-            <img src="assets/img/logo.png" alt="">
+            <img src="${pageContext.request.contextPath}/assets/img/logo.png" alt="">
         </a>
     </div>
 
@@ -66,16 +66,16 @@
                     <li>
                         <a href="#" class="tpl-dropdown-content-message">
                                 <span class="tpl-dropdown-content-photo">
-                      <img src="assets/img/user02.png" alt=""> </span>
+                      <img src="${pageContext.request.contextPath}/assets/img/user02.png" alt=""> </span>
                             <span class="tpl-dropdown-content-subject">
-                      <span class="tpl-dropdown-content-from"> 陈洪彬</span>
+                      <span class="tpl-dropdown-content-from"> ${sessionScope.name}</span>
                                 <span class="tpl-dropdown-content-time">10分钟前 </span>
                                 </span>
                             <span class="tpl-dropdown-content-font"> 欢迎登录智能猪场管理系统！ </span>
                         </a>
                         <a href="#" class="tpl-dropdown-content-message">
                                 <span class="tpl-dropdown-content-photo">
-                      <img src="assets/img/user03.png" alt=""> </span>
+                      <img src="${pageContext.request.contextPath}/assets/img/user03.png" alt=""> </span>
                             <span class="tpl-dropdown-content-subject">
                       <span class="tpl-dropdown-content-from"> Steam </span>
                                 <span class="tpl-dropdown-content-time">18分钟前</span>
@@ -133,24 +133,24 @@
 
             <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
                 <a class="am-dropdown-toggle tpl-header-list-link" href="javascript:;">
-                    <span class="tpl-header-list-user-nick">徐斌</span><span class="tpl-header-list-user-ico"> <img src="assets/img/user01.png"></span>
+                    <span class="tpl-header-list-user-nick">
+                        <c:if test="${sessionScope.name==null}" >游客</c:if>
+                        <c:if test="${sessionScope.name!=null}" >${sessionScope.name}</c:if>
+                    </span><span class="tpl-header-list-user-ico"> <img src="${pageContext.request.contextPath}/assets/img/user01.png"></span>
                 </a>
                 <ul class="am-dropdown-content">
                     <li><a href="PersonInfo.html"><span class="am-icon-bell-o"></span> 资料</a></li>
                     <li><a href="updatePassword.html"><span class="am-icon-cog"></span>修改密码</a></li>
-                    <li><a href="login.html"><span class="am-icon-power-off"></span> 退出</a></li>
+                    <li><a href="login.jsp"><span class="am-icon-power-off"></span> 退出</a></li>
                 </ul>
             </li>
-            <li><a href="###" class="tpl-header-list-link">
-                <span class="am-icon-sign-out tpl-header-list-ico-out-size"></span>
-            </a>
-            </li>
+
         </ul>
     </div>
 </header>
 
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/amazeui.min.js"></script>
-<script src="assets/js/app.js"></script>
-<script src="assets/js/common.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/amazeui.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/app.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/common.js"></script>
 </html>

@@ -1,6 +1,6 @@
 package com.bluedot.pig.pojo.domain;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * @author  xxbb

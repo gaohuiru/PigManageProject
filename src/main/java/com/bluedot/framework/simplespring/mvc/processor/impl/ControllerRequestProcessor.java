@@ -59,7 +59,7 @@ public class ControllerRequestProcessor implements RequestProcessor {
         //获取IoC容器
         this.beanContainer = BeanContainer.getInstance();
         //初始化缓存
-        resultCaches = new ResultCache<>(5);
+        resultCaches = new ResultCache<>();
         //获取所有被Controller标记的类
         Set<Class<?>> requestMappingSet = beanContainer.getClassesByAnnotation(Controller.class);
         initRequestPathInfoControllerMethodMap(requestMappingSet);
@@ -144,6 +144,8 @@ public class ControllerRequestProcessor implements RequestProcessor {
         //1.解析HttpServletRequest的请求方法，请求路径，获取对应的ControllerMethod实例
         String method = requestProcessorChain.getRequestMethod();
         String path = requestProcessorChain.getRequestPath();
+        //和method，path一起用来作为结果缓存的key
+        String requestParametersMap=requestProcessorChain.getReq().getParameterMap().toString();
         ControllerMethod controllerMethod = this.requestPathInfoControllerMethodMap.get(new RequestPathInfo(method, path));
         if (null == controllerMethod) {
             log.error("can not found controllerMethod which path is{}, method is {}", path, method);
@@ -158,7 +160,7 @@ public class ControllerRequestProcessor implements RequestProcessor {
             //如果时查询请求则将结果存入缓存
             Callable<Object> task = () -> invokeControllerMethod(controllerMethod, requestProcessorChain.getReq());
             resultCaches.setTask(task);
-            result = resultCaches.get(path + "," + method);
+            result = resultCaches.get(path + "," + method+":"+requestParametersMap);
         } else if (path.startsWith(requestPrefix[1]) || path.startsWith(requestPrefix[2]) || path.startsWith(requestPrefix[3])) {
             //如果有增删改请求则刷新缓存
             resultCaches.clear();

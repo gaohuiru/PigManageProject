@@ -45,8 +45,9 @@ public class ReflectUtils {
 
             method.invoke(obj, value);
         } catch (Exception e) {
+                LogUtils.getLogger().error(e.getMessage());
             throw new RuntimeException("[" + Thread.currentThread().getName() + "]" +
-                    "com.xxbb.smybatis.utils.ReflectUtils" + "--->" + "value=" +
+                    e.getMessage() + "--->" + "error columnName:"+columnName +" value="+value +"valueType= "+
                     value.getClass());
         }
 

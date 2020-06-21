@@ -54,7 +54,8 @@ public class DefaultSqlSession implements SqlSession {
         if (results.size() == 1) {
             return results.get(0);
         } else {
-            throw new RuntimeException("查询结果出错：查询出多条数据，结果集长度：" + results.size());
+            LogUtils.getLogger().error("查询结果出错：查询出多条数据或没有结果，结果集长度：" + results.size());
+            return null;
         }
     }
 

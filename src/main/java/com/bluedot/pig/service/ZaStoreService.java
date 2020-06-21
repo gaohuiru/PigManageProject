@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class StoreService {
-    public StoreService(){
+public class ZaStoreService {
+    public ZaStoreService(){
 
     }
 
-    public  StoreService(String method, String viewObjectName, Map<String, List<Object>> reqMap){
+    public ZaStoreService(String method, String viewObjectName, Map<String, List<Object>> reqMap){
         System.out.println("具体service获取到的方法："+method);
 
         try {
@@ -27,7 +27,7 @@ public class StoreService {
 //            }
 
             //通过反射实例化类
-            Class c = Class.forName("com.bluedot.pig.service.StoreService");
+            Class c = Class.forName("com.bluedot.pig.service.ZaStoreService");
             Object instance = c.newInstance();
 
             //通过反射找到对应方法

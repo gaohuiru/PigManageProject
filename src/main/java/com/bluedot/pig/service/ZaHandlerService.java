@@ -7,8 +7,8 @@ import java.util.Map;
 /**
  * @author chb
  */
-public class HandlerService {
-    public HandlerService(String uri, Map<String, List<Object>> reqMap) {
+public class ZaHandlerService {
+    public ZaHandlerService(String uri, Map<String, List<Object>> reqMap) {
         //解析URi
         String[] split = uri.split("/");
         String className = split[1];
