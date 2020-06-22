@@ -50,7 +50,7 @@
             </li>
         </ol>
         <div class="tpl-portlet-components">
-            errormsg!!!
+            ${result['error']}
         </div>
         
 

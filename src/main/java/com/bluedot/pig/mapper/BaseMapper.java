@@ -7,6 +7,8 @@ import com.bluedot.pig.pojo.domain.Purview;
 import java.util.List;
 
 /**
+ * 读取BaseMapper.xml文件执行sql操作，主要是用来执行select语句，
+ * 一般的增删改语句直接由BaseDao进行生成
  * @author xxbb
  */
 public interface BaseMapper {

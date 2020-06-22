@@ -32,4 +32,11 @@ public interface ServiceCallback<T> extends Callback {
      default Long doCountExecutor(BaseMapper baseMapper){
          return null;
      }
+
+    /**
+     * 调用增删改方法的模板方法
+     * @param baseMapper 查询代理类
+     * @return 影响的行数
+     */
+     default int doDataModifyExecutor(BaseMapper baseMapper){ return -1;}
 }

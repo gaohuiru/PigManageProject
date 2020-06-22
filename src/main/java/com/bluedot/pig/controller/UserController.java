@@ -29,10 +29,10 @@ public class UserController extends HttpServlet {
 
     @RequestMapping("/queryUsers")
     public ModelAndView queryUsers(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize) {
-        String dispatchPath = "/user/user-info-list.jsp";
-        return baseController.simpleQueryRequestTemplate(userService, pageNo, pageSize, dispatchPath, new ControllerCallback() {
+        StringBuilder dispatchPath = new StringBuilder("/user/user-info-list.jsp");
+        return baseController.simpleRequestTemplate(userService, pageNo, pageSize, dispatchPath, new ControllerCallback() {
             @Override
-            public void doServiceForSimpleQueryRequestExecutor(Map<String, Object> serviceMap) {
+            public void doServiceForSimpleRequest(Map<String, Object> serviceMap,StringBuilder dispatchPath) {
                 serviceMap.put("service", "queryUsers");
                 userService.doService(serviceMap);
             }

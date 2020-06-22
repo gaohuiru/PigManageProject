@@ -188,7 +188,7 @@
                                                         </form>
                                                     </div>
                                                     <div style="float:left;">
-                                                        <a href="${pageContext.request.contextPath}/removePig?pigNo=${pig.No}&pageNo=${result['pageNo']}&pageSize=${result['pageSize']}">
+                                                        <a href="${pageContext.request.contextPath}/pig/removePig?pigNo=${pig.pigNo}&pageNo=${result['pageNo']}&pageSize=${result['pageSize']}">
                                                             <button type="button" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
                                                                 <span class="am-icon-trash-o"></span>删除
                                                             </button>

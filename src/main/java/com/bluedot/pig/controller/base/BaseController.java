@@ -24,12 +24,13 @@ public class BaseController extends HttpServlet {
      * @param controllerCallback 回调接口
      * @return modelAndView
      */
-    public ModelAndView simpleQueryRequestTemplate(BaseService service, Integer pageNo, Integer pageSize, String dispatchPath , ControllerCallback controllerCallback){
+    public ModelAndView simpleRequestTemplate(BaseService service, Integer pageNo, Integer pageSize, StringBuilder dispatchPath , ControllerCallback controllerCallback){
         //初始化map，处理分页参数
-        Map<String, Object> serviceMap = MapInitFactory.createServiceMapForSimpleQueryList(pageNo, pageSize);
+        Map<String, Object> serviceMap = MapInitFactory.createServiceMapForPageParameters(pageNo, pageSize);
         //执行service的方法
-        controllerCallback.doServiceForSimpleQueryRequestExecutor(serviceMap);
-        System.out.println(serviceMap);
+        controllerCallback.doServiceForSimpleRequest(serviceMap,dispatchPath);
+        System.out.println("转发路径："+dispatchPath.toString());
+        System.out.println("转发携带参数"+serviceMap);
 
         return setModelAndView(dispatchPath,serviceMap);
 
@@ -39,14 +40,14 @@ public class BaseController extends HttpServlet {
      * @param dispatchPath 转发路径
      * @return modelAndView视图
      */
-    public ModelAndView setModelAndView(String dispatchPath,Map<String,Object> serviceMap){
+    public ModelAndView setModelAndView(StringBuilder dispatchPath,Map<String,Object> serviceMap){
         ModelAndView modelAndView=new ModelAndView();
         //当map中出现该key时说明业务执行过程中出现了错误
         String errorKey="error";
         if(serviceMap.containsKey(errorKey)){
             modelAndView.setView("/error/error.jsp");
         }else{
-            modelAndView.setView(dispatchPath).addViewData("result",serviceMap);
+            modelAndView.setView(dispatchPath.toString()).addViewData("result",serviceMap);
         }
         return modelAndView;
     }

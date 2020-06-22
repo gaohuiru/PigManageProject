@@ -42,12 +42,36 @@ public class BaseService {
         int pageSize = (int) map.get("pageSize");
         List<T> list =serviceCallback.doListExecutor(baseMapper, pageStart, pageSize);
         Long totalSize = serviceCallback.doCountExecutor(baseMapper);
-        //页面数据、页码、数据总数、数据列表，注意顺序
+        //页面大小、页码、数据总数、数据列表，注意顺序
         PageInfo<T> pageInfo = new PageInfo<>(pageSize,pageNo,totalSize, list);
         //单独计算总页数
         pageInfo.setTotalPage(totalSize,pageSize);
         map.put("pageInfo", pageInfo);
     }
+    public <T>void doRemoveByPrimaryKey(Map<String ,Object> map,ServiceCallback<T> serviceCallback){
+        BaseMapper baseMapper=((MapperFactory) beanContainer.getBean(MapperFactory.class)).createMapper();
+        int pageNo=(int) map.get("pageNo");
+        int pageSize = (int) map.get("pageSize");
+        int affectedRows=serviceCallback.doDataModifyExecutor(baseMapper);
+        if(affectedRows==0){
+            map.put("error","信息删除失败！");
+        }
+        Long totalSize=serviceCallback.doCountExecutor(baseMapper);
+
+        //计算当前页面数，调整页码，防止最后一条数据被删除后原本的最后一页不存在而出现跳转错误
+        long totalPage=totalSize%pageSize==0? totalSize/pageSize:totalSize/pageSize+1;
+        if(totalPage<pageNo){
+            pageNo=pageNo-1;
+            map.put("pageNo",pageNo);
+        }
+        int pageStart=(pageNo-1)*pageSize;
+        List<T> list=serviceCallback.doListExecutor(baseMapper,pageStart,pageSize);
+        //页面大小、页码、数据总数、页面总数、数据列表，注意顺序
+        PageInfo<T> pageInfo = new PageInfo<>(pageSize,pageNo,totalSize,totalPage,list);
+        map.put("pageInfo",pageInfo);
+    }
+
+
 
     /**
      * 根据map中的service参数反射调用对应的service方法

@@ -14,6 +14,17 @@ import java.util.Map;
  */
 public class TestMain {
     @Test
+    public void stringTest(){
+        String str="wwww";
+        StringBuilder sb=new StringBuilder("zzz");
+        addString(str,sb);
+        System.out.println(str+"     "+sb.toString());
+    }
+    private void addString(String str,StringBuilder sb){
+        str=str+"qqq";
+        sb.append("qqq");
+    }
+    @Test
     public void longTest() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         Object obj=Class.forName("java.lang.Integer");
 
