@@ -10194,7 +10194,7 @@ ul.am-dropdown-content>.am-disabled>a:hover {
 
 .am-modal-bd {
 	padding: 15px 10px;
-	text-align: center;
+	text-align:center;
 	border-bottom: 1px solid #dedede;
 	border-radius: 2px 2px 0 0
 }

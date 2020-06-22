@@ -188,15 +188,6 @@
                             <tbody>
                             <tr>
                                 <td>
-                                    <img src="assets/img/user01.png" alt="" class="user-pic">
-                                    <a class="user-name" href="###">陈洪彬</a>
-                                </td>
-                                <td>管理员</td>
-                                <td>3年</td>
-                                <td class="font-green bold">是</td>
-                            </tr>
-                            <tr>
-                                <td>
                                     <img src="assets/img/user02.png" alt="" class="user-pic">
                                     <a class="user-name" href="###">徐斌</a>
                                 </td>
@@ -206,11 +197,22 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <img src="assets/img/user03.png" alt="" class="user-pic">
-                                    <a class="user-name" href="###">熊承杰</a>
+                                    <img src="assets/img/user01.png" alt="" class="user-pic">
+                                    <a class="user-name" href="###">陈洪彬</a>
                                 </td>
-                                <td>管理员</td>
+                                <td>猪只管理员</td>
                                 <td>3年</td>
+                                <td class="font-green bold">是</td>
+                            </tr>
+
+
+                            <tr>
+                                <td>
+                                    <img src="assets/img/user03.png" alt="" class="user-pic">
+                                    <a class="user-name" href="###">姚晨</a>
+                                </td>
+                                <td>仓库管理员</td>
+                                <td>1年</td>
                                 <td class="font-green bold">是</td>
                             </tr>
                             <tr>
@@ -218,28 +220,20 @@
                                     <img src="assets/img/user03.png" alt="" class="user-pic">
                                     <a class="user-name" href="###">刘勇</a>
                                 </td>
-                                <td>管理员</td>
-                                <td>3年</td>
+                                <td>日志管理员</td>
+                                <td>1年</td>
                                 <td class="font-green bold">是</td>
                             </tr>
                             <tr>
                                 <td>
                                     <img src="assets/img/user03.png" alt="" class="user-pic">
-                                    <a class="user-name" href="###">姚晨</a>
+                                    <a class="user-name" href="###">熊承杰</a>
                                 </td>
-                                <td>管理员</td>
-                                <td>3年</td>
+                                <td>设备管理员</td>
+                                <td>1年</td>
                                 <td class="font-green bold">是</td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <img src="assets/img/user03.png" alt="" class="user-pic">
-                                    <a class="user-name" href="###">张三</a>
-                                </td>
-                                <td>管理员</td>
-                                <td>3年</td>
-                                <td class="font-green bold">是</td>
-                            </tr>
+
                             </tbody>
                         </table>
                     </div>
@@ -627,6 +621,7 @@
 
     </div>
 </div>
+<%@ include file="footer.jsp"%>
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/amazeui.min.js"></script>
 <script src="assets/js/app.js"></script>

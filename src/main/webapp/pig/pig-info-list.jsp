@@ -162,34 +162,335 @@
                                         <td>
                                             <div class="am-btn-toolbar">
                                                 <div class="am-btn-group am-btn-group-xs">
-                                                    <form class=""
-                                                          action="/pigInfoUpdate/StoreService/select/pigInfo.do"
-                                                          method="post">
-                                                        <!-- 这个form不可删除，用来解决第一个form表达必跳转pigInfoList界面的玄学问题,可能是受最外面的一个form表单影响-->
-                                                    </form>
                                                     <div style="float:left;">
-                                                        <form class=""
-                                                              action="/pigInfoDetail/PigService/select/pigInfos.do"
-                                                              method="post">
-                                                            <input type="hidden" name="pigNo" value="${pig.pigNo}">
-                                                            <button class="am-btn am-btn-default am-btn-xs am-hide-sm-only">
-                                                                <span class="am-icon-copy"></span>详情
-                                                            </button>
-                                                        </form>
+                                                        <div class="am-modal am-modal-prompt" tabindex="1"
+                                                             id="pig-detail-${pig.pigNo}">
+                                                            <div class="am-modal-dialog">
+                                                                <div class="am-modal-hd">猪只详细</div>
+                                                                <div class="am-modal-bd">
+                                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                                    猪耳号：<label
+                                                                        style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                        type="text" disabled="disabled" name="pigNo"
+                                                                        value="${pig.pigNo}"></label>
+                                                                    &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                    品种：
+                                                                    <c:if test="${pig.pigVarietyId==0 }">
+                                                                        <label
+                                                                                style=" display:inline-block;width: 33%;height: 60%">
+                                                                            <input
+                                                                                    type="text" disabled="disabled"
+                                                                                    name="pigVarietyId"
+                                                                                    value="虚空猪"></label>
+                                                                    </c:if>
+                                                                    <c:if test="${pig.pigVarietyId==1 }">
+                                                                        <label
+                                                                                style=" display:inline-block;width: 33%;height: 60%">
+                                                                            <input
+                                                                                    type="text" disabled="disabled"
+                                                                                    name="pigVarietyId"
+                                                                                    value="白猪"></label>
+                                                                    </c:if>
+
+                                                                    <br>
+                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                    类型：
+                                                                    <c:if test="${pig.pigType==0}">
+                                                                        <label
+                                                                                style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                                type="text" disabled="disabled"
+                                                                                name="pigType"
+                                                                                value="育种猪
+                                                                        "></label>
+                                                                    </c:if>
+                                                                    <c:if test="${pig.pigType==1}">
+                                                                        <label
+                                                                                style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                                type="text" disabled="disabled"
+                                                                                name="pigType"
+                                                                                value="育肥猪
+                                                                        "></label>
+                                                                    </c:if>
+
+                                                                    &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                    性别：
+                                                                    <c:if test="${pig.sex==0}"> <label
+                                                                            style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                            type="text" disabled="disabled" name="sex"
+                                                                            value="公
+                                                                                 "></label></c:if>
+                                                                    <c:if test="${pig.sex==1}"> <label
+                                                                            style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                            type="text" disabled="disabled" name="sex"
+                                                                            value="母
+                                                                                 "></label></c:if>
+
+                                                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                    &nbsp;&nbsp;&nbsp;日龄：<label
+                                                                        style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                        type="text" disabled="disabled" name="age"
+                                                                        value="${pig.age}"></label>
+                                                                    &nbsp;&nbsp;&nbsp; 生长阶段：
+                                                                    <c:if test="${pig.growthStage==1}"><label
+                                                                            style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                            type="text" disabled="disabled"
+                                                                            name="growthStage"
+                                                                            value="哺乳阶段"></label></c:if>
+                                                                    <c:if test="${pig.growthStage==2}"><label
+                                                                            style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                            type="text" disabled="disabled"
+                                                                            name="growthStage"
+                                                                            value="保育阶段"></label></c:if>
+                                                                    <c:if test="${pig.growthStage==3}"><label
+                                                                            style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                            type="text" disabled="disabled"
+                                                                            name="growthStage"
+                                                                            value="生长育肥阶段"></label></c:if>
+
+                                                                    <br>出生日期：<label
+                                                                        style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                        type="text" disabled="disabled" name="birthday"
+                                                                        value="${pig.birthday}"></label>
+                                                                    &nbsp;&nbsp;&nbsp; 当前体重：<label
+                                                                        style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                        type="text" disabled="disabled"
+                                                                        name="pigRecentWeight"
+                                                                        value="${pig.pigRecentWeight}"></label>
+                                                                    <br>
+                                                                    接种次数：<label
+                                                                        style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                        type="text" disabled="disabled"
+                                                                        name="vaccinumCount"
+                                                                        value="${pig.vaccinumCount}"></label>
+                                                                    &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;状态：
+                                                                    <c:if test="${pig.pigState==1}"><label
+                                                                            style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                            type="text" disabled="disabled"
+                                                                            name="pigState"
+                                                                            value="健康"></label></c:if>
+                                                                    <c:if test="${pig.pigState==2}"><label
+                                                                            style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                            type="text" disabled="disabled"
+                                                                            name="pigState"
+                                                                            value="生病"></label></c:if>
+                                                                    <c:if test="${pig.pigState==-1}"><label
+                                                                            style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                            type="text" disabled="disabled"
+                                                                            name="pigState"
+                                                                            value="淘汰"></label></c:if>
+                                                                    <c:if test="${pig.pigState==0}"><label
+                                                                            style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                            type="text" disabled="disabled"
+                                                                            name="pigState"
+                                                                            value=">出栏"></label></c:if>
+                                                                    <br>所在猪舍：<label
+                                                                        style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                        type="text" disabled="disabled" name="pigstyNo"
+                                                                        value="${pig.pigstyNo}"></label>
+                                                                    &nbsp;&nbsp;&nbsp; 所在猪栏：<label
+                                                                        style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                        type="text" disabled="disabled" name="hogcoteNo"
+                                                                        value="${pig.hogcoteNo}"></label>
+                                                                    <br>入栏日期：<label
+                                                                        style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                        type="text" disabled="disabled" name="enterDate"
+                                                                        value="${pig.enterDate}"></label>
+                                                                    &nbsp;&nbsp;&nbsp; 入栏体重：<label
+                                                                        style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                        type="text" disabled="disabled"
+                                                                        name="pigBasicWeight"
+                                                                        value="${pig.pigBasicWeight}"></label>
+                                                                    <br>出栏日期：<label
+                                                                        style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                        type="text" disabled="disabled" name="leaveDate"
+                                                                        value="${pig.leaveDate}"></label>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <button type="button"
+                                                                class="am-btn am-btn-default am-btn-xs am-hide-sm-only"
+                                                                data-am-modal="{target: '#pig-detail-${pig.pigNo}'}">
+                                                            <span class="am-icon-copy"></span>详情
+                                                        </button>
                                                     </div>
                                                     <div style="float:left;">
-                                                        <form class=""
-                                                              action="/pigInfoUpdate/PigService/select/pigInfo.do"
-                                                              method="post">
-                                                            <input type="hidden" name="pigNo" value="${pig.pigNo}">
-                                                            <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
-                                                                    class="am-icon-pencil-square-o"></span>修改
-                                                            </button>
-                                                        </form>
+                                                        <div class="am-modal am-modal-prompt" tabindex="2"
+                                                             id="pig-update-${pig.pigNo}">
+
+                                                            <div class="am-modal-dialog">
+                                                                <div class="am-modal-hd">猪只信息修改</div>
+                                                                <form action="${pageContext.request.contextPath}/pig/modifyPig?pageNo=${result['pageNo']}&pageSize=${result['pageSize']}"
+                                                                      method="post"
+                                                                      id="pig-modify-${pig.pigNo}">
+                                                                    <div class="am-modal-bd">
+                                                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                                                        猪耳号：<label
+                                                                            style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                            type="text" disabled="disabled" name="pigNo"
+                                                                            value="${pig.pigNo}"></label>
+                                                                        &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                        品种：
+                                                                        <c:if test="${pig.pigVarietyId==0 }">
+                                                                            <label
+                                                                                    style=" display:inline-block;width: 33%;height: 60%">
+                                                                                <input
+                                                                                        type="text" disabled="disabled"
+                                                                                        name="pigVarietyId"
+                                                                                        value="虚空猪"></label>
+                                                                        </c:if>
+                                                                        <c:if test="${pig.pigVarietyId==1 }">
+                                                                            <label
+                                                                                    style=" display:inline-block;width: 33%;height: 60%">
+                                                                                <input
+                                                                                        type="text" disabled="disabled"
+                                                                                        name="pigVarietyId"
+                                                                                        value="白猪"></label>
+                                                                        </c:if>
+
+                                                                        <br>
+                                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                        类型：
+                                                                        <c:if test="${pig.pigType==0}">
+                                                                            <label
+                                                                                    style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                                    type="text" disabled="disabled"
+                                                                                    name="pigType"
+                                                                                    value="育种猪
+                                                                        "></label>
+                                                                        </c:if>
+                                                                        <c:if test="${pig.pigType==1}">
+                                                                            <label
+                                                                                    style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                                    type="text" disabled="disabled"
+                                                                                    name="pigType"
+                                                                                    value="育肥猪
+                                                                        "></label>
+                                                                        </c:if>
+
+                                                                        &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                        性别：
+                                                                        <c:if test="${pig.sex==0}"> <label
+                                                                                style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                                type="text" disabled="disabled"
+                                                                                name="sex"
+                                                                                value="公
+                                                                                 "></label></c:if>
+                                                                        <c:if test="${pig.sex==1}"> <label
+                                                                                style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                                type="text" disabled="disabled"
+                                                                                name="sex"
+                                                                                value="母
+                                                                                 "></label></c:if>
+
+                                                                        <br>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                        &nbsp;&nbsp;&nbsp;日龄：<label
+                                                                            style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                            type="text" disabled="disabled" name="age"
+                                                                            value="${pig.age}"></label>
+                                                                        &nbsp;&nbsp;&nbsp; 生长阶段：
+                                                                        <c:if test="${pig.growthStage==1}"><label
+                                                                                style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                                type="text" disabled="disabled"
+                                                                                name="growthStage"
+                                                                                value="哺乳阶段"></label></c:if>
+                                                                        <c:if test="${pig.growthStage==2}"><label
+                                                                                style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                                type="text" disabled="disabled"
+                                                                                name="growthStage"
+                                                                                value="保育阶段"></label></c:if>
+                                                                        <c:if test="${pig.growthStage==3}"><label
+                                                                                style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                                type="text" disabled="disabled"
+                                                                                name="growthStage"
+                                                                                value="生长育肥阶段"></label></c:if>
+
+                                                                        <br>出生日期：<label
+                                                                            style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                            type="text" disabled="disabled"
+                                                                            name="birthday"
+                                                                            value="${pig.birthday}"></label>
+                                                                        &nbsp;&nbsp;&nbsp; 当前体重：<label
+                                                                            style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                            type="text" disabled="disabled"
+                                                                            name="pigRecentWeight"
+                                                                            value="${pig.pigRecentWeight}"></label>
+                                                                        <br>
+                                                                        接种次数：<label
+                                                                            style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                            type="text" disabled="disabled"
+                                                                            name="vaccinumCount"
+                                                                            value="${pig.vaccinumCount}"></label>
+                                                                        &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;状态：
+                                                                        <c:if test="${pig.pigState==1}"><label
+                                                                                style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                                type="text" disabled="disabled"
+                                                                                name="pigState"
+                                                                                value="健康"></label></c:if>
+                                                                        <c:if test="${pig.pigState==2}"><label
+                                                                                style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                                type="text" disabled="disabled"
+                                                                                name="pigState"
+                                                                                value="生病"></label></c:if>
+                                                                        <c:if test="${pig.pigState==-1}"><label
+                                                                                style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                                type="text" disabled="disabled"
+                                                                                name="pigState"
+                                                                                value="淘汰"></label></c:if>
+                                                                        <c:if test="${pig.pigState==0}"><label
+                                                                                style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                                type="text" disabled="disabled"
+                                                                                name="pigState"
+                                                                                value=">出栏"></label></c:if>
+                                                                        <br>所在猪舍：<label
+                                                                            style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                            type="text" disabled="disabled"
+                                                                            name="pigstyNo"
+                                                                            value="${pig.pigstyNo}"></label>
+                                                                        &nbsp;&nbsp;&nbsp; 所在猪栏：<label
+                                                                            style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                            type="text" disabled="disabled"
+                                                                            name="hogcoteNo"
+                                                                            value="${pig.hogcoteNo}"></label>
+                                                                        <br>入栏日期：<label
+                                                                            style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                            type="text" disabled="disabled"
+                                                                            name="enterDate"
+                                                                            value="${pig.enterDate}"></label>
+                                                                        &nbsp;&nbsp;&nbsp; 入栏体重：<label
+                                                                            style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                            type="text" disabled="disabled"
+                                                                            name="pigBasicWeight"
+                                                                            value="${pig.pigBasicWeight}"></label>
+                                                                        <br>出栏日期：<label
+                                                                            style=" display:inline-block;width: 33%;height: 60%"><input
+                                                                            type="text" disabled="disabled"
+                                                                            name="leaveDate"
+                                                                            value="${pig.leaveDate}"></label>
+
+                                                                    </div>
+
+                                                                    <div class="am-modal-footer">
+                                                                    <span class="am-modal-btn"
+                                                                          data-am-modal-cancel>取消</span>
+                                                                        <span class="am-modal-btn"
+                                                                              onclick="document.getElementById('pig-modify-${pig.pigNo}').submit();return false;">提交</span>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                        <input type="hidden" name="pigNo" value="${pig.pigNo}">
+                                                        <button type="button"
+                                                                class="am-btn am-btn-default am-btn-xs am-text-secondary"
+                                                                data-am-modal="{target: '#pig-update-${pig.pigNo}'}">
+                                                            <span class="am-icon-pencil-square-o"></span>修改
+                                                        </button>
+
                                                     </div>
                                                     <div style="float:left;">
                                                         <a href="${pageContext.request.contextPath}/pig/removePig?pigNo=${pig.pigNo}&pageNo=${result['pageNo']}&pageSize=${result['pageSize']}">
-                                                            <button type="button" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
+                                                            <button type="button"
+                                                                    class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
                                                                 <span class="am-icon-trash-o"></span>删除
                                                             </button>
                                                         </a>
@@ -203,6 +504,7 @@
 
                                 </tbody>
                             </table>
+
                             <div class="am-cf">
                                 <div class="am-btn-group am-btn-group-xs">
                                     <button type="button" class="am-btn am-btn-default am-btn-success">导入数据</button>
@@ -273,7 +575,7 @@
     </div>
 
 </div>
-
+<%@ include file="../footer.jsp" %>
 
 <script src="../assets/js/jquery.min.js"></script>
 <script src="../assets/js/amazeui.min.js"></script>
