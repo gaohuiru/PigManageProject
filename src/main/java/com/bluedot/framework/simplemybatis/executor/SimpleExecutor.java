@@ -59,6 +59,20 @@ public class SimpleExecutor implements Executor {
             ParameterHandler parameterHandler = new DefaultParameterHandler(parameter);
             parameterHandler.setParameters(preparedStatement);
             LOGGER.debug("preparedStatement:" + preparedStatement);
+            //为了能够在sql语句中设置查询的条件，去除查询条件上的''进行的特殊处理，如将where 'pigNo'=5 变成where pigNo=5
+            //这里作为查询条件的字段会用{}进行标记即where 'q(pigNo)p'=5 变成where pigNo=5
+            String pre=preparedStatement.toString();
+            String prefix="q(";
+            String suffix=")p";
+            if(pre.contains(prefix)&&pre.contains(suffix)){
+                //分割出sql语句
+                pre=pre.substring(pre.indexOf("select"));
+                pre = pre.replace("'q(", "");
+                pre=pre.replace(")p'","");
+                preparedStatement=connection.prepareStatement(pre);
+                LOGGER.debug("对preparedStatement进行特殊处理后："+preparedStatement);
+            }
+
             return executorCallback.doExecutor(statementHandler, preparedStatement);
         } catch (Exception e) {
             e.printStackTrace();

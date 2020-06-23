@@ -10,6 +10,8 @@ import java.util.Map;
  */
 @Repository
 public class MapInitFactory {
+    private static final String PAGE_SIZE="pageSize";
+    private static final String PAGE_NO="pageNo";
     /**
      * 创建存储分页参数的map，为controller提供map对象
      * @param pageNo 页码
@@ -28,5 +30,23 @@ public class MapInitFactory {
         serviceMap.put("pageStart",pageStart);
         serviceMap.put("pageSize",pageSize);
         return serviceMap;
+    }
+    public static void createServiceMapForPageParameters(Map<String,Object> serviceMap){
+        //当正确传入分页参数时
+        Integer pageNo;
+        Integer pageSize;
+        if(serviceMap.get(PAGE_SIZE)==null||serviceMap.get(PAGE_NO)==null){
+            pageNo=1;
+            pageSize=10;
+        }else{
+            pageNo= Integer.valueOf((String)serviceMap.get(PAGE_NO));
+            pageSize= Integer.valueOf((String) serviceMap.get(PAGE_SIZE));
+        }
+
+
+        int pageStart=(pageNo-1)*pageSize;
+        serviceMap.put("pageNo",pageNo);
+        serviceMap.put("pageStart",pageStart);
+        serviceMap.put("pageSize",pageSize);
     }
 }

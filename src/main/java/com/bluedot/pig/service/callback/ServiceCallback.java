@@ -1,5 +1,6 @@
 package com.bluedot.pig.service.callback;
 
+import com.bluedot.pig.mapper.BaseDao;
 import com.bluedot.pig.mapper.BaseMapper;
 
 import javax.security.auth.callback.Callback;
@@ -25,6 +26,20 @@ public interface ServiceCallback<T> extends Callback {
      }
 
     /**
+     *
+     * 根据查询条件查询数据列表的方法
+     * @param baseMapper 查询代理类
+     * @param pageStart 数据列表的起点
+     * @param pageSize 数据长度
+     * @param queryCondition 查询条件
+     * @param queryValue 查询条件值
+     * @return 数据列表
+     */
+    default List<T> doListExecutorByQueryCondition(BaseMapper baseMapper, int pageStart, int pageSize,String queryCondition,String queryValue){
+        return null;
+    }
+
+    /**
      *  查询数据条数的方法
      * @param baseMapper 查询代理类
      * @return 数据条数
@@ -34,9 +49,19 @@ public interface ServiceCallback<T> extends Callback {
      }
 
     /**
-     * 调用增删改方法的模板方法
+     * 根据查询条件查询数据条数的方法
      * @param baseMapper 查询代理类
+     * @param queryCondition 查询条件
+     * @param queryValue 查询条件值
+     * @return 数据条数
+     */
+    default Long doCountExecutorByQueryCondition(BaseMapper baseMapper,String queryCondition,String queryValue){
+        return null;
+    }
+    /**
+     * 调用增删改方法的模板方法
+     * @param baseDao 增删改操作的类
      * @return 影响的行数
      */
-     default int doDataModifyExecutor(BaseMapper baseMapper){ return -1;}
+     default int doDataModifyExecutor(BaseDao baseDao){ return -1;}
 }

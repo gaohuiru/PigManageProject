@@ -67,7 +67,45 @@ public class PigInfo  {
  	*/
 	private Date leaveDate;
 
-  	public String getPigNo() {
+	public PigInfo() {
+	}
+
+	public PigInfo(String pigNo, Integer sex, Integer age, Integer pigVarietyId, Integer pigType, Integer pigState, Integer growthStage, Date birthday, Double pigRecentWeight, Integer vaccinumCount, Integer pigstyNo, Integer hogcoteNo, Double pigBasicWeight, Date enterDate) {
+		this.pigNo = pigNo;
+		this.sex = sex;
+		this.age = age;
+		this.pigVarietyId = pigVarietyId;
+		this.pigType = pigType;
+		this.pigState = pigState;
+		this.growthStage = growthStage;
+		this.birthday = birthday;
+		this.pigRecentWeight = pigRecentWeight;
+		this.vaccinumCount = vaccinumCount;
+		this.pigstyNo = pigstyNo;
+		this.hogcoteNo = hogcoteNo;
+		this.pigBasicWeight = pigBasicWeight;
+		this.enterDate = enterDate;
+	}
+
+	public PigInfo(String pigNo, Integer sex, Integer age, Integer pigVarietyId, Integer pigType, Integer pigState, Integer growthStage, Date birthday, Double pigRecentWeight, Integer vaccinumCount, Integer pigstyNo, Integer hogcoteNo, Double pigBasicWeight, Date enterDate, Date leaveDate) {
+		this.pigNo = pigNo;
+		this.sex = sex;
+		this.age = age;
+		this.pigVarietyId = pigVarietyId;
+		this.pigType = pigType;
+		this.pigState = pigState;
+		this.growthStage = growthStage;
+		this.birthday = birthday;
+		this.pigRecentWeight = pigRecentWeight;
+		this.vaccinumCount = vaccinumCount;
+		this.pigstyNo = pigstyNo;
+		this.hogcoteNo = hogcoteNo;
+		this.pigBasicWeight = pigBasicWeight;
+		this.enterDate = enterDate;
+		this.leaveDate = leaveDate;
+	}
+
+	public String getPigNo() {
     	return pigNo;
   	}
 

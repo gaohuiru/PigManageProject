@@ -19,8 +19,14 @@
     <select id="getPigs" resultType="com.bluedot.pig.pojo.domain.PigInfo">
         select * from t_pig_info limit #{pageStart},#{pageSize}
     </select>
+    <select id="getPigsByQueryCondition" resultType="com.bluedot.pig.pojo.domain.PigInfo">
+        select * from t_pig_info where #{queryCondition}=#{queryValue} limit #{pageStart},#{pageSize}
+    </select>
     <select id="getPigsCount" resultType="java.lang.Long">
         select count(*) from t_pig_info
+    </select>
+    <select id="getPigsCountByQueryCondition" resultType="java.lang.Long">
+        select count(*) from t_pig_info where #{queryCondition}=#{queryValue}
     </select>
 
 

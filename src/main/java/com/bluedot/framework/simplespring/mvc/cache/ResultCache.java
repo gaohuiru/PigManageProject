@@ -118,6 +118,7 @@ public class ResultCache<K, V> {
         first = null;
         last = null;
         caches.clear();
+        currentSize=0;
     }
 
     /**
@@ -166,6 +167,8 @@ public class ResultCache<K, V> {
                         put(key, node);
                     } catch (ExecutionException | InterruptedException e) {
                         log.error(e.getMessage());
+                        remove(key);
+                        break;
                     }
                 } else {
                     log.debug("该请求的响应缓存存在：{}", node.value);
@@ -174,7 +177,6 @@ public class ResultCache<K, V> {
                 moveToHead(node);
                 //获取出错则删除缓存，避免污染
                 try {
-                    assert node != null;
                     return node.value;
                 } catch (Exception e) {
                     remove(key);
@@ -184,6 +186,7 @@ public class ResultCache<K, V> {
         } finally {
             lock.unlock();
         }
+        return null;
     }
 
     /**

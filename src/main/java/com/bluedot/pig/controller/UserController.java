@@ -32,7 +32,7 @@ public class UserController extends HttpServlet {
         StringBuilder dispatchPath = new StringBuilder("/user/user-info-list.jsp");
         return baseController.simpleRequestTemplate(userService, pageNo, pageSize, dispatchPath, new ControllerCallback() {
             @Override
-            public void doServiceForSimpleRequest(Map<String, Object> serviceMap,StringBuilder dispatchPath) {
+            public void beforeDoServiceForSimpleRequest(Map<String, Object> serviceMap, StringBuilder dispatchPath) {
                 serviceMap.put("service", "queryUsers");
                 userService.doService(serviceMap);
             }

@@ -50,8 +50,26 @@ public interface BaseMapper {
     List<PigInfo> getPigs(int pageStart,int pageSize);
 
     /**
+     *
+     * @param queryCondition 查询条件
+     * @param queryValue 查询结果
+     * @param pageStart 页码
+     * @param pageSize 每页数据
+     * @return 猪只列表
+     */
+    List<PigInfo> getPigsByQueryCondition(String queryCondition,String queryValue,int pageStart,int pageSize);
+
+    /**
      * 获取猪只数据总数
      * @return 数据总数
      */
     Long getPigsCount();
+
+    /**
+     * 根据查询条件获取猪只数据总数
+     * @param queryCondition 查询条件
+     * @param queryValue 查询结果
+     * @return 数据总数
+     */
+    Long getPigsCountByQueryCondition(String queryCondition,String queryValue);
 }

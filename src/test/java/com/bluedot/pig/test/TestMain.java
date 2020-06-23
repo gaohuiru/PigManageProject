@@ -5,6 +5,9 @@ import org.junit.Test;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,6 +17,13 @@ import java.util.Map;
  */
 public class TestMain {
     @Test
+    public void dateTest() throws ParseException {
+        String dateStr="2020-02-02";
+        java.util.Date date=new SimpleDateFormat("yyyy-MM-dd").parse(dateStr);
+        Date dateSql= new Date(date.getTime()) ;
+        System.out.println(dateSql);
+    }
+      @Test
     public void stringTest(){
         String str="wwww";
         StringBuilder sb=new StringBuilder("zzz");
