@@ -5,10 +5,18 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * ly
+ * MD5加密工具
+ * @author ly
  */
 public class Md5Util {
-    public static String getMD5Str(String str) {
+    private static final String ENCODING="UTF-8";
+
+    /**
+     * 获取MD5加密的结果
+     * @param str 传入字符串
+     * @return 加密字符串
+     */
+    public static String getMd5Str(String str) {
         MessageDigest messageDigest = null;
 
         try {
@@ -17,26 +25,25 @@ public class Md5Util {
             //重置
             messageDigest.reset();
             //设置编码格式
-            messageDigest.update(str.getBytes("UTF-8"));
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-        }
+            messageDigest.update(str.getBytes(ENCODING));
+            byte[] byteArray = messageDigest.digest();
+            StringBuilder md5StrBuff = new StringBuilder();
 
-        byte[] byteArray = messageDigest.digest();
-
-        StringBuffer md5StrBuff = new StringBuffer();
-
-        for (int i = 0; i < byteArray.length; i++) {
-            //加盐gi
-            if (Integer.toHexString(0xFF & byteArray[i]).length() == 1) {
-                md5StrBuff.append("0").append(Integer.toHexString(0xFF & byteArray[i]));
-            } else {
-                md5StrBuff.append(Integer.toHexString(0xFF & byteArray[i]));
+            for (byte b : byteArray) {
+                //加盐gi
+                if (Integer.toHexString(0xFF & b).length() == 1) {
+                    md5StrBuff.append("0").append(Integer.toHexString(0xFF & b));
+                } else {
+                    md5StrBuff.append(Integer.toHexString(0xFF & b));
+                }
             }
+            return md5StrBuff.toString();
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
-        return md5StrBuff.toString();
+
     }
 
 }

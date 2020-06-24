@@ -69,12 +69,12 @@
 
                         <ul class="tpl-left-nav-sub-menu4">
                             <li>
-                                <a href="${pageContext.request.contextPath}/pig/queryPigs?pageNo=1&pageSize=10" class="tpl-left-nav-link-list"
+                                <a href="${pageContext.request.contextPath}/pig/queryPigs?service=queryPigs&pageNo=1&pageSize=10" class="tpl-left-nav-link-list"
                                    style="padding-left: 55px;">
                                     <span>猪只信息</span>
                                 </a>
 
-                                <a href="${pageContext.request.contextPath}/pig/queryPigVarieties"
+                                <a href="${pageContext.request.contextPath}/pig/queryPigVarieties?service=queryPigVarieties&pageNo=1&pageSize=10"
                                    class="tpl-left-nav-link-list1" style="padding-left: 55px;">
                                     <span>猪只品种</span>
                                 </a>

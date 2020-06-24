@@ -7,6 +7,7 @@ function  search(e) {
 function refresh(e) {
     window.location.href=e.value;
 }
-function deleteItem() {
-    window.location.href=document.getElementById("removeRequest").value;
+function deleteItem(e) {
+    alert(e.value);
+    window.location.href=document.getElementById("removeRequest"+e.value).value;
 }

@@ -41,7 +41,7 @@ public class BaseService {
      * @param serviceCallback 具体查询操作的回调接口
      * @param <T>             泛型
      */
-    public <T> void doSimpleQueryListTemplate(Map<String, Object> map, ServiceCallback<T> serviceCallback) {
+    protected  <T> void doSimpleQueryListTemplate(Map<String, Object> map, ServiceCallback<T> serviceCallback) {
         BaseMapper baseMapper = ((MapperFactory) beanContainer.getBean(MapperFactory.class)).createMapper();
         BaseDao baseDao=(BaseDao) beanContainer.getBean(BaseDao.class);
         int pageNo = (int) map.get("pageNo");
@@ -79,7 +79,7 @@ public class BaseService {
      * @param serviceCallback 具体查询操作的回调接口
      * @param <T>             泛型
      */
-    public <T> void doSimpleModifyTemplate(Map<String, Object> map, ServiceCallback<T> serviceCallback) {
+    protected  <T> void doSimpleModifyTemplate(Map<String, Object> map, ServiceCallback<T> serviceCallback) {
         BaseMapper baseMapper = ((MapperFactory) beanContainer.getBean(MapperFactory.class)).createMapper();
         BaseDao baseDao=(BaseDao) beanContainer.getBean(BaseDao.class);
         int pageNo = (int) map.get("pageNo");

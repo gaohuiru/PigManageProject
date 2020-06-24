@@ -1,6 +1,5 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.Map" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: xxbb
   Date: 2019/09/12
@@ -26,12 +25,6 @@
     <link rel="stylesheet" href="../assets/css/admin.css">
     <link rel="stylesheet" href="../assets/css/app.css">
 </head>
-<script language="JavaScript">
-    function bashInsert() {
-        window.open("http://localhost:8080/bash_demo.jsp", "new Windows", "height=100, width=400, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no");
-        alert("使用成功！！！");
-    }
-</script>
 <body data-type="generalComponents">
 
 <%@ include file="../head.jsp" %>
@@ -64,7 +57,7 @@
 
                                 <div class="am-modal-dialog">
                                     <div class="am-modal-hd">添加</div>
-                                    <form action="${pageContext.request.contextPath}/pig/addPig?pageNo=${result['pageNo']}&pageSize=${result['pageSize']}&queryCondition=${result['queryCondition']}&queryValue=${result['queryValue']}"
+                                    <form action="${pageContext.request.contextPath}/pig/addPig?service=addPig&pageNo=${result['pageNo']}&pageSize=${result['pageSize']}&queryCondition=${result['queryCondition']}&queryValue=${result['queryValue']}"
                                           method="post"
                                           id="pig-add-form">
                                         <div class="am-modal-bd">
@@ -235,12 +228,14 @@
                                                                        id="search-content"
                                                                        value="${result['queryValue']}">
                             <span class="am-input-group-btn">
+                                <%-- 在搜索时一定要重置页码，不然页码可能越界--%>
                                 <button class="am-btn  am-btn-default am-btn-success tpl-am-btn-success am-icon-search"
                                         type="button"
-                                        value="/pig/queryPigs?pageNo=${result['pageNo']}&pageSize=${result['pageSize']}"
+                                        value="/pig/queryPigs?service=queryPigs&pageNo=1&pageSize=${result['pageSize']}"
                                         onclick="search(this)"></button>
                                 <button class="am-btn  am-btn-default am-btn-default tpl-am-btn-default am-icon-refresh"
-                                        type="button" value="/pig/queryPigs" onclick="refresh(this)"></button>
+                                        type="button" value="/pig/queryPigs?service=queryPigs"
+                                        onclick="refresh(this)"></button>
                             </span>
                         </div>
                     </div>
@@ -250,7 +245,9 @@
                         <table class="am-table am-table-striped am-table-hover table-main">
                             <thead>
                             <tr>
-                                <th class="table-check"><input type="checkbox" class="tpl-table-fz-check"></th>
+                                <th class="table-check"><label>
+                                    <input type="checkbox" class="tpl-table-fz-check">
+                                </label></th>
                                 <th class="table-id">猪只编号</th>
                                 <th class="table-title">品种</th>
                                 <th>性别</th>
@@ -462,7 +459,7 @@
                                                         <div class="am-modal-dialog">
                                                             <div class="am-modal-hd">猪只信息修改</div>
                                                             <form action="
-                                                                ${pageContext.request.contextPath}/pig/modifyPig?pageNo=${result['pageNo']}&pageSize=${result['pageSize']}&queryCondition=${result['queryCondition']}&queryValue=${result['queryValue']}"
+                                                                ${pageContext.request.contextPath}/pig/modifyPig?service=modifyPig&pageNo=${result['pageNo']}&pageSize=${result['pageSize']}&queryCondition=${result['queryCondition']}&queryValue=${result['queryValue']}"
                                                                   method="post"
                                                                   id="pig-modify-${pig.pigNo}">
                                                                 <div class="am-modal-bd">
@@ -659,18 +656,19 @@
                                                          id="pig-remove-${pig.pigNo}">
                                                         <div class="am-modal-dialog">
                                                             <div class="am-modal-hd">删除确认</div>
-                                                            <div class="am-modal-bd">
-                                                                您确定要删除这条猪只信息吗？
-                                                            </div>
-                                                            <div class="am-modal-footer">
+                                                            <form action="${pageContext.request.contextPath}/pig/removePig?service=removePig&pigNo=${pig.pigNo}&pageNo=${result['pageNo']}&pageSize=${result['pageSize']}&queryCondition=${result['queryCondition']}&queryValue=${result['queryValue']}"
+                                                                  method="post"
+                                                                  id="pigVariety-delete-${pig.pigNo}">
+                                                                <div class="am-modal-bd">
+                                                                    您确定要删除这条猪只品种信息吗？
+                                                                </div>
+                                                                <div class="am-modal-footer">
                                                                 <span class="am-modal-btn"
                                                                       data-am-modal-cancel>取消</span>
-                                                                <label for="removeRequest"></label><input hidden
-                                                                                                          id="removeRequest"
-                                                                                                          value="/pig/removePig?pigNo=${pig.pigNo}&pageNo=${result['pageNo']}&pageSize=${result['pageSize']}&queryCondition=${result['queryCondition']}&queryValue=${result['queryValue']}">
-                                                                <span class="am-modal-btn"
-                                                                      onclick="deleteItem()">确定</span>
-                                                            </div>
+                                                                    <span class="am-modal-btn"
+                                                                          onclick="document.getElementById('pigVariety-delete-${pig.pigNo}').submit();return false;">确定</span>
+                                                                </div>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                     <button type="button"
@@ -702,10 +700,13 @@
                                     <%--使用${result['pageInfo'].pageNo}会报错？？？
                                     直接从参数集中拿${result['pageNo']}不报错，
                                     而且${result['pageInfo']}中其他参数都不报错？？？离谱--%>
-
                                     <%--当前页面开始和结束的页码，如第一页开始页码为1，结束页码为5 --%>
                                     <%--计算当前页面的第一个页码--%>
                                     <%--除法计算得到的是浮点型数，需要取整，去除小数--%>
+                                    <%--页码算法（除法的结果要去除小数取整）
+                                        pageNumberStart=（pageNo-1）/pageNumberPagingFactor+1;
+                                        pageNumberEnd=（pageNo-1）/pageNumberPagingFactor+1;
+                                    --%>
                                     <fmt:parseNumber integerOnly="true" var="prePageNumberStart"
                                                      value="${((result['pageNo']-1)/pageNumberPagingFactor)}"/>
                                     <fmt:parseNumber integerOnly="true" var="pageNumberStart"
@@ -724,22 +725,22 @@
                                         <%--按此按钮回到上一组页码的最后一个--%>
                                         <c:if test="${pageNumberStart!=1}">
                                             <li>
-                                                <a href="${pageContext.request.contextPath}/pig/queryPigs?pageNo=${pageNumberStart-1}&pageSize=${result['pageSize']}&queryCondition=${result['queryCondition']}&queryValue=${result['queryValue']}">«</a>
+                                                <a href="${pageContext.request.contextPath}/pig/queryPigs?service=queryPigs&pageNo=${pageNumberStart-1}&pageSize=${result['pageSize']}&queryCondition=${result['queryCondition']}&queryValue=${result['queryValue']}">«</a>
                                             </li>
                                         </c:if>
 
                                         <c:forEach begin="${pageNumberStart}" end="${pageNumberEnd}"
                                                    var="pageNo">
-                                            <%--当页码为当前页是页码按钮高亮--%>
+                                            <%--当页码为当前页，则页码按钮高亮--%>
                                             <li
                                                     <c:if test="${pageNo==result['pageNo']}">class="am-active"</c:if>>
-                                                <a href="${pageContext.request.contextPath}/pig/queryPigs?pageNo=${pageNo}&pageSize=${result['pageSize']}&queryCondition=${result['queryCondition']}&queryValue=${result['queryValue']}">${pageNo}</a>
+                                                <a href="${pageContext.request.contextPath}/pig/queryPigs?service=queryPigs&pageNo=${pageNo}&pageSize=${result['pageSize']}&queryCondition=${result['queryCondition']}&queryValue=${result['queryValue']}">${pageNo}</a>
                                             </li>
                                         </c:forEach>
                                         <%--按此按钮去往下一组页码的第一个--%>
                                         <c:if test="${pageNumberEnd!=result['pageInfo'].totalPage}">
                                             <li>
-                                                <a href="${pageContext.request.contextPath}/pig/queryPigs?pageNo=${pageNumberEnd+1}&pageSize=${result['pageSize']}&queryCondition=${result['queryCondition']}&queryValue=${result['queryValue']}">»</a>
+                                                <a href="${pageContext.request.contextPath}/pig/queryPigs?service=queryPigs&pageNo=${pageNumberEnd+1}&pageSize=${result['pageSize']}&queryCondition=${result['queryCondition']}&queryValue=${result['queryValue']}">»</a>
                                             </li>
                                         </c:if>
 

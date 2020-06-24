@@ -14,7 +14,19 @@ public class PigVariety  {
  	*/
 	private String pigVariety;
 
-  	public Integer getPigVarietyId() {
+	public PigVariety() {
+	}
+
+	public PigVariety(Integer pigVarietyId, String pigVariety) {
+		this.pigVarietyId = pigVarietyId;
+		this.pigVariety = pigVariety;
+	}
+
+	public PigVariety(String pigVariety) {
+		this.pigVariety = pigVariety;
+	}
+
+	public Integer getPigVarietyId() {
     	return pigVarietyId;
   	}
 

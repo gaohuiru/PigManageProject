@@ -24,7 +24,7 @@ public class BaseController extends HttpServlet {
      * @param controllerCallback 回调接口
      * @return modelAndView
      */
-    public ModelAndView simpleRequestTemplate(BaseService service, Integer pageNo, Integer pageSize, StringBuilder dispatchPath , ControllerCallback controllerCallback){
+    protected ModelAndView simpleRequestTemplate(BaseService service, Integer pageNo, Integer pageSize, StringBuilder dispatchPath , ControllerCallback controllerCallback){
         //初始化map，处理分页参数
         Map<String, Object> serviceMap = MapInitFactory.createServiceMapForPageParameters(pageNo, pageSize);
         //执行service的方法
@@ -44,7 +44,7 @@ public class BaseController extends HttpServlet {
      * @param controllerCallback 回调接口
      * @return modelAndView
      */
-    public ModelAndView simpleRequestTemplate(BaseService service, Map<String,Object> serviceMap, StringBuilder dispatchPath , ControllerCallback controllerCallback){
+    protected ModelAndView simpleRequestTemplate(BaseService service, Map<String,Object> serviceMap, StringBuilder dispatchPath , ControllerCallback controllerCallback){
         //初始化map，处理分页参数
         MapInitFactory.createServiceMapForPageParameters(serviceMap);
         //判断所执行的方法是否需附带的查询条件（保证在使用搜索后的展示的页面视图的分页能够继续是显示搜索结果的数据集合）
@@ -64,7 +64,7 @@ public class BaseController extends HttpServlet {
      * @param dispatchPath 转发路径
      * @return modelAndView视图
      */
-    public ModelAndView setModelAndView(StringBuilder dispatchPath,Map<String,Object> serviceMap){
+    protected ModelAndView setModelAndView(StringBuilder dispatchPath,Map<String,Object> serviceMap){
         ModelAndView modelAndView=new ModelAndView();
         //当map中出现该key时说明业务执行过程中出现了错误
         String errorKey="error";
@@ -81,7 +81,7 @@ public class BaseController extends HttpServlet {
      * @param serviceMap 请求参数映射
      * @return 是否有查询条件
      */
-    public boolean hasQueryCondition(Map<String,Object> serviceMap){
+    private boolean hasQueryCondition(Map<String,Object> serviceMap){
         String key="queryCondition";
         String valueOfKey="queryValue";
         //第一步判断是否有key

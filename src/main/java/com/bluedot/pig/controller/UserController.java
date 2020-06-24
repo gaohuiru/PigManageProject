@@ -17,24 +17,17 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/user")
-public class UserController extends HttpServlet {
+public class UserController extends BaseController {
     @Autowired
     UserService userService;
-    /**
-     * 由于Controller已经继承了HttpServlet，所以这里使用组合的方式使用baseController的功能
-     * 抽取了具有共性的请求处理操作的controller类
-     */
-    @Autowired
-    BaseController baseController;
 
     @RequestMapping("/queryUsers")
     public ModelAndView queryUsers(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize) {
         StringBuilder dispatchPath = new StringBuilder("/user/user-info-list.jsp");
-        return baseController.simpleRequestTemplate(userService, pageNo, pageSize, dispatchPath, new ControllerCallback() {
+        return simpleRequestTemplate(userService, pageNo, pageSize, dispatchPath, new ControllerCallback() {
             @Override
             public void beforeDoServiceForSimpleRequest(Map<String, Object> serviceMap, StringBuilder dispatchPath) {
-                serviceMap.put("service", "queryUsers");
-                userService.doService(serviceMap);
+                serviceMap.putIfAbsent("service", "queryUsers");
             }
         });
 

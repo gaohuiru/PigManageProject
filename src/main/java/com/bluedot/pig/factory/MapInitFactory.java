@@ -31,16 +31,21 @@ public class MapInitFactory {
         serviceMap.put("pageSize",pageSize);
         return serviceMap;
     }
+
+    /**
+     * 从serviceMap中解析存储分页参数的map
+     * @param serviceMap 请求参数集合
+     */
     public static void createServiceMapForPageParameters(Map<String,Object> serviceMap){
         //当正确传入分页参数时
-        Integer pageNo;
-        Integer pageSize;
+        int pageNo;
+        int pageSize;
         if(serviceMap.get(PAGE_SIZE)==null||serviceMap.get(PAGE_NO)==null){
             pageNo=1;
             pageSize=10;
         }else{
-            pageNo= Integer.valueOf((String)serviceMap.get(PAGE_NO));
-            pageSize= Integer.valueOf((String) serviceMap.get(PAGE_SIZE));
+            pageNo= Integer.parseInt((String) serviceMap.get(PAGE_NO));
+            pageSize= Integer.parseInt((String) serviceMap.get(PAGE_SIZE));
         }
 
 

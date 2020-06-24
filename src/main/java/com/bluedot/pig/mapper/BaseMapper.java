@@ -2,6 +2,7 @@ package com.bluedot.pig.mapper;
 
 import com.bluedot.pig.pojo.domain.Employee;
 import com.bluedot.pig.pojo.domain.PigInfo;
+import com.bluedot.pig.pojo.domain.PigVariety;
 import com.bluedot.pig.pojo.domain.Purview;
 
 import java.util.List;
@@ -50,7 +51,7 @@ public interface BaseMapper {
     List<PigInfo> getPigs(int pageStart,int pageSize);
 
     /**
-     *
+     * 根据查询条件查询猪只信息
      * @param queryCondition 查询条件
      * @param queryValue 查询结果
      * @param pageStart 页码
@@ -72,4 +73,36 @@ public interface BaseMapper {
      * @return 数据总数
      */
     Long getPigsCountByQueryCondition(String queryCondition,String queryValue);
+
+    /**
+     * 获取猪猪只品种信息列表
+     * @param pageStart 页码
+     * @param pageSize 每页数据
+     * @return 猪只列表
+     */
+    List<PigVariety> getPigVarieties(int pageStart, int pageSize);
+
+    /**
+     * 根据查询条件查询猪只品种信息
+     * @param queryCondition 查询条件
+     * @param queryValue 查询结果
+     * @param pageStart 页码
+     * @param pageSize 每页数据
+     * @return 猪只列表
+     */
+    List<PigVariety> getPigVarietiesByQueryCondition(String queryCondition,String queryValue,int pageStart,int pageSize);
+
+    /**
+     * 获取猪只品种数据总数
+     * @return 数据总数
+     */
+    Long getPigVarietiesCount();
+
+    /**
+     * 根据查询条件获取猪只品种数据总数
+     * @param queryCondition 查询条件
+     * @param queryValue 查询结果
+     * @return 数据总数
+     */
+    Long getPigVarietiesCountByQueryCondition(String queryCondition,String queryValue);
 }

@@ -28,6 +28,18 @@
     <select id="getPigsCountByQueryCondition" resultType="java.lang.Long">
         select count(*) from t_pig_info where #{queryCondition}=#{queryValue}
     </select>
+    <select id="getPigVarieties" resultType="com.bluedot.pig.pojo.domain.PigVariety">
+        select * from t_pig_variety limit #{pageStart},#{pageSize}
+    </select>
+    <select id="getPigVarietiesByQueryCondition" resultType="com.bluedot.pig.pojo.domain.PigVariety">
+        select * from t_pig_variety where #{queryCondition}=#{queryValue} limit #{pageStart},#{pageSize}
+    </select>
+    <select id="getPigVarietiesCount" resultType="java.lang.Long">
+        select count(*) from t_pig_variety
+    </select>
+    <select id="getPigVarietiesCountByQueryCondition" resultType="java.lang.Long">
+        select count(*) from t_pig_variety where #{queryCondition}=#{queryValue}
+    </select>
 
 
 </mapper>

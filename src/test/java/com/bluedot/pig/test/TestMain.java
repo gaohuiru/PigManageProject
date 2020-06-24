@@ -22,6 +22,7 @@ public class TestMain {
         java.util.Date date=new SimpleDateFormat("yyyy-MM-dd").parse(dateStr);
         Date dateSql= new Date(date.getTime()) ;
         System.out.println(dateSql);
+
     }
       @Test
     public void stringTest(){

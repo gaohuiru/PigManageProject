@@ -5,7 +5,7 @@ import java.lang.reflect.Method;
 /**
  * @author xxbb
  */
-public abstract class DefaultAspect {
+public abstract class  DefaultAspect {
     /**
      * 前置通知
      * @param targetClass 被代理的目标类

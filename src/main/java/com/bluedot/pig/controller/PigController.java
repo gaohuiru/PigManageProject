@@ -10,7 +10,6 @@ import com.bluedot.pig.controller.base.BaseController;
 import com.bluedot.pig.controller.callback.ControllerCallback;
 import com.bluedot.pig.service.PigService;
 
-import javax.servlet.http.HttpServlet;
 import java.util.Map;
 
 /**
@@ -19,17 +18,12 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/pig")
-public class PigController extends HttpServlet {
+public class PigController extends BaseController {
     /**
      * 处理猪只业务的service
      */
     @Autowired
     PigService pigService;
-    /**
-     * 提供处理请求的通用方法
-     */
-    @Autowired
-    BaseController baseController;
 
     /**
      * 基本的猪只数据列表查询
@@ -39,42 +33,47 @@ public class PigController extends HttpServlet {
     @RequestMapping("/queryPigs")
     public ModelAndView queryPigs(@RequestParam("map") Map<String,Object> serviceMap){
         StringBuilder dispatchPath=new StringBuilder("/pig/pig-info-list.jsp");
-        return baseController.simpleRequestTemplate(pigService,serviceMap, dispatchPath, new ControllerCallback() {
-            @Override
-            public void beforeDoServiceForSimpleRequest(Map<String, Object> serviceMap, StringBuilder dispatchPath) {
-                serviceMap.put("service","queryPigs");
-            }
-        });
+        return simpleRequestTemplate(pigService,serviceMap, dispatchPath, new ControllerCallback() {});
     }
-    @RequestMapping("/removePig")
+    @RequestMapping(value = "/removePig",method = RequestMethod.POST)
     public ModelAndView removePig(@RequestParam("map") Map<String,Object> serviceMap){
-
         StringBuilder dispatchPath=new StringBuilder("/pig/pig-info-list.jsp");
-        return baseController.simpleRequestTemplate(pigService, serviceMap,dispatchPath, new ControllerCallback() {
-            @Override
-            public void beforeDoServiceForSimpleRequest(Map<String, Object> serviceMap, StringBuilder dispatchPath) {
-                serviceMap.put("service","removePig");
-            }
-        });
+        return simpleRequestTemplate(pigService, serviceMap,dispatchPath, new ControllerCallback() {});
     }
     @RequestMapping(value = "/modifyPig",method = RequestMethod.POST)
     public ModelAndView modifyPig(@RequestParam("map") Map<String,Object> serviceMap){
         StringBuilder dispatchPath=new StringBuilder("/pig/pig-info-list.jsp");
-        return baseController.simpleRequestTemplate(pigService, serviceMap, dispatchPath, new ControllerCallback() {
-            @Override
-            public void beforeDoServiceForSimpleRequest(Map<String, Object> serviceMap, StringBuilder dispatchPath) {
-                serviceMap.put("service","modifyPig");
-            }
-        });
+        return simpleRequestTemplate(pigService, serviceMap, dispatchPath, new ControllerCallback() {});
     }
     @RequestMapping(value = "/addPig",method = RequestMethod.POST )
     public ModelAndView addPig(@RequestParam("map") Map<String,Object> serviceMap){
         StringBuilder dispatchPath=new StringBuilder("/pig/pig-info-list.jsp");
-        return baseController.simpleRequestTemplate(pigService, serviceMap, dispatchPath, new ControllerCallback() {
-            @Override
-            public void beforeDoServiceForSimpleRequest(Map<String, Object> serviceMap, StringBuilder dispatchPath) {
-                serviceMap.put("service","addPig");
-            }
-        });
+        return simpleRequestTemplate(pigService, serviceMap, dispatchPath, new ControllerCallback() {});
     }
+    /**
+     * 基本的猪只数据列表查询
+     * @param serviceMap 页面数据
+     * @return 视图
+     */
+    @RequestMapping("/queryPigVarieties")
+    public ModelAndView queryPigVarieties(@RequestParam("map") Map<String,Object> serviceMap){
+        StringBuilder dispatchPath=new StringBuilder("/pig/pig-variety-list.jsp");
+        return simpleRequestTemplate(pigService,serviceMap, dispatchPath, new ControllerCallback() {});
+    }
+    @RequestMapping(value = "/removePigVariety",method = RequestMethod.POST)
+    public ModelAndView removePigVariety(@RequestParam("map") Map<String,Object> serviceMap){
+        StringBuilder dispatchPath=new StringBuilder("/pig/pig-variety-list.jsp");
+        return simpleRequestTemplate(pigService, serviceMap,dispatchPath, new ControllerCallback() {});
+    }
+    @RequestMapping(value = "/modifyPigVariety",method = RequestMethod.POST)
+    public ModelAndView modifyPigVariety(@RequestParam("map") Map<String,Object> serviceMap){
+        StringBuilder dispatchPath=new StringBuilder("/pig/pig-variety-list.jsp");
+        return simpleRequestTemplate(pigService, serviceMap, dispatchPath, new ControllerCallback() {});
+    }
+    @RequestMapping(value = "/addPigVariety",method = RequestMethod.POST )
+    public ModelAndView addPigVariety(@RequestParam("map") Map<String,Object> serviceMap){
+        StringBuilder dispatchPath=new StringBuilder("/pig/pig-variety-list.jsp");
+        return simpleRequestTemplate(pigService, serviceMap, dispatchPath, new ControllerCallback() {});
+    }
+
 }
