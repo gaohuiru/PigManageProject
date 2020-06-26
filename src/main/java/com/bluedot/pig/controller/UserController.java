@@ -5,6 +5,7 @@ import com.bluedot.framework.simplespring.inject.annotation.Autowired;
 import com.bluedot.framework.simplespring.mvc.annotation.RequestMapping;
 import com.bluedot.framework.simplespring.mvc.annotation.RequestParam;
 import com.bluedot.framework.simplespring.mvc.type.ModelAndView;
+import com.bluedot.framework.simplespring.mvc.type.RequestMethod;
 import com.bluedot.pig.controller.base.BaseController;
 import com.bluedot.pig.controller.callback.ControllerCallback;
 import com.bluedot.pig.service.UserService;
@@ -22,14 +23,24 @@ public class UserController extends BaseController {
     UserService userService;
 
     @RequestMapping("/queryUsers")
-    public ModelAndView queryUsers(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize) {
+    public ModelAndView queryUsers(@RequestParam("map") Map<String,Object> serviceMap) {
         StringBuilder dispatchPath = new StringBuilder("/user/user-info-list.jsp");
-        return simpleRequestTemplate(userService, pageNo, pageSize, dispatchPath, new ControllerCallback() {
-            @Override
-            public void beforeDoServiceForSimpleRequest(Map<String, Object> serviceMap, StringBuilder dispatchPath) {
-                serviceMap.putIfAbsent("service", "queryUsers");
-            }
-        });
-
+        return simpleRequestTemplate(userService, serviceMap, dispatchPath, new ControllerCallback() {});
     }
+    @RequestMapping(value = "/removeUser",method= RequestMethod.POST)
+    public ModelAndView removeUser(@RequestParam("map") Map<String,Object> serviceMap) {
+        StringBuilder dispatchPath = new StringBuilder("/user/user-info-list.jsp");
+        return simpleRequestTemplate(userService, serviceMap, dispatchPath, new ControllerCallback() {});
+    }
+    @RequestMapping(value = "/modifyUser",method= RequestMethod.POST)
+    public ModelAndView modifyUser(@RequestParam("map") Map<String,Object> serviceMap) {
+        StringBuilder dispatchPath = new StringBuilder("/user/user-info-list.jsp");
+        return simpleRequestTemplate(userService, serviceMap, dispatchPath, new ControllerCallback() {});
+    }
+    @RequestMapping(value = "/addUser",method= RequestMethod.POST)
+    public ModelAndView addUser(@RequestParam("map") Map<String,Object> serviceMap) {
+        StringBuilder dispatchPath = new StringBuilder("/user/user-info-list.jsp");
+        return simpleRequestTemplate(userService, serviceMap, dispatchPath, new ControllerCallback() {});
+    }
+
 }

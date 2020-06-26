@@ -300,7 +300,6 @@ public class PigService extends BaseService {
      * @return pigInfo
      */
     private PigInfo packagingPigInfo(Map<String, Object> map) {
-        String leaveDateStr = "leaveDate";
         String pigNo = (String) map.get("pigNo");
         Integer sex = Integer.valueOf((String) map.get("sex"));
         Integer age = Integer.valueOf((String) map.get("age"));

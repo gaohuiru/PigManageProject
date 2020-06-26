@@ -36,7 +36,7 @@
                             </a>
                         </c:if>
                         <c:if test="${purview.systemRights==1}">
-                        <a href="${pageContext.request.contextPath}/user/queryUsers?pageNo=1&pageSize=2">
+                        <a href="${pageContext.request.contextPath}/user/queryUsers?service=queryUsers">
                             <i class="am-icon-angle-right"></i>
                             <span>用户信息</span>
                             <i class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>

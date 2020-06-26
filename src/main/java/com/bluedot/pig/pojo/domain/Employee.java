@@ -63,7 +63,32 @@ public class Employee  {
  	*/
 	private String password;
 
-  	public Integer getEmployeeId() {
+	public Employee() {
+	}
+
+	public Employee(Integer employeeId, String password) {
+		this.employeeId = employeeId;
+		this.password = password;
+	}
+
+	public Employee(Integer employeeId, String realName, Integer sex, Integer age, String identityNumber, String telephone, String email, String image, Integer position, String address, Date entryTime, Integer workingYears, Integer status, String password) {
+		this.employeeId = employeeId;
+		this.realName = realName;
+		this.sex = sex;
+		this.age = age;
+		this.identityNumber = identityNumber;
+		this.telephone = telephone;
+		this.email = email;
+		this.image = image;
+		this.position = position;
+		this.address = address;
+		this.entryTime = entryTime;
+		this.workingYears = workingYears;
+		this.status = status;
+		this.password = password;
+	}
+
+	public Integer getEmployeeId() {
     	return employeeId;
   	}
 

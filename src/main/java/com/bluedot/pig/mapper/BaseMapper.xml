@@ -10,8 +10,14 @@
     <select id="getUsers" resultType="com.bluedot.pig.pojo.domain.Employee">
         select * from t_employee limit #{pageStart},#{pageSize}
     </select>
+    <select id="getUsersByQueryCondition" resultType="com.bluedot.pig.pojo.domain.Employee">
+        select * from t_employee where #{queryCondition}=#{queryValue} limit #{pageStart},#{pageSize}
+    </select>
     <select id="getUsersCount" resultType="java.lang.Long">
         select count(*) from t_employee
+    </select>
+    <select id="getUsersCountByQueryCondition" resultType="java.lang.Long">
+        select count(*) from t_employee where #{queryCondition}=#{queryValue}
     </select>
 
 
@@ -40,6 +46,7 @@
     <select id="getPigVarietiesCountByQueryCondition" resultType="java.lang.Long">
         select count(*) from t_pig_variety where #{queryCondition}=#{queryValue}
     </select>
+
 
 
 </mapper>

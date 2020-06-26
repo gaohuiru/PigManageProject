@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!doctype html>
 <%--下面两句，就C的大小写不同，如果只有上面那句就显示不出页面，只有下面那句c if 表达式就会出错，
      至少我的猪只界面会出现这样的问题--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--解决jstl、el标签库失效的问题 --%>
 <%@ page isELIgnored="false" %>
 <html>

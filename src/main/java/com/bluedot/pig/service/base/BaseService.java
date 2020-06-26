@@ -43,7 +43,6 @@ public class BaseService {
      */
     protected  <T> void doSimpleQueryListTemplate(Map<String, Object> map, ServiceCallback<T> serviceCallback) {
         BaseMapper baseMapper = ((MapperFactory) beanContainer.getBean(MapperFactory.class)).createMapper();
-        BaseDao baseDao=(BaseDao) beanContainer.getBean(BaseDao.class);
         int pageNo = (int) map.get("pageNo");
         int pageStart = (int) map.get("pageStart");
         int pageSize = (int) map.get("pageSize");

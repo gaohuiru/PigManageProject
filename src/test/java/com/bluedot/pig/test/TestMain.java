@@ -8,7 +8,9 @@ import java.lang.reflect.Method;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -16,6 +18,14 @@ import java.util.Map;
  * @author xxbb
  */
 public class TestMain {
+    @Test
+    public void iteratorTest(){
+        List<String> list=new ArrayList<>();
+        list.add("1");
+        list.add("2");
+        list.removeIf("2"::equals);
+        System.out.println(list);
+    }
     @Test
     public void dateTest() throws ParseException {
         String dateStr="2020-02-02";
