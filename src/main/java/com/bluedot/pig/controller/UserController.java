@@ -43,4 +43,37 @@ public class UserController extends BaseController {
         return simpleRequestTemplate(userService, serviceMap, dispatchPath, new ControllerCallback() {});
     }
 
+    @RequestMapping("/queryUserPurviews")
+    public ModelAndView queryUserPurviews(@RequestParam("map") Map<String,Object> serviceMap) {
+        StringBuilder dispatchPath = new StringBuilder("/user/user-purview-list.jsp");
+        return simpleRequestTemplate(userService, serviceMap, dispatchPath, new ControllerCallback() {});
+    }
+    @RequestMapping(value = "/modifyUserPurview",method= RequestMethod.POST)
+    public ModelAndView modifyUserPurview(@RequestParam("map") Map<String,Object> serviceMap) {
+        StringBuilder dispatchPath = new StringBuilder("/user/user-purview-list.jsp");
+        return simpleRequestTemplate(userService, serviceMap, dispatchPath, new ControllerCallback() {});
+    }
+
+    /**
+     * 删除权限信息，暂时不使用
+     * @param serviceMap 请求参数
+     * @return 视图
+     */
+    @RequestMapping(value = "/removeUserPurview",method= RequestMethod.POST)
+    public ModelAndView removeUserPurview(@RequestParam("map") Map<String,Object> serviceMap) {
+        StringBuilder dispatchPath = new StringBuilder("/user/user-purview-list.jsp");
+        return simpleRequestTemplate(userService, serviceMap, dispatchPath, new ControllerCallback() {});
+    }
+
+    /**
+     * 添加权限信息，暂时不使用
+     * @param serviceMap 请求参数
+     * @return 视图
+     */
+    @RequestMapping(value = "/addUserPurview",method= RequestMethod.POST)
+    public ModelAndView addUserPurview(@RequestParam("map") Map<String,Object> serviceMap) {
+        StringBuilder dispatchPath = new StringBuilder("/user/user-purview-list.jsp");
+        return simpleRequestTemplate(userService, serviceMap, dispatchPath, new ControllerCallback() {});
+    }
+
 }

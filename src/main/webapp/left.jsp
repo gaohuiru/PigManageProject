@@ -21,7 +21,7 @@
                 </a>
                 <ul class="tpl-left-nav-sub-menu">
                     <li>
-                        <a href="yonghu-table-power.html">
+                        <a href="${pageContext.request.contextPath}/user/queryUserPurviews?service=queryUserPurviews">
                             <i class="am-icon-angle-right"></i>
                             <span>权限管理</span>
                             <i class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>

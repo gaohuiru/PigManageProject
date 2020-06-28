@@ -19,7 +19,19 @@
     <select id="getUsersCountByQueryCondition" resultType="java.lang.Long">
         select count(*) from t_employee where #{queryCondition}=#{queryValue}
     </select>
-
+    <!--用户权限相关-->
+    <select id="getUserPurviews" resultType="com.bluedot.pig.pojo.vo.PurviewVo">
+        select p.*,e.real_name from t_purview p left join t_employee e on p.employee_id=e.employee_id limit #{pageStart},#{pageSize}
+    </select>
+    <select id="getUserPurviewsByQueryCondition" resultType="com.bluedot.pig.pojo.vo.PurviewVo">
+        select p.*,e.real_name from t_purview p left join t_employee e on p.employee_id=e.employee_id where #{queryCondition}=#{queryValue} limit #{pageStart},#{pageSize}
+    </select>
+    <select id="getPurviewsCount" resultType="java.lang.Long">
+        select count(*) from t_purview
+    </select>
+    <select id="getPurviewsCountByQueryCondition" resultType="java.lang.Long">
+        select count(*) from t_purview where #{queryCondition}=#{queryValue}
+    </select>
 
     <!--猪只相关-->
     <select id="getPigs" resultType="com.bluedot.pig.pojo.domain.PigInfo">

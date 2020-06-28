@@ -30,7 +30,23 @@ public class Purview  {
  	*/
 	private Integer systemRights;
 
-  	public Integer getEmployeeId() {
+	public Purview() {
+	}
+
+	public Purview(Integer employeeId) {
+		this.employeeId = employeeId;
+	}
+
+	public Purview(Integer employeeId, Integer userRights, Integer pigRights, Integer storeRights, Integer equipmentRights, Integer systemRights) {
+		this.employeeId = employeeId;
+		this.userRights = userRights;
+		this.pigRights = pigRights;
+		this.storeRights = storeRights;
+		this.equipmentRights = equipmentRights;
+		this.systemRights = systemRights;
+	}
+
+	public Integer getEmployeeId() {
     	return employeeId;
   	}
 

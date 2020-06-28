@@ -4,6 +4,7 @@ import com.bluedot.pig.pojo.domain.Employee;
 import com.bluedot.pig.pojo.domain.PigInfo;
 import com.bluedot.pig.pojo.domain.PigVariety;
 import com.bluedot.pig.pojo.domain.Purview;
+import com.bluedot.pig.pojo.vo.PurviewVo;
 
 import java.util.List;
 
@@ -66,6 +67,40 @@ public interface BaseMapper {
      * @return 用户总数
      */
     Long getUsersCountByQueryCondition(String queryCondition, String queryValue);
+
+    /**
+     * 查询用户权限信息
+     * @param pageStart 起始位置
+     * @param pageSize 页面大小
+     * @return 数据列表
+     */
+    List<PurviewVo> getUserPurviews(int pageStart, int pageSize);
+
+    /**
+     * 根据查询条件查询用户权限信息
+     * @param queryCondition 查询条件
+     * @param queryValue     查询结果
+     * @param pageStart 起始位置
+     * @param pageSize 页面大小
+     * @return 数据列表
+     */
+    List<PurviewVo> getUserPurviewsByQueryCondition(String queryCondition, String queryValue, int pageStart, int pageSize);
+
+    /**
+     * 权限数据总数
+     * @return 条数
+     */
+    Long getPurviewsCount();
+
+    /**
+     * 根据条件查询权限数据总数
+     * @param queryCondition 查询条件
+     * @param queryValue     查询结果
+     * @return 条数
+     */
+    Long getPurviewsCountByQueryCondition(String queryCondition, String queryValue);
+
+
 
     /**
      * 获取猪只信息列表

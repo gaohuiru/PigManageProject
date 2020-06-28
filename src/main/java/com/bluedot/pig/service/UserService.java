@@ -6,6 +6,8 @@ import com.bluedot.pig.mapper.BaseDao;
 import com.bluedot.pig.mapper.BaseMapper;
 import com.bluedot.pig.factory.MapperFactory;
 import com.bluedot.pig.pojo.domain.Employee;
+import com.bluedot.pig.pojo.domain.Purview;
+import com.bluedot.pig.pojo.vo.PurviewVo;
 import com.bluedot.pig.service.base.BaseService;
 import com.bluedot.pig.service.callback.ServiceCallback;
 import com.bluedot.pig.util.TimeUtil;
@@ -51,7 +53,7 @@ public class UserService extends BaseService {
     }
 
     /**
-     * 删除用户信息
+     * 删除用户信息,同时删除一条用户权限
      * @param map 数据映射
      */
     private void removeUser(Map<String,Object> map){
@@ -81,7 +83,8 @@ public class UserService extends BaseService {
                 Integer id=Integer.valueOf((String)map.get("employeeId"));
                 Employee employee=new Employee();
                 employee.setEmployeeId(id);
-                return baseDao.delete(employee);
+                Purview purview=new Purview(id);
+                return baseDao.delete(employee)+baseDao.delete(purview);
             }
         });
     }
@@ -121,7 +124,7 @@ public class UserService extends BaseService {
     }
 
     /**
-     * 添加用户信息
+     * 添加用户信息,同时添加一条默认权限信息
      * @param map 请求参数
      */
     private void addUser(Map<String,Object> map){
@@ -149,10 +152,152 @@ public class UserService extends BaseService {
 
             @Override
             public int doDataModifyExecutor(BaseDao baseDao) {
-                return baseDao.insert(packagingEmployee(map));
+                Employee employee=packagingEmployee(map);
+                int addPurview=baseDao.insert(new Purview(employee.getEmployeeId()));
+                int addEmployee=baseDao.insert(employee);
+                return addEmployee+addPurview;
             }
         });
     }
+
+    /**
+     * 查询用户权限信息
+     * @param map 请求参数map
+     */
+    private void queryUserPurviews(Map<String, Object> map){
+        doSimpleQueryListTemplate(map, new ServiceCallback<PurviewVo>(){
+            @Override
+            public List<PurviewVo> doListExecutorByQueryCondition(BaseMapper baseMapper, int pageStart, int pageSize, String queryCondition, String queryValue) {
+                //由于权限页面的数据列表使用了联立查询，这里需要对查询条件参数进行预处理
+                String[] preQueryCondition=new String[]{"q(employee_id)p","q(real_name)p"};
+                if(preQueryCondition[0].equals(queryCondition)){
+                    queryCondition="q(p.employee_id)p";
+                }
+                if(preQueryCondition[1].equals(queryCondition)){
+                    queryCondition="q(e.real_name)p";
+                }
+                return baseMapper.getUserPurviewsByQueryCondition(queryCondition,queryValue,pageStart,pageSize);
+            }
+
+            @Override
+            public Long doCountExecutorByQueryCondition(BaseMapper baseMapper, String queryCondition, String queryValue) {
+                return baseMapper.getPurviewsCountByQueryCondition(queryCondition,queryValue);
+            }
+
+            @Override
+            public List<PurviewVo> doListExecutor(BaseMapper baseMapper, int pageStart, int pageSize) {
+                return baseMapper.getUserPurviews(pageStart,pageSize);
+            }
+
+            @Override
+            public Long doCountExecutor(BaseMapper baseMapper) {
+                return baseMapper.getPurviewsCount();
+            }
+        });
+    }
+
+    /**
+     * 删除用户权限信息,暂时不单独使用，在删除用户信息时同时删除权限信息
+     * @param map 数据映射
+     */
+    private void removeUserPurview(Map<String,Object> map){
+        doSimpleModifyTemplate(map, new ServiceCallback<PurviewVo>() {
+            @Override
+            public List<PurviewVo> doListExecutor(BaseMapper baseMapper, int pageStart, int pageSize) {
+                return baseMapper.getUserPurviews(pageStart,pageSize);
+            }
+
+            @Override
+            public List<PurviewVo> doListExecutorByQueryCondition(BaseMapper baseMapper, int pageStart, int pageSize, String queryCondition, String queryValue) {
+                return baseMapper.getUserPurviewsByQueryCondition(queryCondition,queryValue,pageStart,pageSize);
+            }
+
+            @Override
+            public Long doCountExecutor(BaseMapper baseMapper) {
+                return baseMapper.getPurviewsCount();
+            }
+
+            @Override
+            public Long doCountExecutorByQueryCondition(BaseMapper baseMapper, String queryCondition, String queryValue) {
+                return baseMapper.getPurviewsCountByQueryCondition(queryCondition,queryValue);
+            }
+
+            @Override
+            public int doDataModifyExecutor(BaseDao baseDao) {
+                Integer id=Integer.valueOf((String)map.get("employeeId"));
+                Purview purview=new Purview();
+                purview.setEmployeeId(id);
+                return baseDao.delete(purview);
+            }
+        });
+    }
+
+    /**
+     * 修改用户权限信息
+     * @param map 请求参数
+     */
+    private void modifyUserPurview(Map<String,Object> map){
+        doSimpleModifyTemplate(map, new ServiceCallback<PurviewVo>() {
+            @Override
+            public List<PurviewVo> doListExecutor(BaseMapper baseMapper, int pageStart, int pageSize) {
+                return baseMapper.getUserPurviews(pageStart,pageSize);
+            }
+
+            @Override
+            public List<PurviewVo> doListExecutorByQueryCondition(BaseMapper baseMapper, int pageStart, int pageSize, String queryCondition, String queryValue) {
+                return baseMapper.getUserPurviewsByQueryCondition(queryCondition,queryValue,pageStart,pageSize);
+            }
+
+            @Override
+            public Long doCountExecutor(BaseMapper baseMapper) {
+                return baseMapper.getPurviewsCount();
+            }
+
+            @Override
+            public Long doCountExecutorByQueryCondition(BaseMapper baseMapper, String queryCondition, String queryValue) {
+                return baseMapper.getPurviewsCountByQueryCondition(queryCondition,queryValue);
+            }
+
+            @Override
+            public int doDataModifyExecutor(BaseDao baseDao) {
+                return baseDao.update(packagingPurview(map));
+            }
+        });
+    }
+
+    /**
+     * 添加用户权限信息，暂时不单独使用，添加用户信息时同时添加一条权限信息
+     * @param map 请求参数
+     */
+    private void addUserPurview(Map<String,Object> map){
+        doSimpleModifyTemplate(map, new ServiceCallback<PurviewVo>() {
+            @Override
+            public List<PurviewVo> doListExecutor(BaseMapper baseMapper, int pageStart, int pageSize) {
+                return baseMapper.getUserPurviews(pageStart,pageSize);
+            }
+
+            @Override
+            public List<PurviewVo> doListExecutorByQueryCondition(BaseMapper baseMapper, int pageStart, int pageSize, String queryCondition, String queryValue) {
+                return baseMapper.getUserPurviewsByQueryCondition(queryCondition,queryValue,pageStart,pageSize);
+            }
+
+            @Override
+            public Long doCountExecutor(BaseMapper baseMapper) {
+                return baseMapper.getPurviewsCount();
+            }
+
+            @Override
+            public Long doCountExecutorByQueryCondition(BaseMapper baseMapper, String queryCondition, String queryValue) {
+                return baseMapper.getPurviewsCountByQueryCondition(queryCondition,queryValue);
+            }
+
+            @Override
+            public int doDataModifyExecutor(BaseDao baseDao) {
+                return baseDao.insert(packagingPurview(map));
+            }
+        });
+    }
+
 
     /**
      * 将请求数据中的信息封装造成员工对象
@@ -185,5 +330,20 @@ public class UserService extends BaseService {
 
         return new Employee(employeeId,realName,sex,age,identityNumber,
                 telephone,email,image,position,address,entryTime,workingYears,status,password);
+    }
+
+    /**
+     * 封装权限信息
+     * @param map 数据列表
+     * @return 权限对象
+     */
+    private Purview packagingPurview(Map<String,Object> map){
+        Integer employeeId=Integer.valueOf((String)map.get("employeeId"));
+        Integer userRights=map.get("userRights")==null?0:Integer.parseInt((String)map.get("userRights"));
+        Integer pigRights=map.get("pigRights")==null?0:Integer.parseInt((String)map.get("pigRights"));
+        Integer storeRights=map.get("storeRights")==null?0:Integer.parseInt((String)map.get("storeRights"));
+        Integer equipmentRights=map.get("equipmentRights")==null?0:Integer.parseInt((String)map.get("equipmentRights"));
+        Integer systemRights=map.get("systemRights")==null?0:Integer.parseInt((String)map.get("systemRights"));
+        return new Purview(employeeId,userRights,pigRights,storeRights,equipmentRights,systemRights);
     }
 }
