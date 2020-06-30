@@ -33,7 +33,7 @@
             <!-- 			<i>Log In </i> or <span> Sign Up</span> -->
         </div>
         <div class="am-u-sm-10 login-am-center">
-            <form action="login" method="post" class="am-form">
+            <form action="login?service=login" method="post" class="am-form">
                 <fieldset>
                     <div class="am-form-group">
                         <input type="text" class="" id="doc-ipt-email-1" placeholder="请输入工号" name="username">

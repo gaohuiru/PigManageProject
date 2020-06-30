@@ -23,6 +23,7 @@ public class AspectListExecutor implements MethodInterceptor {
      * 排好序的切面列表
      */
     private List<AspectInfo> sortedAspectInfoList;
+    private List<AspectInfo> backupAspectInfoList;
 
     public AspectListExecutor(Class<?> targetClass, List<AspectInfo> aspectInfoList) {
         this.targetClass = targetClass;
@@ -48,7 +49,7 @@ public class AspectListExecutor implements MethodInterceptor {
             //2.执行被代理类的方法
             returnValue=methodProxy.invokeSuper(o, args);
             //3.如果代理方法返回正常，则安装order的顺序降序执行完所有的Aspect的afterRunning方法
-            returnValue=invokeAfterReturningAdvices(method,args,returnValue);
+            invokeAfterReturningAdvices(method,args,returnValue);
         }catch (Exception e){
             //4.如果代理方法返回异常，则安装order的顺序降序执行完所有的Aspect的afterThrowing方法
             invokeAfterThrowingAdvices(method,args,e);

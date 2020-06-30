@@ -6,6 +6,7 @@ import com.bluedot.framework.simplespring.mvc.annotation.RequestMapping;
 import com.bluedot.framework.simplespring.mvc.annotation.RequestParam;
 import com.bluedot.framework.simplespring.mvc.type.ModelAndView;
 import com.bluedot.framework.simplespring.mvc.type.RequestMethod;
+import com.bluedot.pig.controller.base.BaseController;
 import com.bluedot.pig.pojo.domain.Employee;
 import com.bluedot.pig.pojo.domain.Purview;
 import com.bluedot.pig.service.LoginService;
@@ -20,7 +21,7 @@ import java.util.Map;
  * @author xxbb
  */
 @Controller
-public class LoginController extends HttpServlet {
+public class LoginController extends BaseController {
     @Autowired
     LoginService loginService;
 
@@ -30,11 +31,7 @@ public class LoginController extends HttpServlet {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ModelAndView login(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("request") HttpServletRequest request) {
-        Map<String,Object> serviceMap=new HashMap<>(16);
-        serviceMap.put("username",username);
-        serviceMap.put("password",password);
-        serviceMap.put("service","login");
+    public ModelAndView login(@RequestParam("map") Map<String,Object>serviceMap, @RequestParam("request") HttpServletRequest request) {
         loginService.doService(serviceMap);
         ModelAndView modelAndView=new ModelAndView();
 
@@ -48,9 +45,11 @@ public class LoginController extends HttpServlet {
             //设置用户姓名和权限的session
             String realName=((Employee) serviceMap.get("employee")).getRealName();
             Purview purview= (Purview) serviceMap.get("purview");
+            Integer employeeId=purview.getEmployeeId();
             //返回视图
             return modelAndView.setView("index.jsp")
                     .addViewData("session.name",realName)
+                    .addViewData("session.id",employeeId)
                     .addViewData("session.purview",purview);
         }
 

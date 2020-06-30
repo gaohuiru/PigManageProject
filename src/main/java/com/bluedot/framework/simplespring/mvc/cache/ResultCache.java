@@ -118,7 +118,7 @@ public class ResultCache<K, V> {
         first = null;
         last = null;
         caches.clear();
-        currentSize=0;
+        currentSize = 0;
     }
 
     /**
@@ -156,33 +156,34 @@ public class ResultCache<K, V> {
     public V get(K key) {
         lock.lock();
         try {
-            while (true) {
-                Node<K, V> node = caches.get(key);
 
-                if (node == null) {
-                    log.debug("该请求的响应缓存不存在，调用线程执行任务");
-                    try {
-                        Future<V> future = pool.submit(task);
-                        node = new Node<>(key, future.get());
-                        put(key, node);
-                    } catch (ExecutionException | InterruptedException e) {
-                        log.error(e.getMessage());
-                        remove(key);
-                        break;
-                    }
-                } else {
-                    log.debug("该请求的响应缓存存在：{}", node.value);
-                }
+            Node<K, V> node = caches.get(key);
 
-                moveToHead(node);
-                //获取出错则删除缓存，避免污染
+            if (node == null) {
+                log.debug("该请求的响应缓存不存在，调用线程执行任务");
                 try {
-                    return node.value;
-                } catch (Exception e) {
-                    remove(key);
+                    Future<V> future = pool.submit(task);
+                    node = new Node<>(key, future.get());
+                    put(key, node);
+                } catch (ExecutionException | InterruptedException e) {
                     log.error(e.getMessage());
+                    remove(key);
+
                 }
+            } else {
+                log.debug("该请求的响应缓存存在：{}", node.value);
             }
+
+            moveToHead(node);
+            //获取出错则删除缓存，避免污染
+            try {
+                assert node != null;
+                return node.value;
+            } catch (Exception e) {
+                remove(key);
+                log.error(e.getMessage());
+            }
+
         } finally {
             lock.unlock();
         }
@@ -200,7 +201,7 @@ public class ResultCache<K, V> {
 
             //移除map中节点
             Node<K, V> remove = caches.remove(last.key);
-            log.debug("缓存已满，删除最近最少使用的缓存元素：{}",remove);
+            log.debug("缓存已满，删除最近最少使用的缓存元素：{}", remove);
             currentSize--;
             //将节点从链表中移除
             removeLast();

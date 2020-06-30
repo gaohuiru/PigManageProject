@@ -1,20 +1,26 @@
 package com.bluedot.pig.controller.base;
 
+import com.bluedot.framework.simplespring.core.BeanContainer;
 import com.bluedot.framework.simplespring.core.annotation.Controller;
 import com.bluedot.framework.simplespring.mvc.type.ModelAndView;
+import com.bluedot.framework.simplespring.util.LogUtil;
 import com.bluedot.pig.controller.callback.ControllerCallback;
 import com.bluedot.pig.factory.MapInitFactory;
+import com.bluedot.pig.mapper.BaseDao;
+import com.bluedot.pig.pojo.domain.ErrorLog;
+import com.bluedot.pig.pojo.domain.OperationLog;
 import com.bluedot.pig.service.base.BaseService;
 
 import javax.servlet.http.HttpServlet;
+import java.util.Date;
 import java.util.Map;
 
 /**
  * 抽取请求处理中的共性的内容
  * @author xxbb
  */
-@Controller
 public class BaseController extends HttpServlet {
+    BaseDao baseDao= (BaseDao) BeanContainer.getInstance().getBean(BaseDao.class);
     /**
      * 简单数据列表查询请求的处理模板
      * @param service 具体调用的service
@@ -45,19 +51,25 @@ public class BaseController extends HttpServlet {
      * @return modelAndView
      */
     protected ModelAndView simpleRequestTemplate(BaseService service, Map<String,Object> serviceMap, StringBuilder dispatchPath , ControllerCallback controllerCallback){
-        //初始化map，处理分页参数
-        MapInitFactory.createServiceMapForPageParameters(serviceMap);
-        //判断所执行的方法是否需附带的查询条件（保证在使用搜索后的展示的页面视图的分页能够继续是显示搜索结果的数据集合）
-        serviceMap.put("hasQueryCondition",hasQueryCondition(serviceMap));
-        //执行service的方法
-        controllerCallback.beforeDoServiceForSimpleRequest(serviceMap,dispatchPath);
-        service.doService(serviceMap);
-        controllerCallback.afterDoServiceForSimpleRequest(serviceMap,dispatchPath);
-        System.out.println("转发路径："+dispatchPath.toString());
-        System.out.println("转发携带参数 result:"+serviceMap);
-
-        return setModelAndView(dispatchPath,serviceMap);
-
+        try {
+            //初始化map，处理分页参数
+            MapInitFactory.createServiceMapForPageParameters(serviceMap);
+            //判断所执行的方法是否需附带的查询条件（保证在使用搜索后的展示的页面视图的分页能够继续是显示搜索结果的数据集合）
+            serviceMap.put("hasQueryCondition",hasQueryCondition(serviceMap));
+            //执行service的方法
+            controllerCallback.beforeDoServiceForSimpleRequest(serviceMap,dispatchPath);
+            service.doService(serviceMap);
+            controllerCallback.afterDoServiceForSimpleRequest(serviceMap,dispatchPath);
+            //记录操作日志
+            insertOperationLog(serviceMap);
+            LogUtil.getLogger().debug ("转发路径："+dispatchPath.toString());
+            LogUtil.getLogger().debug ("转发携带参数 result:"+serviceMap);
+            return setModelAndView(dispatchPath,serviceMap);
+        } catch (Exception e) {
+            serviceMap.putIfAbsent("error",e.getMessage());
+            insertOperationLog(serviceMap);
+            throw new RuntimeException(e);
+        }
     }
     /**
      * 设置转发路径
@@ -92,5 +104,30 @@ public class BaseController extends HttpServlet {
         String queryCondition=String.valueOf(serviceMap.get("queryCondition"));
         String queryValue=String.valueOf(serviceMap.get("queryValue"));
         return !queryCondition.isEmpty()&&!queryValue.isEmpty();
+    }
+
+    /**
+     *
+     * @param map 参数
+     */
+    private void insertOperationLog(Map<String,Object> map) {
+
+        //登录时没有id
+        if (map.get("operatorId") == null) {
+            return;
+        }
+        LogUtil.getLogger().debug("插入操作记录");
+        Integer employeeId = Integer.valueOf((String) map.get("operatorId"));
+        String service = (String) map.get("service");
+        String parameter = map.toString();
+        Date date = new Date();
+        if (map.containsKey("error")) {
+            String errorMsg = (String) map.get("error");
+            ErrorLog errorLog = new ErrorLog(employeeId, service, parameter, errorMsg, date);
+            baseDao.insert(errorLog);
+        } else {
+            OperationLog operationLog = new OperationLog(employeeId, service, parameter, date);
+            baseDao.insert(operationLog);
+        }
     }
 }

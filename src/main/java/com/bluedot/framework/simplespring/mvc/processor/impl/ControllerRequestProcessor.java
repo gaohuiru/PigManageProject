@@ -59,7 +59,7 @@ public class ControllerRequestProcessor implements RequestProcessor {
         //获取IoC容器
         this.beanContainer = BeanContainer.getInstance();
         //初始化缓存
-        resultCaches = new ResultCache<>(3);
+        resultCaches = new ResultCache<>(1);
         //获取所有被Controller标记的类
         Set<Class<?>> requestMappingSet = beanContainer.getClassesByAnnotation(Controller.class);
         initRequestPathInfoControllerMethodMap(requestMappingSet);

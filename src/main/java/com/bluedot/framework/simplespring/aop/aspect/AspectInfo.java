@@ -31,4 +31,13 @@ public class AspectInfo {
     public PointcutLocator getPointcutLocator() {
         return pointcutLocator;
     }
+
+    @Override
+    public String toString() {
+        return "AspectInfo{" +
+                "orderIndex=" + orderIndex +
+                ", aspectObject=" + aspectObject +
+                ", pointcutLocator=" + pointcutLocator +
+                '}';
+    }
 }
