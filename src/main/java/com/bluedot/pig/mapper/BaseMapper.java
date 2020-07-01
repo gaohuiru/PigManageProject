@@ -1,9 +1,6 @@
 package com.bluedot.pig.mapper;
 
-import com.bluedot.pig.pojo.domain.Employee;
-import com.bluedot.pig.pojo.domain.PigInfo;
-import com.bluedot.pig.pojo.domain.PigVariety;
-import com.bluedot.pig.pojo.domain.Purview;
+import com.bluedot.pig.pojo.domain.*;
 import com.bluedot.pig.pojo.vo.PurviewVo;
 
 import java.util.List;
@@ -173,4 +170,19 @@ public interface BaseMapper {
      * @return 数据总数
      */
     Long getPigVarietiesCountByQueryCondition(String queryCondition, String queryValue);
+
+    List<LoginLog> getLoginLogs(int pageStart, int pageSize);
+    List<LoginLog> getLoginLogsByQueryCondition(String queryCondition, String queryValue, int pageStart, int pageSize);
+    Long getLoginLogsCount();
+    Long getLoginLogCountByQueryCondition(String queryCondition, String queryValue);
+
+    List<OperationLog> getOperationLogs(int pageStart, int pageSize);
+    List<OperationLog> getOperationLogsByQueryCondition(String queryCondition, String queryValue, int pageStart, int pageSize);
+    Long getOperationLogsCount();
+    Long getOperationLogCountByQueryCondition(String queryCondition, String queryValue);
+
+    List<ErrorLog> getErrorLogs(int pageStart, int pageSize);
+    List<ErrorLog> getErrorLogsByQueryCondition(String queryCondition, String queryValue, int pageStart, int pageSize);
+    Long getErrorLogsCount();
+    Long getErrorLogCountByQueryCondition(String queryCondition, String queryValue);
 }

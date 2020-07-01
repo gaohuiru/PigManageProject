@@ -12,6 +12,7 @@ import com.bluedot.pig.pojo.domain.OperationLog;
 import com.bluedot.pig.service.base.BaseService;
 
 import javax.servlet.http.HttpServlet;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Map;
 
@@ -111,22 +112,23 @@ public class BaseController extends HttpServlet {
      * @param map 参数
      */
     private void insertOperationLog(Map<String,Object> map) {
-
+        String operatorId="operatorId";
+        String errorKey="error";
         //登录时没有id
-        if (map.get("operatorId") == null) {
+        if (map.get(operatorId) == null) {
             return;
         }
         LogUtil.getLogger().debug("插入操作记录");
         Integer employeeId = Integer.valueOf((String) map.get("operatorId"));
         String service = (String) map.get("service");
         String parameter = map.toString();
-        Date date = new Date();
-        if (map.containsKey("error")) {
-            String errorMsg = (String) map.get("error");
-            ErrorLog errorLog = new ErrorLog(employeeId, service, parameter, errorMsg, date);
+        Timestamp timestamp=new Timestamp(System.currentTimeMillis());
+        if (map.containsKey(errorKey)) {
+            String errorMsg = (String) map.get(errorKey);
+            ErrorLog errorLog = new ErrorLog(employeeId, service, parameter, errorMsg, timestamp);
             baseDao.insert(errorLog);
         } else {
-            OperationLog operationLog = new OperationLog(employeeId, service, parameter, date);
+            OperationLog operationLog = new OperationLog(employeeId, service, parameter, timestamp);
             baseDao.insert(operationLog);
         }
     }

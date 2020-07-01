@@ -19,6 +19,10 @@ import java.util.Map;
  */
 public class TestMain {
     @Test
+    public void timeStamp(){
+
+    }
+    @Test
     public void iteratorTest(){
         List<String> list=new ArrayList<>();
         list.add("1");

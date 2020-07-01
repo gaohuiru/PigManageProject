@@ -293,16 +293,16 @@
 
                 </a>
                 <ul class="tpl-left-nav-sub-menu" style="padding-left: 17px;">
-                    <a href="login-info.html">
-                        <span>用户登陆记录</span>
+                    <a href="${pageContext.request.contextPath}/log/queryLoginLogs?operatorId=${sessionScope.id}&service=queryLoginLogs&pageNo=1&pageSize=10">
+                        <span>用户登陆日志</span>
                     </a>
 
-                    <a href="operate-info.html">
-                        <span>用户操作记录</span>
+                    <a href="${pageContext.request.contextPath}/log/queryOperationLogs?operatorId=${sessionScope.id}&service=queryOperationLogs&pageNo=1&pageSize=10">
+                        <span>用户操作日志</span>
                     </a>
 
-                    <a href="sys-log.html">
-                        <span>系统异常记录</span>
+                    <a href="${pageContext.request.contextPath}/log/queryErrorLogs?operatorId=${sessionScope.id}&service=queryErrorLogs&pageNo=1&pageSize=10">
+                        <span>系统异常日志</span>
                     </a>
                 </ul>
             </li>

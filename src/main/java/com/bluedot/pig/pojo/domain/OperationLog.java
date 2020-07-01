@@ -1,6 +1,7 @@
 package com.bluedot.pig.pojo.domain;
 
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -26,12 +27,12 @@ public class OperationLog  {
 	/**
  	* time
  	*/
-	private java.util.Date time;
+	private Timestamp time;
 
 	public OperationLog() {
 	}
 
-	public OperationLog(Integer employeeId, String service, String parameter, Date time) {
+	public OperationLog(Integer employeeId, String service, String parameter, Timestamp time) {
 		this.employeeId = employeeId;
 		this.service = service;
 		this.parameter = parameter;
@@ -74,13 +75,11 @@ public class OperationLog  {
   	}
 
 
-  	public java.util.Date getTime() {
-    	return time;
-  	}
+	public Timestamp getTime() {
+		return time;
+	}
 
-  	public void setTime(java.util.Date time) {
-    	this.time = time;
-  	}
-
-
+	public void setTime(Timestamp time) {
+		this.time = time;
+	}
 }

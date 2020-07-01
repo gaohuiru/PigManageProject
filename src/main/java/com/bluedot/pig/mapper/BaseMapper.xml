@@ -19,6 +19,7 @@
     <select id="getUsersCountByQueryCondition" resultType="java.lang.Long">
         select count(*) from t_employee where #{queryCondition}=#{queryValue}
     </select>
+
     <!--用户权限相关-->
     <select id="getUserPurviews" resultType="com.bluedot.pig.pojo.vo.PurviewVo">
         select p.*,e.real_name from t_purview p left join t_employee e on p.employee_id=e.employee_id limit #{pageStart},#{pageSize}
@@ -59,6 +60,45 @@
         select count(*) from t_pig_variety where #{queryCondition}=#{queryValue}
     </select>
 
+    <!--登录日志查询-->
+    <select id="getLoginLogs" resultType="com.bluedot.pig.pojo.domain.LoginLog">
+        select * from t_login_log limit #{pageStart},#{pageSize}
+    </select>
+    <select id="getLoginLogsByQueryCondition" resultType="com.bluedot.pig.pojo.domain.LoginLog">
+        select * from t_login_log where #{queryCondition}=#{queryValue} limit #{pageStart},#{pageSize}
+    </select>
+    <select id="getLoginLogsCount" resultType="java.lang.Long">
+        select count(*) from t_login_log
+    </select>
+    <select id="getLoginLogCountByQueryCondition" resultType="java.lang.Long">
+        select count(*) from t_login_log where #{queryCondition}=#{queryValue}
+    </select>
+    <!--操作日志查询-->
+    <select id="getOperationLogs" resultType="com.bluedot.pig.pojo.domain.OperationLog">
+        select * from t_operation_log limit #{pageStart},#{pageSize}
+    </select>
+    <select id="getOperationLogsByQueryCondition" resultType="com.bluedot.pig.pojo.domain.OperationLog">
+        select * from t_operation_log where #{queryCondition}=#{queryValue} limit #{pageStart},#{pageSize}
+    </select>
+    <select id="getOperationLogsCount" resultType="java.lang.Long">
+        select count(*) from t_operation_log
+    </select>
+    <select id="getOperationLogCountByQueryCondition" resultType="java.lang.Long">
+        select count(*) from t_operation_log where #{queryCondition}=#{queryValue}
+    </select>
+    <!--异常日志查询-->
+    <select id="getErrorLogs" resultType="com.bluedot.pig.pojo.domain.ErrorLog">
+        select * from t_error_log limit #{pageStart},#{pageSize}
+    </select>
+    <select id="getErrorLogsByQueryCondition" resultType="com.bluedot.pig.pojo.domain.ErrorLog">
+        select * from t_error_log where #{queryCondition}=#{queryValue} limit #{pageStart},#{pageSize}
+    </select>
+    <select id="getErrorLogsCount" resultType="java.lang.Long">
+        select count(*) from t_error_log
+    </select>
+    <select id="getErrorLogCountByQueryCondition" resultType="java.lang.Long">
+        select count(*) from t_error_log where #{queryCondition}=#{queryValue}
+    </select>
 
 
 </mapper>

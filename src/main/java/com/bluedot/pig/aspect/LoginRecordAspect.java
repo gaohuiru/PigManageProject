@@ -13,6 +13,7 @@ import eu.bitwalker.useragentutils.UserAgent;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Map;
 
@@ -66,7 +67,7 @@ public class LoginRecordAspect extends DefaultAspect {
                 +userAgent1.getBrowserVersion()+","+
                 userAgent1.getOperatingSystem().getName();
         int ifSucceed;
-        Date date=new Date();
+        Timestamp timestamp=new Timestamp(System.currentTimeMillis());
         String msg;
         String errorKey="error";
         if(throwable==null){
@@ -83,7 +84,7 @@ public class LoginRecordAspect extends DefaultAspect {
             ifSucceed=-1;
         }
         LogUtils.getLogger().debug("插入登录数据");
-        LoginLog loginLog=new LoginLog(employeeId,ip,userAgent,ifSucceed,date,msg);
+        LoginLog loginLog=new LoginLog(employeeId,ip,userAgent,ifSucceed,timestamp,msg);
         baseDao.insert(loginLog);
     }
 }
