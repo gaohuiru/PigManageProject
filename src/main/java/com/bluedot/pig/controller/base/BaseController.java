@@ -21,7 +21,7 @@ import java.util.Map;
  * @author xxbb
  */
 public class BaseController extends HttpServlet {
-    BaseDao baseDao= (BaseDao) BeanContainer.getInstance().getBean(BaseDao.class);
+
     /**
      * 简单数据列表查询请求的处理模板
      * @param service 具体调用的service
@@ -52,6 +52,8 @@ public class BaseController extends HttpServlet {
      * @return modelAndView
      */
     protected ModelAndView simpleRequestTemplate(BaseService service, Map<String,Object> serviceMap, StringBuilder dispatchPath , ControllerCallback controllerCallback){
+        //获取数据库操作类
+        BaseDao baseDao= (BaseDao) BeanContainer.getInstance().getBean(BaseDao.class);
         try {
             //初始化map，处理分页参数
             MapInitFactory.createServiceMapForPageParameters(serviceMap);
@@ -62,13 +64,13 @@ public class BaseController extends HttpServlet {
             service.doService(serviceMap);
             controllerCallback.afterDoServiceForSimpleRequest(serviceMap,dispatchPath);
             //记录操作日志
-            insertOperationLog(serviceMap);
+            insertOperationLog(serviceMap,baseDao);
             LogUtil.getLogger().debug ("转发路径："+dispatchPath.toString());
             LogUtil.getLogger().debug ("转发携带参数 result:"+serviceMap);
             return setModelAndView(dispatchPath,serviceMap);
         } catch (Exception e) {
             serviceMap.putIfAbsent("error",e.getMessage());
-            insertOperationLog(serviceMap);
+            insertOperationLog(serviceMap,baseDao);
             throw new RuntimeException(e);
         }
     }
@@ -111,14 +113,14 @@ public class BaseController extends HttpServlet {
      *
      * @param map 参数
      */
-    private void insertOperationLog(Map<String,Object> map) {
+    private void insertOperationLog(Map<String,Object> map,BaseDao baseDao) {
         String operatorId="operatorId";
         String errorKey="error";
         //登录时没有id
         if (map.get(operatorId) == null) {
             return;
         }
-        LogUtil.getLogger().debug("插入操作记录");
+
         Integer employeeId = Integer.valueOf((String) map.get("operatorId"));
         String service = (String) map.get("service");
         String parameter = map.toString();
@@ -126,9 +128,11 @@ public class BaseController extends HttpServlet {
         if (map.containsKey(errorKey)) {
             String errorMsg = (String) map.get(errorKey);
             ErrorLog errorLog = new ErrorLog(employeeId, service, parameter, errorMsg, timestamp);
+            LogUtil.getLogger().debug("插入异常记录");
             baseDao.insert(errorLog);
         } else {
             OperationLog operationLog = new OperationLog(employeeId, service, parameter, timestamp);
+            LogUtil.getLogger().debug("插入操作记录");
             baseDao.insert(operationLog);
         }
     }
