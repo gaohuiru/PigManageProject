@@ -162,6 +162,9 @@ public class ResultCache<K, V> {
             if (node == null) {
                 log.debug("该请求的响应缓存不存在，调用线程执行任务");
                 try {
+                    if(task==null){
+                        throw new RuntimeException("Callable task is null");
+                    }
                     Future<V> future=pool.submit(task);
                     //循环等待线程执行完成
                     boolean flag=true;
@@ -193,6 +196,7 @@ public class ResultCache<K, V> {
             }
 
         } finally {
+            this.task=null;
             lock.unlock();
         }
         return null;
@@ -259,7 +263,7 @@ public class ResultCache<K, V> {
     /**
      * 移除链表最后一个节点
      */
-    public void removeLast() {
+    private void removeLast() {
         if (last != null) {
             last = last.pre;
             //还为空说明容器内没有节点
