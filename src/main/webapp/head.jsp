@@ -3,6 +3,7 @@
      至少我的猪只界面会出现这样的问题--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%--解决jstl、el标签库失效的问题 --%>
 <%@ page isELIgnored="false" %>
 <html>

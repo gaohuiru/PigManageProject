@@ -25,17 +25,17 @@ public class LogController extends BaseController {
 
     @RequestMapping("/queryLoginLogs")
     public ModelAndView queryLoginLogs(@RequestParam("map") Map<String,Object> serviceMap){
-        StringBuilder dispatchPath=new StringBuilder("/log/login-log-list.jsp");
+        StringBuilder dispatchPath=new StringBuilder("/WEB-INF/log/login-log-list.jsp");
         return simpleRequestTemplate(logService, serviceMap, dispatchPath, new ControllerCallback() {});
     }
     @RequestMapping("/queryOperationLogs")
     public ModelAndView queryOperationLogs(@RequestParam("map") Map<String,Object> serviceMap){
-        StringBuilder dispatchPath=new StringBuilder("/log/operation-log-list.jsp");
+        StringBuilder dispatchPath=new StringBuilder("/WEB-INF//log/operation-log-list.jsp");
         return simpleRequestTemplate(logService, serviceMap, dispatchPath, new ControllerCallback() {});
     }
     @RequestMapping("/queryErrorLogs")
     public ModelAndView queryErrorLogs(@RequestParam("map") Map<String,Object> serviceMap){
-        StringBuilder dispatchPath=new StringBuilder("/log/error-log-list.jsp");
+        StringBuilder dispatchPath=new StringBuilder("/WEB-INF//log/error-log-list.jsp");
         return simpleRequestTemplate(logService, serviceMap, dispatchPath, new ControllerCallback() {});
     }
 

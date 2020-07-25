@@ -84,7 +84,7 @@ public class BaseController extends HttpServlet {
         //当map中出现该key时说明业务执行过程中出现了错误
         String errorKey="error";
         if(serviceMap.containsKey(errorKey)){
-            modelAndView.setView("/error/error.jsp").addViewData("result",serviceMap);
+            modelAndView.setView("/WEB-INF/error/error.jsp").addViewData("result",serviceMap);
         }else{
             modelAndView.setView(dispatchPath.toString()).addViewData("result",serviceMap);
         }
