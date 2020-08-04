@@ -3,6 +3,7 @@ package com.bluedot.pig.util;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 
 /**
  * MD5加密工具
@@ -18,7 +19,6 @@ public class Md5Util {
      */
     public static String getMd5Str(String str) {
         MessageDigest messageDigest = null;
-
         try {
             //获取MD5摘要对象
             messageDigest = MessageDigest.getInstance("MD5");

@@ -20,6 +20,7 @@ import java.util.Map;
 public class TestMain {
     @Test
     public void timeStamp(){
+        System.out.println("我的世界".length());
 
     }
     @Test

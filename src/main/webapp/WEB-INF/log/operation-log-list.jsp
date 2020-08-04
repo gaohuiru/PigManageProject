@@ -118,7 +118,7 @@
                                     <td>${operation.employeeId}</td>
                                     <td>${operation.service}</td>
                                     <td>${operation.time}</td>
-                                    <td><div class="my-table-wrap-parameter">${operation.parameter}</div></td>
+                                    <td title="${operation.parameter}"><div class="my-table-wrap-parameter">${operation.parameter}</div></td>
                                         <%--删除按钮--%>
 <%--                                                                            <td>--%>
 <%--                                                                                <div class="am-btn-toolbar">--%>

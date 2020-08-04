@@ -174,7 +174,6 @@ public class ResultCache<K, V> {
     public V get(K key) {
         lock.lock();
         try {
-
             Node<K, V> node = caches.get(key);
 
             if (node == null) {
@@ -240,8 +239,6 @@ public class ResultCache<K, V> {
         currentSize++;
 
         //将节点移至首部的操作放在get方法里了
-
-
     }
 
     /**

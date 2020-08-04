@@ -84,85 +84,85 @@
                             </li>
                         </ul>
 
-                        <a href="javascript:;" class="tpl-left-nav-link-list5">
-                            <i class="am-icon-angle-right tpl-left-nav-more-ico5"></i>
+                        <a  class="tpl-left-nav-link-list5"  type="button" data-am-modal="{target: '#error-alert'}">
+                            <i class="am-icon-angle-right "></i>
                             <span>饲喂生长管理</span>
                         </a>
-                        <ul class="tpl-left-nav-sub-menu5">
-                            <li>
-                                <a href="/feedStandardList/PigService/select/feedStandard.do"
-                                   class="tpl-left-nav-link-list" style="padding-left: 55px;">
-                                    <span>饲喂设定</span>
-                                </a>
+<%--                        <ul class="tpl-left-nav-sub-menu5">--%>
+<%--                            <li>--%>
+<%--                                <a href="/feedStandardList/PigService/select/feedStandard.do"--%>
+<%--                                   class="tpl-left-nav-link-list" style="padding-left: 55px;">--%>
+<%--                                    <span>饲喂设定</span>--%>
+<%--                                </a>--%>
 
 
-                                <a href="/pigFeedList/PigService/select/pigFeed.do" class="tpl-left-nav-link-list1"
-                                   style="padding-left: 55px;">
-                                    <span>猪只饲喂生长统计</span>
-                                </a>
+<%--                                <a href="/pigFeedList/PigService/select/pigFeed.do" class="tpl-left-nav-link-list1"--%>
+<%--                                   style="padding-left: 55px;">--%>
+<%--                                    <span>猪只饲喂生长统计</span>--%>
+<%--                                </a>--%>
 
-                                <a href="zhuzhi-table-badGrowth.html" class="tpl-left-nav-link-list1"
-                                   style="padding-left: 55px;">
-                                    <span>生长状况不良猪只统计</span>
-                                </a>
-                            </li>
-                        </ul>
-                        <a href="javascript:;" class="tpl-left-nav-link-list6">
-                            <i class="am-icon-angle-right tpl-left-nav-more-ico6"></i>
+<%--                                <a href="zhuzhi-table-badGrowth.html" class="tpl-left-nav-link-list1"--%>
+<%--                                   style="padding-left: 55px;">--%>
+<%--                                    <span>生长状况不良猪只统计</span>--%>
+<%--                                </a>--%>
+<%--                            </li>--%>
+<%--                        </ul>--%>
+                        <a class="tpl-left-nav-link-list6" type="button" data-am-modal="{target: '#error-alert'}">
+                            <i class="am-icon-angle-right "></i>
                             <span>猪只安全管理</span>
                             <i class="tpl-left-nav-content-ico am-fr am-margin-right"></i>
                         </a>
-                        <ul class="tpl-left-nav-sub-menu6">
-                            <li>
-                                <a href="javascript:;" class="tpl-left-nav-link-list" style="padding-left: 55px;">
-                                    <i class="am-icon-angle-right tpl-left-nav-more-ico"></i>
-                                    <span>疫苗接种管理</span>
-                                </a>
-                                <ul class="tpl-left-nav-sub-menu">
-                                    <li>
-                                        <a href="CanVaccinateList.html" class="" style="padding-left: 80px;">
-                                            <span>需接种猪只信息表</span>
-                                        </a>
-                                        <a href="/VaccinateSetList/PigService/select/vaccinateSet.do" class=""
-                                           style="padding-left: 80px;">
-                                            <span>疫苗接种设定表</span>
-                                        </a>
-                                        <a href="/VaccinateList/PigService/select/vaccinateList.do" class=" "
-                                           style="padding-left: 80px;">
-                                            <span>疫苗接种记录表</span>
-                                        </a>
-                                        </a>
-                                    </li>
-                                </ul>
+<%--                        <ul class="tpl-left-nav-sub-menu6">--%>
+<%--                            <li>--%>
+<%--                                <a href="javascript:;" class="tpl-left-nav-link-list" style="padding-left: 55px;">--%>
+<%--                                    <i class="am-icon-angle-right tpl-left-nav-more-ico"></i>--%>
+<%--                                    <span>疫苗接种管理</span>--%>
+<%--                                </a>--%>
+<%--                                <ul class="tpl-left-nav-sub-menu">--%>
+<%--                                    <li>--%>
+<%--                                        <a href="CanVaccinateList.html" class="" style="padding-left: 80px;">--%>
+<%--                                            <span>需接种猪只信息表</span>--%>
+<%--                                        </a>--%>
+<%--                                        <a href="/VaccinateSetList/PigService/select/vaccinateSet.do" class=""--%>
+<%--                                           style="padding-left: 80px;">--%>
+<%--                                            <span>疫苗接种设定表</span>--%>
+<%--                                        </a>--%>
+<%--                                        <a href="/VaccinateList/PigService/select/vaccinateList.do" class=" "--%>
+<%--                                           style="padding-left: 80px;">--%>
+<%--                                            <span>疫苗接种记录表</span>--%>
+<%--                                        </a>--%>
+<%--                                        </a>--%>
+<%--                                    </li>--%>
+<%--                                </ul>--%>
 
 
-                                <a href="javascript:;" class="tpl-left-nav-link-list1" style="padding-left: 55px;">
-                                    <i class="am-icon-angle-right tpl-left-nav-more-ico1"></i>
-                                    <span>疾病管理</span>
-                                </a>
-                                <ul class="tpl-left-nav-sub-menu1" style="">
-                                    <li>
-                                        <a href="SuspectIllnessList.html" class="" style="padding-left: 80px;">
-                                            <span>疑似生病猪只表</span>
-                                        </a>
-                                        <a href="${pageContext.request.contextPath}/IllnessSetList/PigService/select/illSetList.do"
-                                           class="" style="padding-left: 80px;">
-                                            <span>疾病判断参数设定表</span>
-                                        </a>
-                                        <a href="/IllnessList/PigService/select/illnessList.do" class=""
-                                           style="padding-left: 80px;">
-                                            <span>病情记录表</span>
-                                        </a>
-                                    </li>
-                                </ul>
+<%--                                <a href="javascript:;" class="tpl-left-nav-link-list1" style="padding-left: 55px;">--%>
+<%--                                    <i class="am-icon-angle-right tpl-left-nav-more-ico1"></i>--%>
+<%--                                    <span>疾病管理</span>--%>
+<%--                                </a>--%>
+<%--                                <ul class="tpl-left-nav-sub-menu1" style="">--%>
+<%--                                    <li>--%>
+<%--                                        <a href="SuspectIllnessList.html" class="" style="padding-left: 80px;">--%>
+<%--                                            <span>疑似生病猪只表</span>--%>
+<%--                                        </a>--%>
+<%--                                        <a href="${pageContext.request.contextPath}/IllnessSetList/PigService/select/illSetList.do"--%>
+<%--                                           class="" style="padding-left: 80px;">--%>
+<%--                                            <span>疾病判断参数设定表</span>--%>
+<%--                                        </a>--%>
+<%--                                        <a href="/IllnessList/PigService/select/illnessList.do" class=""--%>
+<%--                                           style="padding-left: 80px;">--%>
+<%--                                            <span>病情记录表</span>--%>
+<%--                                        </a>--%>
+<%--                                    </li>--%>
+<%--                                </ul>--%>
 
-                                <a href="Eliminate.html" class="tpl-left-nav-link-list2"
-                                   style="padding-left: 72px;">
-                                    <span>淘汰管理</span>
-                                </a>
+<%--                                <a href="Eliminate.html" class="tpl-left-nav-link-list2"--%>
+<%--                                   style="padding-left: 72px;">--%>
+<%--                                    <span>淘汰管理</span>--%>
+<%--                                </a>--%>
 
-                            </li>
-                        </ul>
+<%--                            </li>--%>
+<%--                        </ul>--%>
 
                         <!--<a href="javascript:;" class="tpl-left-nav-link-list7">
                             <i class="am-icon-angle-right tpl-left-nav-more-ico7"></i>
@@ -196,42 +196,42 @@
                                     <span>猪栏信息</span>
                                 </a>
                             <li>
-                                <a href="javascript:;" class="tpl-left-nav-link-list" style="padding-left: 55px;">
-                                    <i class="am-icon-angle-right tpl-left-nav-more-ico"></i>
-                                    <span>转栏管理</span>
-                                </a>
-                                <ul class="tpl-left-nav-sub-menu" style="">
-                                    <li>
-                                        <a href="CanTurnBarList.html" class="" style="padding-left: 80px;">
-                                            <span>可转栏猪只信息表</span>
-                                        </a>
-                                        <a href="TurnBarSetList.html" class="" style="padding-left: 80px;">
-                                            <span>转栏参数设定表</span>
-                                        </a>
-                                        <a href="TurnBarList.html" class="" style="padding-left: 80px;">
-                                            <span>转栏记录表</span>
-                                        </a>
-                                    </li>
-                                </ul>
+<%--                                <a href="javascript:;" class="tpl-left-nav-link-list" style="padding-left: 55px;">--%>
+<%--                                    <i class="am-icon-angle-right tpl-left-nav-more-ico"></i>--%>
+<%--                                    <span>转栏管理</span>--%>
+<%--                                </a>--%>
+<%--                                <ul class="tpl-left-nav-sub-menu" style="">--%>
+<%--                                    <li>--%>
+<%--                                        <a href="CanTurnBarList.html" class="" style="padding-left: 80px;">--%>
+<%--                                            <span>可转栏猪只信息表</span>--%>
+<%--                                        </a>--%>
+<%--                                        <a href="TurnBarSetList.html" class="" style="padding-left: 80px;">--%>
+<%--                                            <span>转栏参数设定表</span>--%>
+<%--                                        </a>--%>
+<%--                                        <a href="TurnBarList.html" class="" style="padding-left: 80px;">--%>
+<%--                                            <span>转栏记录表</span>--%>
+<%--                                        </a>--%>
+<%--                                    </li>--%>
+<%--                                </ul>--%>
 
 
-                                <a href="javascript:;" class="tpl-left-nav-link-list1" style="padding-left: 55px;">
-                                    <i class="am-icon-angle-right tpl-left-nav-more-ico1 "></i>
-                                    <span>出栏管理</span>
-                                </a>
-                                <ul class="tpl-left-nav-sub-menu1" style="">
-                                    <li>
-                                        <a href="CanOutBarList.html" class="" style="padding-left: 80px;">
-                                            <span>可出栏猪只信息表</span>
-                                        </a>
-                                        <a href="OutBarSetList.html" class="" style="padding-left: 80px;">
-                                            <span>出栏参数设定表</span>
-                                        </a>
-                                        <a href="OutBarList.html" class="" style="padding-left: 80px;">
-                                            <span>出栏记录表</span>
-                                        </a>
-                                    </li>
-                                </ul>
+<%--                                <a href="javascript:;" class="tpl-left-nav-link-list1" style="padding-left: 55px;">--%>
+<%--                                    <i class="am-icon-angle-right tpl-left-nav-more-ico1 "></i>--%>
+<%--                                    <span>出栏管理</span>--%>
+<%--                                </a>--%>
+<%--                                <ul class="tpl-left-nav-sub-menu1" style="">--%>
+<%--                                    <li>--%>
+<%--                                        <a href="CanOutBarList.html" class="" style="padding-left: 80px;">--%>
+<%--                                            <span>可出栏猪只信息表</span>--%>
+<%--                                        </a>--%>
+<%--                                        <a href="OutBarSetList.html" class="" style="padding-left: 80px;">--%>
+<%--                                            <span>出栏参数设定表</span>--%>
+<%--                                        </a>--%>
+<%--                                        <a href="OutBarList.html" class="" style="padding-left: 80px;">--%>
+<%--                                            <span>出栏记录表</span>--%>
+<%--                                        </a>--%>
+<%--                                    </li>--%>
+<%--                                </ul>--%>
                             </li>
                             </li>
                         </ul>
@@ -240,52 +240,62 @@
             </li>
 
             <li class="tpl-left-nav-item">
-                <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+                <a  class="nav-link tpl-left-nav-link-list" type="button" data-am-modal="{target: '#error-alert'}">
                     <i class="am-icon-wpforms"></i>
                     <span>仓库管理</span>
-                    <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right "></i>
+                    <i class="am-icon-angle-right am-fr am-margin-right "></i>
                 </a>
-                <ul class="tpl-left-nav-sub-menu" style="padding-left: 17px;">
-                    <!--{% comment %} style="display: block;"  打开 {% endcomment %}  -->
+<%--                <ul class="tpl-left-nav-sub-menu" style="padding-left: 17px;">--%>
+<%--                    <!--{% comment %} style="display: block;"  打开 {% endcomment %}  -->--%>
 
-                    <li>
-                        <a href="cangku-form-storeinformation.html">
-                            <span>仓库信息管理</span>
-                        </a>
+<%--                    <li>--%>
+<%--                        <a href="cangku-form-storeinformation.html">--%>
+<%--                            <span>仓库信息管理</span>--%>
+<%--                        </a>--%>
 
-                        <a href="cangku-form-loginout.html">
-                            <span>出入库记录</span>
-                        </a>
+<%--                        <a href="cangku-form-loginout.html">--%>
+<%--                            <span>出入库记录</span>--%>
+<%--                        </a>--%>
 
 
-                    </li>
-                </ul>
+<%--                    </li>--%>
+<%--                </ul>--%>
             </li>
 
-
+            <div class="am-modal am-modal-alert" tabindex="-1" id="error-alert">
+                <div class="am-modal-dialog">
+                    <div class="am-modal-hd">页面维护中</div>
+                    <div class="am-modal-bd">
+                        抱歉！该模块页面正在进行维护！
+                    </div>
+                    <div class="am-modal-footer">
+                        <span class="am-modal-btn">确定</span>
+                    </div>
+                </div>
+            </div>
             <li class="tpl-left-nav-item">
-                <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+                <a  class="nav-link tpl-left-nav-link-list " type="button" data-am-modal="{target: '#error-alert'}">
                     <i class="am-icon-wpforms"></i>
                     <span>设备管理</span>
-                    <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right "></i>
+                    <i class="am-icon-angle-right  am-fr am-margin-right  "></i>
                 </a>
-                <ul class="tpl-left-nav-sub-menu" style="padding-left: 17px;">
-                    <!--{% comment %} style="display: block;"  打开 {% endcomment %}  -->
+<%--                <ul class="tpl-left-nav-sub-menu " style="padding-left: 17px;">--%>
+<%--                    <!--{% comment %} style="display: block;"  打开 {% endcomment %}  -->--%>
 
-                    <li>
-                        <a href="e-control.html">
-                            <span>设备控制表</span>
-                        </a>
-                        <a href="shebei-table-eList.html">
-                            <span>设备信息管理</span>
-                        </a>
+<%--                    <li>--%>
+<%--                        <a href="e-control.html">--%>
+<%--                            <span>设备控制表</span>--%>
+<%--                        </a>--%>
+<%--                        <a href="shebei-table-eList.html">--%>
+<%--                            <span>设备信息管理</span>--%>
+<%--                        </a>--%>
 
-                        <a href="e-unit_exception.html">
-                            <span>设备异常信息</span>
-                        </a>
+<%--                        <a href="e-unit_exception.html">--%>
+<%--                            <span>设备异常信息</span>--%>
+<%--                        </a>--%>
 
-                    </li>
-                </ul>
+<%--                    </li>--%>
+<%--                </ul>--%>
             </li>
 
 
@@ -313,6 +323,7 @@
                     </a>
                 </ul>
             </li>
+
 
 
         </ul>

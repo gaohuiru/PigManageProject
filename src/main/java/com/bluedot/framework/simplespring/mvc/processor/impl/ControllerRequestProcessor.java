@@ -65,7 +65,13 @@ public class ControllerRequestProcessor implements RequestProcessor {
         initRequestPathInfoControllerMethodMap(requestMappingSet);
     }
 
+    /**
+     * 将controller中的每一个方法封装成controllerMethod对象
+     * 要注意方法参数的顺序，由于使用HashMap会自动排序，这里在存储方法参数时使用的时LinkedHashMap
+     * @param requestMappingSet 需要封装的方法
+     */
     private void initRequestPathInfoControllerMethodMap(Set<Class<?>> requestMappingSet) {
+
         if (ValidationUtil.isEmpty(requestMappingSet)) {
             log.warn("requestMappingSet is Empty");
             return;
@@ -230,8 +236,9 @@ public class ControllerRequestProcessor implements RequestProcessor {
         //2.根据获取到的请求参数名及其对应的值，
         // 以及controllerMethod里面的参数和类型的映射关系，去实例化出方法对应的参数
         List<Object> methodParams = new ArrayList<>();
-        //controller方法参数在hashmap中的顺序
+
         Map<String, Class<?>> methodParamMap = controllerMethod.getMethodParameters();
+        //这里methodParamMap由于是LinkedHashMap才能保证map内参数遍历的顺序和controller方法的参数顺序一致
         for (String paramName : methodParamMap.keySet()) {
             Object value;
             String mapParamName = "map";

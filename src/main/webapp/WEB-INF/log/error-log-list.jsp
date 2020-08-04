@@ -120,10 +120,10 @@
                                     <td>${error.employeeId}</td>
                                     <td>${error.service}</td>
                                     <td>${error.time}</td>
-                                    <td>
+                                    <td title="${error.errorMsg}">
                                         <div class="my-table-wrap-error-msg">${error.errorMsg}</div>
                                     </td>
-                                    <td>
+                                    <td title="${error.parameter}">
                                         <div class="my-table-wrap-error-msg">${error.parameter}</div>
                                     </td>
                                         <%--删除按钮--%>
